@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gloss · 点一句读不懂的话 — 陈利行作品集</title>
+<meta name="description" content="Gloss 案例：236 条真实批注定位问题、3 款竞品 7 维对比、砍掉三个功能、把主观标准写成硬规则，以及一次终止人工评测的自我推翻。">
+<link rel="stylesheet" href="assets/style.css">
+
+<!--
+  ══════════════════════════════════════════════════════════════
+  ✏️  改文案指南 · Gloss 案例页 gloss.html
+  ──────────────────────────────────────────────────────────────
+  怎么改：用记事本或 VS Code 打开本文件，Ctrl+F 搜下面【】里的
+          几个字，找到后只改标签之间的中文。存盘，浏览器按 F5。
+
+  本页可改的位置（搜 → 对应位置）：
+    【案例 01 · 已上线】         页面顶部小标签
+    【点一句读不懂的话】          大标题（<br> 是换行符）
+    【读中文哲学书，最难的不是查不到】 导语
+    【产品定义 · 规则设计 · 验收】  规格表：角色
+    【2026.08 — 至今】           规格表：时间
+    【已上线，持续迭代】          规格表：状态
+    【问题不是 AI 做不到】        章节 01 标题
+    【我读哲学书时反复遇到】       章节 01 正文
+    【产品的全部价值】           引文 01
+    【236 条批注：先证明】        章节 02 标题
+    【三款竞品，六个维度】        章节 03 标题
+    （竞品表格：7 行 × 5 列，每一格文字都可改）
+    【用「永不做」划边界】        章节 04 标题
+    【三个被砍掉的功能】          章节 05 标题
+    【把「什么算改好了」写成】     章节 06 标题
+    【我发现自己不够可靠】        章节 07 标题
+    【我知道这个产品的边界在哪】   章节 08 标题
+    【已上线，持续迭代中】        章节 09 标题
+    【书架页 · 空状态】           图片下方说明
+    【阅读页高保真】             图片下方说明
+    【陈利行 · CHEN LIXING】     页脚姓名
+  ──────────────────────────────────────────────────────────────
+  ⚠️ 三条铁律
+     1. 只改中文。不要删除或改动 < > " " 这些符号，也不要动
+        class="..." 里面的内容 —— 那是控制样式的。
+     2. 要换行，写 <br>（例：第一行<br>第二行）。
+     3. 改完一定要存盘，再回浏览器刷新才看得到。
+  ══════════════════════════════════════════════════════════════
+-->
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="brand"><b>CHEN LIXING</b> <span>· 作品集</span></div>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="gloss.html" aria-current="page">Gloss</a>
+      <a href="feynman.html">费曼学习助手</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <div class="meta">Portfolio · 2026</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="case-head">
+    <a class="back meta" href="index.html">← 返回索引</a>
+    <div class="meta label">案例 01 · 已上线</div>
+    <h1>点一句读不懂的话，<br>就地把它讲成白话</h1>
+    <p class="dek">读中文哲学书，最难的不是查不到，而是每查一次都要离开这一页。Gloss 把「选中 → 切出去 → 搜索 → 对照 → 切回来」压成一次点击。</p>
+
+    <dl class="spec">
+      <div><dt>角色</dt><dd>产品定义 · 规则设计 · 验收</dd></div>
+      <div><dt>时间</dt><dd>2026.08 — 至今</dd></div>
+      <div><dt>状态</dt><dd>MVP版本已上线，持续迭代中</dd></div>
+    </dl>
+  </section>
+
+  <!-- 01 -->
+  <section class="section">
+    <div class="section-no">01<br>问题</div>
+    <div class="section-body">
+      <h2>问题不是 AI 做不到，是摩擦高到用户不愿意去做</h2>
+      <p>我读专业课书籍时反复遇到同一件事：一句话读不懂，于是选中、切到浏览器、打开搜索、输入、在一堆结果里翻找、对照原文、再切回来。这一趟走完，刚才读到哪已经忘了。</p>
+      <p>而这件事的荒谬之处在于——<strong>AI 早就能把这句话讲明白</strong>。它不是能力问题，是摩擦问题。七步操作的成本，高到足以让人放弃一个本来很有价值的功能。</p>
+
+      <div class="pull">
+        <p>产品的全部价值，就是把七步压成一次点击。</p>
+      </div>
+
+      <p>这个判断定下来之后，后面所有的取舍都有了统一的尺子：<strong>任何增加阅读中断的设计，无论多有用，都不做。</strong></p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section">
+    <div class="section-no">02<br>证据</div>
+    <div class="section-body">
+      <h2>236 条批注：先证明这个问题真的存在</h2>
+      <p>在写第一版 PRD 之前，我先把证据找出来。我在自己读的一本 docx 版《论斯宾诺莎的学说》里，从 2025 年 4 月 17 日到 23 日，陆续写了 <strong>236 条 Word 批注</strong>——全是读不懂的地方，以及我当时用大白话给自己解释的记录。</p>
+      <p>这 236 条批注的价值不在数量，在于它是一份<strong>没有为做产品而准备的原始材料</strong>。写批注的时候我并不知道自己为了要做一个阅读工具。</p>
+
+      <h3>从批注到评测集</h3>
+      <ul>
+        <li>读取解析文档中我写的批注文字，还原「原句 + 我的批注」配对，锚定成功率 100%</li>
+        <li>从中挑出 20 句成分层评测集：混合难点 6 句 / 术语 5 句 / 句法 5 句 / 指代+句法 2 句 / 指代 2 句</li>
+        <li>批注只作为语气参考，<strong>不写进 prompt</strong>——避免模型直接抄我的答案</li>
+      </ul>
+      <p>这份评测集后来成了整个项目的验收基准：每改一版改写规则，都拿它跑一遍。</p>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section">
+    <div class="section-no">03<br>竞品</div>
+    <div class="section-body">
+      <h2>三款竞品，六个维度，结论是「没有一个是阅读器」</h2>
+      <p>我把可能替代 Gloss 的东西分成三类，用六个维度逐项对比。对比的目的不是证明它们差，而是找出<strong>它们各自解决不了、而我可以解决的那一格</strong>。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>微信读书AI问书功能</th>
+              <th>ChatPDF类</th>
+              <th>划词翻译类</th>
+              <th>Gloss</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>阅读体验</td><td>最好</td><td>不是阅读器</td><td>寄生于原文</td><td>完整阅读器</td></tr>
+            <tr><td>交互</td><td>框选句子跳转问</td><td>离开正文去聊天</td><td>划词</td><td>点句撑开</td></tr>
+            <tr class="hi"><td>输出</td><td>问答式回答</td><td>摘要 / 问答</td><td>词对词翻译</td><td>整句白话改写</td></tr>
+            <tr><td>术语边界</td><td>不区分</td><td>不区分</td><td>不适用</td><td>只保留承重概念</td></tr>
+            <tr><td>回原文核查</td><td>需返回</td><td>需返回</td><td>原句始终并排</td><td>原句始终并排</td></tr>
+            <tr><td>读完留下什么</td><td>标注/笔记</td><td>无</td><td>无</td><td>带白话/标注的文档</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pull">
+        <p>微信读书有最好的阅读体验，但摩擦还是很高；ChatPDF能读你的书，但它不是阅读器。</p>
+        <cite>PRD v1.3 · 2.4 竞品与差异化</cite>
+      </div>
+
+      <p>Gloss 的位置由此确定：<strong>就地读就地问 + 只做减法 + 读完留下一份带白话的文档。</strong></p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="section">
+    <div class="section-no">04<br>定位</div>
+    <div class="section-body">
+      <h2>用「永不做」划边界</h2>
+      <p>我花了更多时间在「不做什么」上。功能收敛到两条核心：<strong>白话改写</strong>（点句子，给出整句白话）和<strong>就地整句理解</strong>（不离开正文）。</p>
+
+      <div class="decision">
+        <span class="label">永不做</span>
+        <h4>问答框 / 对话界面</h4>
+        <p>ChatPDF 形态。看起来能力更强，但它会让阅读割裂——用户一旦进入对话，就离开了这本书。这与「一切服务于阅读的连贯性」这条统一原则直接冲突。</p>
+      </div>
+
+      <p>这条边界后来非常有用。每当我想加一个「看起来很聪明」的功能，只要它把用户拉出正文，答案就已经定了。</p>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="section">
+    <div class="section-no">05<br>砍掉</div>
+    <div class="section-body">
+      <h2>三个被砍掉的功能，和它们的理由</h2>
+      <p>PRD 从 v0.1 迭代到 v1.3，砍掉的东西比加进去的多。下面是三个我印象最深的。</p>
+
+      <div class="decision">
+        <span class="label">v1.1 · 砍</span>
+        <h4>「知识缺口标注」——四类输出砍成三类</h4>
+        <p>原设想是让 AI 判断用户缺哪个前置概念，直接标出来。砍掉的理由是：<strong>产品无法判断用户是否具备前置知识，猜必然经常错。</strong>一个经常猜错的功能，比没有这个功能更伤害信任。</p>
+      </div>
+
+      <div class="decision">
+        <span class="label">v1.1 · 砍</span>
+        <h4>「标记待读」</h4>
+        <p>和已有的缓存机制完全重叠。功能不是越多越好，重复的功能只是增加了维护成本和界面噪音。</p>
+      </div>
+
+      <div class="decision">
+        <span class="label">v1.1 · 推翻</span>
+        <h4>「重复点击 = 质量信号」这个假设是错的</h4>
+        <p>我原本以为用户反复点同一句，说明这句改写质量差。后来意识到：重复点击更可能是<strong>交互摩擦的信号</strong>——比如面板没撑开、位置不对。把行为归因错了，后面的迭代方向就会全错。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="section">
+    <div class="section-no">06<br>规则</div>
+    <div class="section-body">
+      <h2>把「什么算改好了」写成 AI 能执行的硬规则</h2>
+      <p>「这句白话改得不好！」是主观感觉，模型执行不了。我做的事是把它翻译成三条可判定的硬规则。其中一条，最后推翻了我自己的初始设定。</p>
+
+      <h3>规则一：长度上限</h3>
+      <p>最初我定的是「白话长度应为原句的 50%–80%」，听起来很合理——白话嘛，应该更短。后来，我把这条废除了。</p>
+      <p>原因是：我拿评测集里 20 句做过一次统计，<strong>我自己写的批注与原句的长度比，中位数是 111%，最高到 220%</strong>。也就是说，这条规则会毙掉我一多半真实的批注。</p>
+
+      <div class="pull">
+        <p>读不懂源于密度，不是长度。所以规则改成：不超过 150 字的绝对上限。</p>
+        <cite>PRD · F4 白话改写</cite>
+      </div>
+
+      <h3>规则二：术语只留承重的</h3>
+      <p>v0.3 写的是「术语一律保留」，太粗了——照这个执行，白话里会塞满没必要保留的学术词。后来细化为<strong>只保留承重概念</strong>：体系性概念保留（实体、样式、市民社会），文言词和普通学术词白话化（谵妄 → 神志不清）。拿不准的时候，看这个词是否在原文中反复出现。</p>
+
+      <h3>规则三：预防AI幻觉</h3>
+      <p>这是写进 prompt 原句的一条：</p>
+
+      <div class="pull">
+        <p>原句某一部分的意思你拿不准，就保留原句的说法，不要自己编一个听起来通顺的解释。</p>
+        <cite>lib/prompts/gloss.ts · 生效版本 gloss-v9</cite>
+      </div>
+
+      <p>这条规则来自一个更早的发现：<strong>给模型一张替换词表，会失效；给它一套判断规则，才有效。</strong>词表只能覆盖我想到的情况，规则能覆盖我没想到的。</p>
+
+      <figure class="figure">
+        <img src="assets/img/gloss-rewrite.png" alt="Gloss 阅读页：原句与白话并排显示，承重术语「市民社会」被单独标记">
+        <figcaption>规则落地后的样子。原句在上、白话在下，并排显示，不打断阅读；「市民社会」属于体系性概念，被判定为承重术语单独标记，可点开单独查看。底部三个动作依次是保存、编辑、听不懂。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="section">
+    <div class="section-no">07<br>自检</div>
+    <div class="section-body">
+      <h2>我发现自己不够可靠，于是停掉了人工评测</h2>
+      <p>这是我做这个项目里最重要的一次判断。</p>
+      <p>为了检验每个版本是不是真的变好了，我做逐句人工评测。为了检验这套评测本身是否可信，我加了一个对照组：<strong>把同一个版本的两份输出混在一起，看自己能不能判出一致的结果。</strong></p>
+      <p>结果是：在 14 句可判别样本中，<strong>有 9 句被我判到了相反的一侧</strong>——分歧率约 64%。</p>
+
+      <div class="pull">
+        <p>我的判断精度，低于版本之间的真实差距。继续逐句人工评测，测出来的主要是我的噪音。</p>
+        <cite>Gloss 交接报告 · 评测自检</cite>
+      </div>
+
+      <p>所以我主动终止了全量人工评测，转而依赖结构化评测集和更明确的判定规则。</p>
+
+      <h3>同一批材料，还推翻了我另一个假设</h3>
+      <ul>
+        <li>「偏离原意」这一类错误，<strong>单看一版根本看不见</strong>——把三个版本并排之后，才暴露出 7/20 的偏离率。这直接推翻了我原先「漂移是我的改动引入的」这个假设。</li>
+        <li>有一版我用评测集里的 5 个词做示例，等于<strong>开卷考试</strong>，测出来的分数无效，作废重做。</li>
+        <li>更早的一次：「意识」这个词从 v5 开始就出现在评测集里，实际上<strong>已经泄题</strong>——它在评测集中出现 5 次，而在真实样本里出现 35 次。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="section">
+    <div class="section-no">08<br>边界</div>
+    <div class="section-body">
+      <h2>我知道这个产品的边界在哪</h2>
+      <p>PRD 里有一节是专门用来标注「哪些结论站不住」的。</p>
+
+      <div class="decision">
+        <span class="label">PRD 如实标注</span>
+        <h4>已知的三个不确定</h4>
+        <p>
+          用户样本不足；竞品覆盖率待验证；「长期阅读器」这个定位零数据支持。
+        </p>
+      </div>
+
+      <p>我把这些写在 PRD 里而不是删掉，是因为<strong>一个不知道自己边界在哪的产品，迭代方向必然是随机的</strong>。</p>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section class="section">
+    <div class="section-no">09<br>现状</div>
+    <div class="section-body">
+      <h2>已上线，持续迭代中</h2>
+      <p>Gloss 目前MVP已上线，代码托管在GitHub，累计 75 次提交。</p>
+      <p>技术实现由 AI 编程助手完成（Next.js App Router + TypeScript，原生 CSS 变量，Vercel 部署）；我负责的部分是：<strong>问题定义、PRD 撰写与迭代、改写规则设计、评测集构建、任务拆解与验收</strong>。</p>
+
+      <figure class="figure">
+        <img src="assets/img/gloss-shelf-empty.png" alt="Gloss 书架页空状态">
+        <figcaption>书架页 · 空状态。竖向书脊、folio 页码与「导入新书」占位构成完整的档案感。</figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="assets/img/gloss-reader.webp" alt="Gloss 阅读页高保真">
+        <figcaption>阅读页高保真。左栏目录、中栏正文、右栏阅读参数（字号 16.5px / 行距 2.05）；点句后就地撑开白话面板，原句与白话并排，术语加下划线可单独查看。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon-in">
+    <div class="colophon-grid">
+      <div>
+        <h4>陈利行 · CHEN LIXING</h4>
+        <p class="meta" style="text-transform:none;letter-spacing:.04em;font-size:12px">产品经理 ｜ 深圳 ｜ 2026 届</p>
+      </div>
+      <div style="text-align:right">
+        <p class="meta" style="text-transform:none;letter-spacing:.04em;font-size:12px;line-height:2.2">
+          GitHub · clarachan1123<br>
+          邮箱与电话 · 见简历
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="folio-bar" style="border-top:1px solid var(--rule)">
+    <span class="meta">Chen Lixing · Portfolio</span>
+    <span class="meta">folio 02 / 04</span>
+  </div>
+</footer>
+
+</body>
+</html>

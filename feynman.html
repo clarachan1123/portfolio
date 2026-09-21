@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>费曼学习助手 · 你讲给 AI 听 — 陈利行作品集</title>
+<meta name="description" content="费曼学习助手案例：用「不是什么」划边界、把品牌语气写成五把尺子、把「学没学懂」变成可看见的知识地图。">
+<link rel="stylesheet" href="assets/style.css">
+
+<!--
+  ══════════════════════════════════════════════════════════════
+  ✏️  改文案指南 · 费曼案例页 feynman.html
+  ──────────────────────────────────────────────────────────────
+  怎么改：用记事本或 VS Code 打开本文件，Ctrl+F 搜下面【】里的
+          几个字，找到后只改标签之间的中文。存盘，浏览器按 F5。
+
+  本页可改的位置（搜 → 对应位置）：
+    【案例 02 · 未上线】         页面顶部小标签
+    【你讲给 AI 听】             大标题（<br> 是换行符）
+    【备考时我能读懂】            导语
+    【产品定义 · 语气规范 · 验收】 规格表：角色
+    【2026.05 — 2026.07】        规格表：时间
+    【React + Vite + Capacitor】 规格表：实现
+    【能读懂、能记住】            章节 01 标题
+    【先写清楚「它不是什么」】     章节 02 标题
+    【不是聊天机器人】            边界卡 1
+    【不是答案搜索器】            边界卡 2
+    【不是打卡】                 边界卡 3
+    【把品牌语气写成五把可执行的尺子】 章节 03 标题
+    （语气表格：5 行 × 2 列，每一格文字都可改）
+    【把「学没学懂」变成能看见的形状】 章节 04 标题
+    【功能做完了，但我知道它还不够好】 章节 05 标题
+    【现在的状态】               章节 06 标题
+    【陈利行 · CHEN LIXING】     页脚姓名
+  ──────────────────────────────────────────────────────────────
+  ⚠️ 三条铁律
+     1. 只改中文。不要删除或改动 < > " " 这些符号，也不要动
+        class="..." 里面的内容 —— 那是控制样式的。
+     2. 要换行，写 <br>（例：第一行<br>第二行）。
+     3. 改完一定要存盘，再回浏览器刷新才看得到。
+  ══════════════════════════════════════════════════════════════
+-->
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="brand"><b>CHEN LIXING</b> <span>· 作品集</span></div>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="gloss.html">Gloss</a>
+      <a href="feynman.html" aria-current="page">费曼学习助手</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <div class="meta">Portfolio · 2026</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="case-head">
+    <a class="back meta" href="index.html">← 返回索引</a>
+    <div class="meta label">案例 02 · 未上线</div>
+    <h1>你讲给 AI 听，<br>AI 追问你</h1>
+    <p class="dek">备考时我能读懂、能记住，却没法验证自己是不是真的理解了。问题出在只有输入、没有反馈——所以我把方向反过来。</p>
+
+    <dl class="spec">
+      <div><dt>角色</dt><dd>产品定义 · 语气规范 · 验收</dd></div>
+      <div><dt>时间</dt><dd>2026.05 — 2026.07</dd></div>
+      <div><dt>状态</dt><dd>未上线（微信小程序需要注册个体户才能上线此类产品）</div>
+    </dl>
+  </section>
+
+  <!-- 产品界面一览 -->
+  <div class="gallery">
+    <figure>
+      <img src="assets/img/feynman-home.webp" alt="费曼学习助手首页">
+      <figcaption>首页 · 把想弄懂的概念抛给它，它来找你的认知漏洞</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/img/feynman-session.webp" alt="费曼完整演练：用户讲述，AI 追问">
+      <figcaption>讲述演练 · 用户复述，AI 只追问，不替你把思考做完</figcaption>
+    </figure>
+  </div>
+
+  <!-- 01 -->
+  <section class="section">
+    <div class="section-no">01<br>问题</div>
+    <div class="section-body">
+      <h2>能读懂、能记住，但没有内化知识</h2>
+      <p>备考的时候我发现一个很难受的状态：书看完了，笔记也做了，但我说不清自己到底掌握到什么程度。<strong>能读懂、能记住，不等于真的理解了，不等于形成知识体系了。</strong></p>
+      <p>市面上大部分学习工具解决的是「输入」——更好的讲义、更清晰的笔记、更多的题库。但我缺的不是输入，是<strong>反馈</strong>：一个能告诉我「你刚才那段复述里，哪里其实是含糊的、是有漏洞的」的产品。</p>
+      <p>费曼学习法的原义恰好就是这个：讲不清楚，就说明没懂。于是我把它做成产品——用户复述，AI 只负责追问和总结。</p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section">
+    <div class="section-no">02<br>边界</div>
+    <div class="section-body">
+      <h2>先写清楚「它不是什么」</h2>
+      <p>AI 学习工具最容易滑向「什么都能干」，然后什么都干不好。所以我先划了三条边界，并且写进 PRD 当作硬约束。</p>
+
+      <div class="decision">
+        <span class="label">边界一</span>
+        <h4>不是聊天机器人</h4>
+        <p>没有AI人格、没有头像、不寒暄。它不是陪你聊天的人，是一个只关心「你到底懂没懂」的对话对象。</p>
+      </div>
+
+      <div class="decision">
+        <span class="label">边界二</span>
+        <h4>不是答案搜索器</h4>
+        <p>随时能看答案，本身就是一条有心理成本的退路——它会让人放弃思考。</p>
+      </div>
+
+      <div class="decision">
+        <span class="label">边界三</span>
+        <h4>不是激励类 App</h4>
+        <p>没有徽章、没有连续天数、没有排行榜、没有庆祝动画。成长的反馈在知识版图界面慢慢增长的板块，在学习总览里客观的总结。</p>
+      </div>
+
+      <figure class="figure phone">
+        <img src="assets/img/feynman-quiz.webp" alt="Quiz 模式：第 3 轮焦点问题与三级渐进提示">
+        <figcaption>「不是答案搜索器」这条边界具体怎么落地：用户答不上来时，看到的不是答案，而是三级渐进提示——提示 1 方向启发、提示 2 线索聚焦、提示 3 逼近答案。每一级只把问题往前推一点，思考仍然是用户自己的。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section">
+    <div class="section-no">03<br>语气</div>
+    <div class="section-body">
+      <h2>把品牌语气写成五把可执行的尺子</h2>
+      <p>「不庆祝、不审判」是一句调性描述，但它没法交给AI执行——每个人对它的理解都不一样。所以我把它拆成五条具体规则，写进系统提示词。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>尺子</th><th>具体规则</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>怎么问</td><td>单点切入，难度随用户的表达热度递进；面对纯小白走「稀薄模式」——先问「这个印象是从哪来的？」</td></tr>
+            <tr><td>怎么接</td><td>接住用户的关键词碎片顺势追问；<strong>不替用户把思考做完</strong></td></tr>
+            <tr><td>怎么纠错</td><td>分三档力度：片面 → 继续追问；实质误解 → 抛一个反例，逼用户自己悟到；事实硬错 → 直接指出</td></tr>
+            <tr><td>情绪基调</td><td>正反馈不靠语言，交给知识地图<strong>无声地给</strong></td></tr>
+            <tr><td>诚实</td><td>置信度决定语气强度；被用户反驳时既不固执也不秒跪；没有事实核查兜底时，坦诚说明而不是硬答</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>PRD 里还单独列了一张禁用词表：<strong>「太棒了」「你说得很好」「非常正确」</strong>——这类话会让用户误判自己的掌握程度，是产品要防的东西，不是要加的东西。</p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="section">
+    <div class="section-no">04<br>地图</div>
+    <div class="section-body">
+      <h2>把「学没学懂」变成能看见的形状</h2>
+      <p>理解程度是看不见的，这是这个产品最难的部分。我的做法是：把用户聊过的知识板块按层级摆成一张版图，<strong>色块越深，表示这一块掌握得越牢</strong>——哪块是虚的，一眼就能看出来。</p>
+
+      <p>这套设计的用意是：比起被表扬，用户更需要<strong>看见自己思考的形状在长大</strong>。</p>
+
+      <figure class="figure phone">
+        <img src="assets/img/feynman-map.webp" alt="知识地图实机界面：以安史之乱为例，各知识板块按掌握度显示深浅">
+        <figcaption>以「安史之乱」为例的实机界面。顶部是综合掌握度 64%；每个知识板块占一格，色块越深表示掌握度越高——「关东漕运与汴水命脉」88%，色最深；「族群纽带」只有 20%，色最浅。底部是「针对薄弱点追问」的入口。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="section">
+    <div class="section-no">05<br>停在哪</div>
+    <div class="section-body">
+      <h2>功能做完了，但我知道它还不够好</h2>
+      <p>这个项目最终没有上线。目前功能基本完成，界面、对话引擎和知识地图都已经跑通。</p>
+      <p>停下来的原因是：我列出了它当时的问题，然后判断这些问题是<strong>产品的核心体验问题，不是可以带着上线的瑕疵</strong>。</p>
+
+      <div class="decision">
+        <span class="label">PRD §12 · 已知问题</span>
+        <h4>目前存在的问题</h4>
+        <p>
+          没有搭建好登录系统、云端系统，用户一旦清除本地缓存，所有知识板块、学习总览进度都清空。
+        </p>
+      </div>
+
+      <p>我选择先继续打磨核心体验，而不是把这些包一包就发出去。<strong>一个针对知识巩固内化的学习工具，必须能够长期稳定使用</strong>——记录自己的成长，建立长期知识体系。</p>
+
+      <p>这也是 Gloss 和费曼这两个项目的分水岭：Gloss 的核心闭环（点句 → 白话）成立，所以我让它上线；费曼的核心闭环（问答 → 地图反馈 → 形成总结 →长期跟进）不成立，所以我把它停在原地。</p>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="section">
+    <div class="section-no">06<br>现状</div>
+    <div class="section-body">
+      <h2>现在的状态</h2>
+      <p>费曼学习助手目前处于搁置状态，精力集中在 Gloss 上。它是我用 AI 编程助手完整跑通「需求定义 → 开发 → 自测 → 反馈优化」闭环的第一个项目——Gloss 上很多做法（把主观标准写成硬规则、先划边界再谈功能）都是在这个项目里试出来的。</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon-in">
+    <div class="colophon-grid">
+      <div>
+        <h4>陈利行 · CHEN LIXING</h4>
+        <p class="meta" style="text-transform:none;letter-spacing:.04em;font-size:12px">产品经理 ｜ 深圳 ｜ 2026 届</p>
+      </div>
+      <div style="text-align:right">
+        <p class="meta" style="text-transform:none;letter-spacing:.04em;font-size:12px;line-height:2.2">
+          联系方式 · 见简历
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="folio-bar" style="border-top:1px solid var(--rule)">
+    <span class="meta">Chen Lixing · Portfolio</span>
+    <span class="meta">folio 03 / 04</span>
+  </div>
+</footer>
+
+</body>
+</html>

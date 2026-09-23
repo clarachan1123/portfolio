@@ -1134,35 +1134,77 @@ body.no-hint .hint { display: none; }
   box-shadow: 0 0 0 1px rgba(26,24,21,.14) inset;
 }
 
-.map-cards {
+/* ── 知识地图：整屏手机 + 同倍率放大卡片 + 细线连回 ──────────────
+   旧版把长图切成三张横条并排（已删除：.map-cards / .map-col / .map-card），
+   读者看不到「整张地图」的样子，而这一节的论点恰恰是「它长成了一张图」。
+   改成：左边完整手机，右边按同一倍率放大的板块，细线连回手机里的位置。
+
+   关键是「同倍率」：三块放大倍数一致，读者才能横向比色深。倍率用
+   --zw 这个旋钮调（卡片总高 = 1.268 × --zw + 182，手机高 = .56 × --zw × 2.6918，
+   两者相等解得 .56 —— 差一点就会有一边高出一大截）。 */
+.map-zoom {
   grid-column: 1 / -1;
-  display: flex;
-  align-items: flex-start;
-  gap: var(--gut);
   margin: 34px calc(-1 * var(--edge)) 0 0;
 }
-.map-col {
-  flex: 1 1 50%;
-  min-width: 0;
+.map-zoom-in {
+  --zw: clamp(200px, 54vw, 776px);
+  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  gap: calc(var(--zw) * .22);
 }
-.map-card { flex: 1 1 50%; min-width: 0; margin: 0; }
-.map-card img {
-  width: 100%;
-  border: 1px solid var(--rule);
-  background: #FBF9F4;
+.map-zoom-shot { flex: 0 0 auto; width: calc(var(--zw) * .56); }
+/* 手机壳用站点 .phone（CSS 画）套一张「整页长截图」（1179×3174）———
+   截图自带的内容底色就是截图源整张图的全貌。下面这行 aspect-ratio 跟截图一致，
+   否则 object-fit:cover 会把底下两行（潜在支脉 / 生长观察）裁掉。 */
+.map-zoom-shot .phone {
+  --pw: calc(var(--zw) * .56);
+  aspect-ratio: 1179 / 3174;
+}
+.map-zoom-notes {
+  flex: 0 0 auto;
+  width: var(--zw);
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 26px;
+}
+.map-zoom-note { margin: 0; width: 100%; position: relative; }
+.map-zoom-note.w-turn   { width: 65.4%; }
+.map-zoom-note.w-branch { width: 48.3%; }
+/* 不加边框、不加底色：裁下来的色块自带圆角，方框会露出截图里的纸色，看着像「框里装了张图」。 */
+.map-zoom-note img {
+  display: block; width: 100%; height: auto;
   box-shadow: 0 20px 34px -26px rgba(23,21,15,.42);
 }
-.map-col .map-card { flex: 0 0 auto; }
-.map-card figcaption {
-  margin-top: 10px;
+.map-zoom-note figcaption {
+  margin-top: 9px;
   font-family: var(--mono);
   font-size: 9.5px;
   letter-spacing: .08em;
   line-height: 1.75;
   color: var(--ink-3);
+}
+.map-zoom-note figcaption b { color: var(--accent); font-weight: 500; }
+
+/* 连线层。两个属性同时存在：纸色粗线垫底当光晕，墨绿细线做实体。 */
+.map-zoom-lines {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  pointer-events: none; overflow: visible;
+}
+.map-zoom-lines .halo { fill: none; stroke: var(--paper); stroke-width: 4; }
+.map-zoom-lines .ring { fill: none; stroke: var(--accent); stroke-width: 1.6; opacity: .9; }
+.map-zoom-lines .ln   { fill: none; stroke: var(--accent); stroke-width: 1; opacity: .72; }
+.map-zoom-lines circle { fill: var(--accent); opacity: .85; }
+.map-zoom-lines circle.hollow { fill: var(--paper); stroke: var(--accent); stroke-width: 1; opacity: .95; }
+
+@media (max-width: 880px) {
+  /* 窄屏：手机居中在上，卡片按同比例堆在下面，连线取消（JS 也早退） */
+  .map-zoom-in { display: block; }
+  .map-zoom-shot { width: min(300px, 62vw); margin: 0 auto 34px; }
+  /* --pw 必须是长度，不能是百分比 —— 它要拿去算 border-radius，瘦长盒子上
+     border-radius 用百分比会按宽高分别算 → 椭圆。 */
+  .map-zoom-shot .phone { --pw: min(300px, 62vw); }
+  .map-zoom-notes { width: 100%; }
+  .map-zoom-lines { display: none; }
 }
 .map-band > figcaption {
   grid-column: 1 / -1;

@@ -37,8 +37,8 @@
   ──────────────────────────────────────────────────────────────
   ⚠️ 右侧那些小字方框（class="facts"）是「旁注」，也可以改，
      它们和正文讲的是不同角度，改的时候注意别和正文说重复的话。
-  ⚠️ 知识地图那一节有三张图（map-a / map-b / map-c），图注里的
-     百分比数字来自真实截图，改文字时不要改这些数字。
+  ⚠️ 知识地图那一节是「完整手机 + 4 张同倍率放大卡」，图里的百分比数字
+     来自真实截图，改文字时不要改这些数字。
   ⚠️ 三条铁律
      1. 只改中文。不要删除或改动 < > " " 这些符号，也不要动
         class="..." 里面的内容 —— 那是控制样式的。
@@ -211,20 +211,36 @@
         <p><span class="sw" style="background:#2B5748"></span>71–100%　已牢固</p>
       </div>
 
-      <div class="map-cards">
-        <figure class="map-card">
-          <img src="assets/img/map-a.webp" alt="知识地图上半：综合掌握度 64%、牢固层级图例，以及主支柱板块「关东漕运与汴水命脉」88%" width="1170" height="1547">
-          <figcaption>顶部 · 综合掌握度 64%，主支柱「关东漕运与汴水命脉」88%。</figcaption>
-        </figure>
-        <div class="map-col">
-          <figure class="map-card">
-            <img src="assets/img/map-b.webp" alt="知识地图中段：制度失衡 76%、兵员私有化 65%、战局转折 42%、内外重平衡术 28%" width="1170" height="874">
-            <figcaption>中段 · 四组板块并排，色深即掌握度。</figcaption>
-          </figure>
-          <figure class="map-card">
-            <img src="assets/img/map-c.webp" alt="知识地图下半：族群纽带 20%、堂党争 35%、两条潜在支脉，以及底部「针对薄弱点追问」入口" width="1170" height="734">
-            <figcaption>下半 · 最浅的「族群纽带」20%，底部是追问入口。</figcaption>
-          </figure>
+      <div class="map-zoom">
+        <div class="map-zoom-in">
+          <div class="map-zoom-shot">
+            <div class="phone">
+              <div class="scr">
+                <img src="assets/img/map-full.webp" alt="费曼知识地图完整一屏：综合掌握度 64%，九块已长出的板块按深浅排布，底下两行是还没长出来的潜在支脉，最后一句是生长观察" width="900" height="2422">
+              </div>
+            </div>
+          </div>
+          <div class="map-zoom-notes">
+            <!-- data-box = 这一块在截图里的位置（x0,y0,x1,y1 比例，基于 1179×3174）。
+                 JS 每帧现算坐标，连线随视口缩放不飘。 -->
+            <figure class="map-zoom-note" data-box="0.0407,0.2023,0.9593,0.3538">
+              <img src="assets/img/map-pillar.webp" alt="主支柱板块：关东漕运与汴水命脉，88%，答过 4 问，已形成完整经济因果链" width="1083" height="481">
+              <figcaption><b>88%</b>　从左边原样放大。徽标旁那句话把因果链写完了 —— 这就是「牢固」长什么样。</figcaption>
+            </figure>
+            <figure class="map-zoom-note w-turn" data-box="0.0356,0.5041,0.6370,0.6333">
+              <img src="assets/img/map-turn.webp" alt="战局转折板块：哥舒翰出关与潼关溃败，42%，深绿实线框，顶部挂着「刚刚长出」标签" width="709" height="435">
+              <figcaption><b>42%</b>　深绿实线框，顶上挂着「刚刚长出」。上一轮它还是下面那种虚线框。</figcaption>
+            </figure>
+            <figure class="map-zoom-note w-branch" data-box="0.0407,0.7628,0.4843,0.8229">
+              <img src="assets/img/map-branch.webp" alt="潜在支脉 01：马嵬驿兵变玄宗失权，虚线框还没长出来" width="523" height="192">
+              <figcaption><b>潜在支脉</b>　虚线＝还没长出来的枝。位置排好了，聊到才会填实 —— 旁边 02 同理。</figcaption>
+            </figure>
+            <figure class="map-zoom-note" data-box="0.0407,0.8311,0.9601,0.9149">
+              <img src="assets/img/map-growth.webp" alt="生长观察：你的思维在军事制度与漕运经济两条脉络上最为扎实，在朝堂君臣心理防线上仍有雾气，无需急于填满" width="1084" height="266">
+              <figcaption><b>生长观察</b>　地图自己写的一句总结，末尾是「无需急于填满」。</figcaption>
+            </figure>
+          </div>
+          <svg class="map-zoom-lines" aria-hidden="true"></svg>
         </div>
       </div>
     </figure>
@@ -277,5 +293,71 @@
   </div>
 </footer>
 
+<script>
+/* 知识地图那一节的连线：从放大卡片连回手机里对应板块的位置。
+   用 JS 而不写死坐标，是因为构图随视口缩放。JS 不跑也不影响阅读 —— 只是少几条线。 */
+(function () {
+  var box = document.querySelector('.map-zoom-in');
+  if (!box) return;
+  var svg = box.querySelector('.map-zoom-lines');
+  /* 量的是**屏幕**那块矩形，不是整个手机 —— data-box 比例是按截图算的，
+     手机还有一圈 3.6% 边框，留给手机算坐标会让描边方块整体偏出去一圈。 */
+  var shot = box.querySelector('.map-zoom-shot .scr') || box.querySelector('.map-zoom-shot');
+  var notes = box.querySelectorAll('.map-zoom-note');
+
+  function draw() {
+    if (getComputedStyle(svg).display === 'none') return;
+    var bb = box.getBoundingClientRect();
+    var sb = shot.getBoundingClientRect();
+    svg.setAttribute('viewBox', '0 0 ' + bb.width + ' ' + bb.height);
+    var halos = '', marks = '';
+    for (var i = 0; i < notes.length; i++) {
+      var n = notes[i];
+      var b4 = (n.getAttribute('data-box') || '').split(',').map(Number);
+      if (b4.length !== 4) continue;
+      var f = parseFloat(n.getAttribute('data-anchor'));
+      if (isNaN(f)) f = (b4[1] + b4[3]) / 2;
+
+      /* 在手机里把目标板块描一圈。描边要往外挪几个像素 —— 之前的版本踩过一个坑：
+         线正好压在方块边界上，一半落在纸底、一半落在色块上，被两边各吃掉一半，
+         只剩一道 1px 浅灰，肉眼当成抗锯齿。挪到外面的纸底上就干净了。
+         描边一律墨绿（三种深浅的方块都在纸底上），不用按深浅挑颜色。
+
+         再垫一层纸色「光晕」：连线下半走的是页面纸底，不垫光晕也看得见，
+         但穿过邻近色块时会被色块吃掉。光晕跟页面底色同色，平时看不见，
+         只在压到别的色块时才起作用，等于给批注让出一条干净的路。
+         光晕必须先画完再画所有描边/线，否则后一块的光晕会擦掉前一块。 */
+      var pad = sb.width * 0.011;
+      var rx = sb.left - bb.left + sb.width * b4[0] - pad;
+      var ry = sb.top - bb.top + sb.height * b4[1] - pad;
+      var rw = sb.width * (b4[2] - b4[0]) + pad * 2;
+      var rh = sb.height * (b4[3] - b4[1]) + pad * 2;
+      var rr = sb.width * 0.032;
+      halos += '<rect class="halo" x="' + rx + '" y="' + ry + '" width="' + rw +
+               '" height="' + rh + '" rx="' + rr + '"/>';
+      marks += '<rect class="ring" x="' + rx + '" y="' + ry + '" width="' + rw +
+               '" height="' + rh + '" rx="' + rr + '"/>';
+
+      /* 连线从描边方块的右缘出发，走到放大卡片的左缘中点。 */
+      var x1 = rx + rw;
+      var y1 = sb.top - bb.top + sb.height * f;
+      var nb = n.getBoundingClientRect();
+      var x2 = nb.left - bb.left - 13;
+      var y2 = nb.top - bb.top + nb.height / 2;
+      var d = 'M' + x1 + ' ' + y1 + ' L' + x2 + ' ' + y2;
+      halos += '<path class="halo" d="' + d + '"/>';
+      marks += '<path class="ln" d="' + d + '"/>';
+      marks += '<circle class="hollow" cx="' + x1 + '" cy="' + y1 + '" r="3.4"/>';
+      marks += '<circle cx="' + x2 + '" cy="' + y2 + '" r="2.2"/>';
+    }
+    svg.innerHTML = halos + marks;
+  }
+
+  draw();
+  window.addEventListener('resize', draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  window.addEventListener('load', draw);
+})();
+</script>
 </body>
 </html>

@@ -110,6 +110,12 @@
 <script>
 /* 站点里每一张图：文件名 / 用在哪 / 建议宽度 */
 var SLOTS = [
+  /* —— 首页 · 项目索引 —— */
+  {f:'win-g-shelf.webp',        w:'首页项目 01 · Gloss 书架页（窗口框）',      width:1800},
+  {f:'win-g-top.webp',          w:'首页项目 01 · Gloss 阅读页顶部（窗口框）',  width:1800},
+  {f:'phone-f-home.webp',       w:'首页项目 02 · 费曼首页（左手机）',          width:760},
+  {f:'phone-f-tell.webp',       w:'首页项目 02 · 费曼讲述（中手机）',          width:760},
+  {f:'phone-f-map.webp',        w:'首页项目 02 · 费曼知识地图（右手机）',      width:760},
   /* —— Gloss 案例页 —— */
   {f:'win-g-reader.webp',       w:'Gloss 页首 · 阅读器三栏（窗口框）',        width:1800},
   {f:'annot-word.webp',         w:'Gloss §02 · 236 条批注的 Word 原件',      width:1300},
@@ -125,16 +131,10 @@ var SLOTS = [
   {f:'gloss-spec-audit.webp',   w:'Gloss §07 横滑第 9 张 · 审计清单',        width:800},
   {f:'shelf-empty.webp',        w:'Gloss 最后一节 · 书架页空状态',           width:1400},
   /* —— Feynman 案例页 —— */
-  {f:'phone-f-home.webp',       w:'Feynman 页首三台手机 · 左（首页）',        width:760},
-  {f:'phone-f-tell.webp',       w:'Feynman 页首三台手机 · 中（讲述）',        width:760},
-  {f:'phone-f-map.webp',        w:'Feynman 页首三台手机 · 右（知识地图）',    width:760},
   {f:'phone-f-quiz.webp',       w:'Feynman §02 之后 · 三级渐进提示',          width:760},
   {f:'map-a.webp',              w:'Feynman §04 知识地图卡片 · 上半',         width:1170},
   {f:'map-b.webp',              w:'Feynman §04 知识地图卡片 · 中段',         width:1170},
-  {f:'map-c.webp',              w:'Feynman §04 知识地图卡片 · 下半',         width:1170},
-  /* —— 暂时没用上，首页「项目索引」以后加回来时会用到，先别删 —— */
-  {f:'win-g-shelf.webp',        w:'（暂未启用）首页 · Gloss 书架页',          width:1800},
-  {f:'win-g-top.webp',          w:'（暂未启用）首页 · Gloss 阅读页顶部',      width:1800}
+  {f:'map-c.webp',              w:'Feynman §04 知识地图卡片 · 下半',         width:1170}
 ];
 
 var $ = function(id){ return document.getElementById(id); };

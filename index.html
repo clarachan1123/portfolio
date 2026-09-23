@@ -128,22 +128,24 @@
     <div class="plate-lead">
       <span class="plate-tag">书架页 · 阅读页 · 桌面窗口</span>
       <h3>两屏合起来，才是一个完整动作</h3>
-      <p>书架页 12 本书脊竖排，末位留一个虚线位的「导入新书」；阅读页把目录、正文、阅读参数分进三栏，白话面板就地落在正文那一栏里，<strong>不用离开这一页</strong>。</p>
+      <p>书架页 12 本书脊竖排，末位留一个虚线位的「导入新书」；阅读页把目录、正文、阅读参数分进三栏，<strong>左栏是书的结构，右栏是读书的参数，中间才是书本身</strong>。</p>
       <p>Gloss 是网页产品，所以用桌面窗口装；费曼是手机 App，用手机框装 —— 壳的形态本身就是信息。</p>
     </div>
 
     <figure class="plate">
       <div class="wins">
-        <div class="win">
-          <div class="bar"><i></i><i></i><i></i><span class="url">gloss-jet.vercel.app</span></div>
-          <img src="assets/img/win-g-shelf.webp" alt="Gloss 书架页：12 本书脊竖排，末位为「导入新书」虚线占位" width="1800" height="1125">
-        </div>
+        <!-- 顺序：后窗=阅读页，前窗=书架页。书架页信息密度低、书脊是等距竖条，
+             压在阅读页上面比反过来整齐（2026-09-23 用户要求调序）。 -->
         <div class="win">
           <div class="bar"><i></i><i></i><i></i><span class="url">gloss-jet.vercel.app</span></div>
           <img src="assets/img/win-g-top.webp" alt="Gloss 阅读页：左栏目录与文档进度、中栏正文、右栏阅读参数" width="1800" height="1125">
         </div>
+        <div class="win">
+          <div class="bar"><i></i><i></i><i></i><span class="url">gloss-jet.vercel.app</span></div>
+          <img src="assets/img/win-g-shelf.webp" alt="Gloss 书架页：12 本书脊竖排，末位为「导入新书」虚线占位" width="1800" height="1125">
+        </div>
       </div>
-      <figcaption>上：书架页。下：阅读页，三栏结构，白话面板在中栏就地展开。</figcaption>
+      <figcaption>后：阅读页。前：书架页 —— 标着「正在读」的那本书脊，就是顶部「停在 78%」的那本。</figcaption>
     </figure>
 
     <div class="proj-sep"></div>
@@ -163,18 +165,18 @@
     </article>
 
     <div class="plate-lead">
-      <span class="plate-tag">首页 · 讲述 · 知识地图 · 手机框</span>
+      <span class="plate-tag">问答页 · 澄清页 · 知识地图</span>
       <h3>三屏，就是一次完整循环</h3>
-      <p>首页只留一个输入框，不做课程也不做题库；讲述到一半会被打断追问「稍等，有个词没听懂」；掌握程度最后落成一张色块地图，<strong>色越深，这一块越牢</strong>。</p>
+      <p>它先抛给你一个焦点问题，答不上来时给的不是答案，是三级台阶。方向不对就打开主题设定，把「偏原理还是偏应用」「学透还是随便逛」重新定一遍；掌握程度最后落成一张色块地图，<strong>最浅的那块下面，就是下一轮追问的入口</strong>。</p>
     </div>
 
     <figure class="plate">
       <div class="devices">
-        <div class="phone"><div class="scr"><img src="assets/img/phone-f-home.webp" alt="费曼首页：输入想弄懂的概念，或从随手一张卡开始推演" width="760" height="1723"></div></div>
-        <div class="phone"><div class="scr"><img src="assets/img/phone-f-tell.webp" alt="费曼「我来讲述」：用户复述到一半，AI 打断追问「稍等，有个词没听懂」" width="760" height="2222"></div></div>
-        <div class="phone"><div class="scr"><img src="assets/img/phone-f-map.webp" alt="费曼知识地图：各知识板块按掌握度显示深浅" width="760" height="2094"></div></div>
+        <div class="phone mock"><div class="scr"><img src="assets/img/phone-f-ask.webp" alt="费曼问答页：第 3 轮焦点问题，答不上来时展开「提示 1 · 方向启发」" width="520" height="1055"></div></div>
+        <div class="phone mock"><div class="scr"><img src="assets/img/phone-f-clarify.webp" alt="费曼主题设定：把「探究维度」与「研学节奏」重新定义一遍" width="520" height="1055"></div></div>
+        <div class="phone mock"><div class="scr"><img src="assets/img/phone-f-map.webp" alt="费曼知识地图：综合掌握度 64%，各知识板块按掌握度显示深浅" width="520" height="1055"></div></div>
       </div>
-      <figcaption>抛出一个概念 → 复述时被打断追问 → 掌握度落成一张地图。</figcaption>
+      <figcaption>它先问你 → 答不上来给台阶，方向不对就回炉 → 掌握度落成地图。三屏是同一次会话：安史之乱。</figcaption>
     </figure>
 
   </div>

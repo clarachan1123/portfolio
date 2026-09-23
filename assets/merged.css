@@ -942,6 +942,38 @@ body.no-hint .hint { display: none; }
   object-position: center top;
 }
 
+/* ── 14pro mockup 模式（.phone.mock）──────────────────────────
+   素材 `Feynman-*14pro-portrait`（1339×2716）自带完整 iPhone 14 Pro 外框，
+   背景是 RGBA 透明 —— 也就是说「壳」已经在图里了。
+   所以套进 .phone 时必须把上面那一整套 CSS 画的壳撤掉，否则会框套框。
+   高度也不再由 aspect-ratio 定（素材比例 1339/2716 ≈ .493，和屏幕比例 .462 不同），
+   交给图片自己撑。--pw 那套响应式宽度照旧生效，不用另写断点。
+   ⚠️ 别把这个类叫 .shot —— gloss.html 里 .shot 是「截图 figure」，含义完全不同。 */
+.phone.mock {
+  padding: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.phone.mock .scr {
+  height: auto;
+  border-radius: 0;
+  overflow: visible;
+  background: none;
+  box-shadow: none;
+}
+.phone.mock .scr img {
+  display: block;
+  width: 100%;
+  /* 同上：HTML 的 height="1055" 会变成 height:1055px 压过宽高比，必须显式 auto */
+  height: auto;
+  object-fit: contain;
+  /* 素材自带银色边框高光（最外圈实测 rgb(222,217,219)），深色底上靠它就能立住；
+     浅色底（feynman.html 的羊皮纸）上再补一层投影，免得手机像贴纸一样平。 */
+  filter: drop-shadow(0 20px 26px rgba(23, 21, 15, .30));
+}
+
 /* 桌面窗口 */
 .win {
   border-radius: 11px;

@@ -3,9 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>陈利行 · 产品作品集</title>
-<meta name="description" content="陈利行（2026 届，武汉大学哲学）的产品作品集。两个独立定义的 AI 产品：Gloss 已上线，费曼学习助手停在上线前。">
-<link rel="stylesheet" href="assets/style.css">
+<title>陈利行 · 产品经理求职作品集 — 两个自己定义、自己验收的 AI 产品</title>
+<meta name="description" content="两个由 AI 编程助手实现、由我定义问题与验收标准的 AI 产品：已上线的中文哲学书阅读工具 Gloss，与未上线的费曼学习助手。">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/space-grotesk@5/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/500.css">
+<link rel="stylesheet" href="assets/merged.css">
 
 <!--
   ══════════════════════════════════════════════════════════════
@@ -15,23 +19,22 @@
           几个字，找到后只改标签之间的中文。存盘，浏览器按 F5。
 
   本页可改的位置（搜 → 对应位置）：
-    【CHEN LIXING】          页眉左上角字标
-    【产品经理 · 求职作品集】  封面左上小字
-    【深圳 · 2026 届】        封面右上小字
-    【两个我自己定义】        封面主标题（<br> 是换行符，可留可删）
-    【一个已经上线】          封面副标题
-    【Gloss · 书架页】        封面图下方说明
-    【项目索引】              索引区小标题
-    【已上线】/【未上线】      项目状态标签
-    【点一句读不懂的话】       项目 01 标题
-    【读难书】          项目 01 描述
-    【236】/【5】/【20】       项目 01 的三个数字
-    【条真实批注】/【版 PRD 留存】/【句分层评测集】 数字下方说明
-    【你讲给 AI 听】          项目 02 标题
-    【备考时能读懂】          项目 02 描述
-    【哲学专业，做产品】       关于区标题
-    【武汉大学哲学本科】       关于区描述
-    【陈利行 · CHEN LIXING】  页脚姓名
+    【CHEN LIXING】           页眉左上角字标
+    【产品经理 · 求职作品集】   封面左上小字
+    【深圳 · 2026 届】         封面右上小字
+    【两个我自己定义】         封面主标题（<br> 是换行符，可留可删）
+    【两个项目的代码都由】     封面副标题
+    【236】/【5】/【20】/【7】  封面数据矩阵里的数字
+    【条真实批注】等          数字下方的小字说明
+    【哲学专业，不写代码】     关于区标题
+    【武汉大学哲学本科】       关于区正文
+    【把模糊的抱怨】等         关于区四条「能力」卡片（一/二/三/四）
+    【时间线】                时间线小标题
+    【Gloss · 独立产品设计开发】 时间线各条目
+    【教育与工具】            教育与工具小标题
+    【武汉大学（985）】        教育那一行
+    【找我聊聊】              右侧联系卡片
+    【陈利行】/【CHEN LIXING】 页脚姓名
     【产品经理 ｜ 深圳 ｜ 2026 届】 页脚一行简介
     【GitHub · clarachan1123】 页脚联系方式
   ──────────────────────────────────────────────────────────────
@@ -40,6 +43,7 @@
         class="..." 里面的内容 —— 那是控制样式的。
      2. 要换行，写 <br>（例：第一行<br>第二行）。
      3. 改完一定要存盘，再回浏览器刷新才看得到。
+     4. 绝对不要用 Word 或 WPS 打开这个文件，会把引号换成中文引号、加一堆乱码标签。
   ══════════════════════════════════════════════════════════════
 -->
 </head>
@@ -47,117 +51,159 @@
 
 <header class="masthead">
   <div class="masthead-in">
-    <div class="brand"><b>CHEN LIXING 陈利行</b> <span>· 作品集</span></div>
-    <nav class="nav">
+    <div class="brand">CHEN LIXING <span>陈利行</span></div>
+    <nav>
       <a href="index.html" aria-current="page">首页</a>
       <a href="gloss.html">Gloss</a>
       <a href="feynman.html">Feynman</a>
-      <a href="about.html">关于</a>
+      <a href="index.html#about">关于</a>
     </nav>
-    <div class="meta">Portfolio · 2026</div>
+    <div class="meta stamp">Portfolio · 2026</div>
   </div>
 </header>
 
-<main class="wrap">
+<main class="night">
+<section class="page">
+  <div class="grid12 cover">
 
-  <section class="cover">
+    <div class="cover-top">
+      <span class="mono">产品经理 · 求职作品集</span>
+      <span class="mono">深圳 · 2026 届</span>
+    </div>
+
     <h1>两个我自己定义、<br>自己验收的 <em>AI 产品</em>。</h1>
 
-    <figure class="cover-plate">
-      <img src="assets/img/gloss-shelf.webp" alt="Gloss 书架页：书脊竖排，底部为 folio 页码">
-      <figcaption class="plate-cap">
-        <span>Gloss · 书架页（首页） </span>
-      </figcaption>
-    </figure>
-  </section>
+    <p class="cover-lede">两个项目的代码都由 AI 编程助手实现，我负责定义问题、拆解任务、设计规则、验收结果。</p>
 
-  <div class="index-head">
-    <span class="meta">Gloss</span>
-    <span class="meta">01 — 02</span>
+    <div class="matrix">
+      <div class="cell"><b>236</b><span>条真实批注</span></div>
+      <div class="cell"><b>5</b><span>次 PRD 迭代</span></div>
+      <div class="cell"><b>20</b><span>句分层评测集</span></div>
+      <div class="cell"><b>7</b><span>个阶段的全状态规格</span></div>
+      <div class="cell is-accent"><b>9/14</b><span>自我评测判到相反一侧</span></div>
+      <div class="cell is-accent"><b>64%</b><span>分歧率 → 终止人工评测</span></div>
+      <div class="cell"><b>3</b><span>个被砍掉的功能</span></div>
+      <div class="cell"><b>1</b><span>个产品已上线</span></div>
+    </div>
+
   </div>
-
-  <!-- ===================== 01 Gloss ===================== -->
-  <article class="entry">
-    <div class="entry-no">01</div>
-    <div class="entry-body">
-      <div class="entry-tags">
-        <span class="tag live">已部署，MVP 开发中</span>
-        <span class="tag">2026.08 — 至今</span>
-      </div>
-
-      <h3><a href="gloss.html">点一句读不懂的话，就地把它讲成白话</a></h3>
-
-      <p class="entry-desc">读难书，最难的不是查不到，是每查一次都要离开这一页。Gloss 把「选中 → 切出去 → 搜索 → 对照 → 切回来」压成一次点击：点句子，就地撑开一句白话，不打断阅读。</p>
-
-      <div class="stats">
-        <div class="stat"><b>236</b><span>条真实批注</span></div>
-        <div class="stat"><b>5</b><span>次PRD迭代</span></div>
-        <div class="stat"><b>20</b><span>句分层评测集</span></div>
-      </div>
-
-      <a class="entry-link" href="gloss.html">读完整案例 →</a>
-    </div>
-
-    <figure class="entry-thumb">
-      <img src="assets/img/gloss-reader.webp" alt="Gloss 阅读页：左侧目录、中间正文、右侧参数与白话面板">
-    </figure>
-  </article>
-
-  <!-- ===================== 02 费曼 ===================== -->
-  <article class="entry">
-    <div class="entry-no">02</div>
-    <div class="entry-body">
-      <div class="entry-tags">
-        <span class="tag hold">已有MVP版本</span>
-        <span class="tag">2026.05 — 2026.07</span>
-      </div>
-
-      <h3><a href="feynman.html">你讲给 AI 听，AI 追问你</a></h3>
-
-      <p class="entry-desc">备考时能记住，却无法验证自己是不是真的理解、内化了——问题出在「只有输入、没有反馈」。费曼把方向反过来：用户复述，AI 只负责追问，思考空间留给你自己。</p>
-
-      <a class="entry-link" href="feynman.html">读完整案例 →</a>
-    </div>
-
-    <figure class="entry-thumb phone">
-      <img src="assets/img/feynman-map.webp" alt="费曼学习助手知识地图：以安史之乱为例，各知识板块按掌握度显示深浅">
-    </figure>
-  </article>
-
-  <!-- ===================== 关于 ===================== -->
-  <div class="index-head">
-    <span class="meta">关于</span>
-    <span class="meta">03</span>
-  </div>
-
-  <section class="entry" style="border-bottom:0">
-    <div class="entry-no">03</div>
-    <div class="entry-body">
-      <h3>武汉大学 · 26届本科生 · 哲学专业</h3>
-      <p class="entry-desc">两个项目的代码都由 AI 编程助手实现，我负责定义问题、拆解任务、设计规则、验收结果。</p>
-      <a class="entry-link" href="about.html">更多关于我 →</a>
-    </div>
-  </section>
-
+</section>
 </main>
 
-<footer class="colophon">
-  <div class="colophon-in">
-    <div class="colophon-grid">
+<section class="page band band-alt" id="about">
+  <div class="grid12 breather">
+    <p class="meta">关于 · 武汉大学 ｜ 哲学 本科 ｜ 2026 届</p>
+    <p>哲学专业，不写代码，<br>但能 0 到 1 交付产品。</p>
+  </div>
+
+  <div class="grid12">
+    <div class="about-body">
+      <p>武汉大学哲学本科，2026 届。两个 AI 产品的代码都由 AI 编程助手实现——我负责的是定义问题、拆解任务、设计规则、验收结果。</p>
+      <p>我不会写代码，这一点我写在简历第一行而不是藏起来。但两个项目的交付物是真实的：一个已上线的产品，一份 5 个版本的 PRD，一套跑了 236 条真实批注的评测集。</p>
+      <p><strong>我把问题定义清楚、把标准写成可执行的规则、把任务拆到 AI 能接手的粒度，然后逐项验收。</strong>这套方式我跑了两遍，第二遍的产品上线了。</p>
+    </div>
+
+    <div class="pillars">
       <div>
-        <h4>陈利行 · CHEN LIXING</h4>
-        <p class="meta" style="text-transform:none;letter-spacing:.04em;font-size:12px">产品经理 ｜ 深圳 ｜ 2026 届</p>
+        <dt>一</dt>
+        <dd>把模糊的抱怨，变成可验证的问题。「哲学书太难读」不是一个产品问题。Gloss 的起点是把它收敛成一句可以证伪的话：问题不是 AI 做不到，是摩擦高到用户不会真的去做。这句话一旦写下来，后面所有取舍就有了统一的尺子。</dd>
       </div>
-      <div style="text-align:right">
-        <p class="meta" style="text-transform:none;letter-spacing:.04em;font-size:12px;line-height:2.2">
-          联系方式 · 见简历
-        </p>
+      <div>
+        <dt>二</dt>
+        <dd>用「不做什么」定义产品。两个项目里，我花在划边界上的时间比加功能多。费曼写了三条「不是」，Gloss 写了「永不做问答框」。理由很简单：<strong>一个不知道自己边界在哪的产品，迭代方向必然是随机的。</strong></dd>
+      </div>
+      <div>
+        <dt>三</dt>
+        <dd>把主观标准翻译成可执行的规则。「这句白话改得好不好」是感觉，AI 执行不了。我做的事是把它变成硬规则——不超过 150 字、术语只留承重的、说不清楚好过说错。过程中发现：<strong>给模型一张替换词表会失效，给它一套判断规则才有效。</strong></dd>
+      </div>
+      <div>
+        <dt>四</dt>
+        <dd>怀疑自己的判断。做 Gloss 时我加了一组对照，检验自己的人工评测是否可靠。结果发现同一版本的两份输出，我在 14 句里有 9 句判到了相反一侧。于是我停掉了这套评测方法。我认为承认自己不可靠，比坚持一套测不准的方法更有价值。</dd>
       </div>
     </div>
   </div>
-  <div class="folio-bar" style="border-top:1px solid var(--rule)">
-    <span class="meta">Chen Lixing · Portfolio</span>
-    <span class="meta">folio 01 / 04</span>
+</section>
+
+<section class="page band">
+  <div class="grid12">
+    <div class="band-head" style="border-bottom-color:var(--ink)">
+      <h2>时间线</h2>
+      <span class="mono">2023.09 — 至今</span>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="mono">2026.08 — 至今</div>
+        <div><h4>Gloss · 独立产品设计开发</h4><p>中文哲学书点句出白话的阅读工具，已有 MVP 版本。我负责问题定义、PRD 迭代、改写规则设计、评测集构建与验收。</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="mono">2026.05 — 2026.07</div>
+        <div><h4>费曼学习助手 · 独立产品设计开发</h4><p>AI 学习工具，未上线。负责产品定位、语气规范设计与开发验收。</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="mono">2025.10 — 2026.02</div>
+        <div><h4>上海蜂阁信息 · 产品实习生</h4><p>负责 FamCal（家庭成员共享日程）的附件能力：从需求分析、竞品研究、PRD、交互方案到开发跟进与上线验收。这段经历是后面两个独立项目的方法基础。</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="mono">2025.05 — 2025.08</div>
+        <div><h4>杭州不垢科技 · 品牌营销实习生</h4><p>负责留学项目的小红书内容种草与线索获取，围绕目标用户决策链路设计内容策略，累计产出 100+ 篇内容，参与内容到咨询线索的转化链路复盘。</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="mono">2024.03 — 2024.04</div>
+        <div><h4>用户行为研究 · 课程小组</h4><p>负责问卷设计，回收 200+ 份有效样本，完成数据清洗与结构化分析，识别出实用价值、图文美化、排版清晰度三大收藏驱动因素，沉淀为小组可复用的选题评估框架。</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="mono">2023.09 — 2024.10</div>
+        <div><h4>武汉大学哲学学院学生会 · 院级公众号运营</h4><p>独立负责日常运营、内容编辑与排版发布，累计发布 97 篇；沉淀标准化推文模板与发布 SOP，出稿时长从 50 分钟降到 20 分钟。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page band band-alt">
+  <div class="grid12">
+    <div class="band-head" style="border-bottom-color:var(--ink)">
+      <h2>教育与工具</h2>
+      <span class="mono">背景</span>
+    </div>
+
+    <div class="about-body" style="grid-column:3/9;margin-top:44px">
+      <div class="table-wrap" style="max-width:100%">
+        <table>
+          <tbody>
+            <tr><td>教育</td><td>武汉大学（985）｜ 哲学 本科 ｜ GPA 3.59 ｜ 2022.09 — 2026.06</td></tr>
+            <tr><td>主修课程</td><td>逻辑学、伦理学、普通心理学、社会哲学</td></tr>
+            <tr><td>AI 工具</td><td>Claude Code、Codex；Prompt 设计与 AI 工作流搭建</td></tr>
+            <tr><td>设计工具</td><td>Figma、Google Stitch</td></tr>
+            <tr><td>数据工具</td><td>Excel（VLOOKUP、数据透视表）、SQL</td></tr>
+            <tr><td>语言能力</td><td>CET-6 ｜ 粤语</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <aside class="facts" style="grid-column:10/-1;margin-top:44px">
+      <h4>找我聊聊</h4>
+      <p>深圳 ｜ 2026 届 ｜ 求职方向：产品经理</p>
+      <p>联系方式：见简历</p>
+      <p class="mono" style="letter-spacing:.06em">github.com/clarachan1123</p>
+    </aside>
+  </div>
+</section>
+
+<footer class="night colophon">
+  <div class="page">
+    <div class="grid12 colophon-in">
+      <h4 class="name">陈利行<br>CHEN LIXING</h4>
+      <div class="who"><p>产品经理 ｜ 深圳 ｜ 2026 届</p></div>
+      <div class="contact">
+        <p>GitHub · clarachan1123<br>邮箱与电话 · 见简历</p>
+      </div>
+      <div class="folio-bar">
+        <span class="mono">Chen Lixing · Portfolio</span>
+        <span class="mono">产品作品集 · 2026 届</span>
+      </div>
+    </div>
   </div>
 </footer>
 

@@ -1,0 +1,1276 @@
+/* ══════════════════════════════════════════════════════════════
+   CONCEPT B · 论证链 / The Argument Chain
+   产品思维（Product Thinking）：墨黑区块 · 密度递减 · 截图标注
+   ──────────────────────────────────────────────────────────────
+   结构来源：一个数字密度严格递减的序列（4→3→1→0），其中有两处
+   三字符的爆发块，以及首尾同一字符构成的框。
+   翻译为：页面从最密的信息矩阵开始，逐段放开，到最后完全留白；
+   两处「推翻」用珊瑚橙的 × 打断论证链；首尾用深色区块收框。
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* 深色区块 —— 暖墨。原 B 用的是冷黑 #101114，与羊皮纸素材并置时发青；
+     这里换成带暖调的墨色，与截图底色同源。 */
+  --night:    #17150F;
+  --night-2:  #201D15;
+  --night-3:  #2C2820;
+  --on-night: #F2EEE4;
+  --on-night-2: #A79F8C;
+  --on-night-3: #6B6455;
+  --night-line: #332E24;
+
+  /* 浅色区块 —— 羊皮纸。取自素材实测：Gloss 首页 #F5F3EC / 阅读页 #F2EFE8 /
+     Feynman 首页 #F8F4F0 / 知识地图 #F2F1EA。四张图交集就是这个纸色。 */
+  --paper:   #F4F1E9;
+  --paper-2: #EAE5DA;
+  --paper-3: #DFD9CB;
+  --ink:     #1A1815;
+  --ink-2:   #57503F;
+  --ink-3:   #8B8371;
+  --rule:    #D6D0C0;
+  --rule-2:  #E5E0D3;
+
+  /* 唯一强调色：深墨绿。取自 Feynman 知识地图实测主色 #2E5B4B（占该图 17%），
+     是全部素材里唯一的高饱和色 —— 用它就不会和截图割裂。
+     原 B 用的珊瑚橙 #E4572E 在素材里找不到对应。 */
+  --accent:   #2E5B4B;
+  --accent-d: #B9D2C6;
+  /* 深色区块内自动切到提亮版，避免墨绿压在暖墨上看不清 */
+  --accent-lit: #7FB39A;
+
+  --cjk: "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei UI",
+         "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC",
+         "Hiragino Sans GB", sans-serif;
+  --disp: "Space Grotesk Variable", "Space Grotesk", var(--cjk);
+  --text: var(--cjk);
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --gut: 24px;
+  --edge: clamp(20px, 4vw, 64px);
+  --rail: 56px;
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body { overflow-x: clip; margin: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 16.5px;
+  line-height: 1.9;
+  letter-spacing: .01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ⚠️ height: auto 不是可选项。HTML 上的 height="1125" 会变成一条
+   presentational hint（等于 height:1125px），它的优先级高于作者样式表里的
+   width:100% —— 只写 width 的话，图片会被按原始像素高度压扁/拉长。
+   凡是给了 width/height 属性的图，都必须靠这条把高度交回给宽高比。 */
+img { max-width: 100%; display: block; height: auto; }
+a { color: inherit; text-decoration: none; }
+em { font-style: normal; }
+::selection { background: #F7D6CB; }
+
+.page { max-width: 1440px; margin: 0 auto; padding: 0 var(--edge); }
+
+.grid12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gut);
+}
+
+.mono, .meta {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.7;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* ── 深色区块 ─────────────────────────────────────────────── */
+
+/* 深色区块：墨绿压在暖墨上对比度不足，这里把强调色整体切到提亮版，
+   深色区内的所有 var(--accent) 自动生效，无需逐处改写。 */
+.night { background: var(--night); color: var(--on-night); --accent: var(--accent-lit); }
+.night .mono, .night .meta { color: var(--on-night-3); }
+.night ::selection { background: var(--accent); color: #fff; }
+
+/* ── 大主题色带 ─────────────────────────────────────────────
+   换一个板块（关于 → Gloss → 费曼 → 时间线）时，整条底色换一档。
+   底色是「换主题」这件事唯一的信号，所以它必须整幅铺满视口 —— 而
+   .page 是 max-width 1440 的网格容器，自己铺不满。所以底色画在一个
+   100vw 宽的伪元素上，用 z-index:-1 压到内容下面（.band 不设 z-index，
+   就不会生成层叠上下文，-1 才会落到 body 背景之上、内容之下）。
+   100vw 含滚动条宽度，会略微超出视口，靠 html/body 的 overflow-x:clip 裁掉。 */
+.band { position: relative; --band: var(--paper); }
+.band::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  background: var(--band);
+}
+/* 间隔带：比纸色深一档的牛皮色。只用在「关于 / 费曼 / 教育与工具」这些
+   非案例板块上，两个案例（Gloss / 费曼）反而保持亮纸色，形成明暗交替。 */
+.band-alt { --band: #E7E0CE; }
+
+/* ── 页眉 ─────────────────────────────────────────────────── */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--night) 88%, transparent);
+  backdrop-filter: blur(10px) saturate(1.3);
+  border-bottom: 1px solid var(--night-line);
+  color: var(--on-night);
+}
+.masthead-in {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px var(--edge);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.brand {
+  font-family: var(--disp);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.brand span { color: var(--on-night-3); font-weight: 400; }
+.masthead nav {
+  margin-left: auto;
+  display: flex;
+  gap: 24px;
+  font-size: 13.5px;
+  color: var(--on-night-2);
+}
+.masthead nav a { padding-bottom: 2px; border-bottom: 1px solid transparent; transition: .2s; }
+.masthead nav a:hover { color: var(--on-night); border-bottom-color: var(--on-night-3); }
+.masthead nav a[aria-current="page"] { color: var(--on-night); border-bottom-color: var(--accent); }
+.masthead .stamp { color: var(--on-night-3); white-space: nowrap; }
+
+/* ── 封面（深色 · 高密度） ────────────────────────────────── */
+
+.cover { padding: clamp(48px, 7vw, 92px) 0 clamp(40px, 5vw, 68px); }
+
+.cover-top {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--night-line);
+  padding-bottom: 9px;
+  margin-bottom: clamp(30px, 4vw, 52px);
+}
+
+.cover h1 {
+  grid-column: 1 / 8;
+  font-family: var(--disp);
+  font-weight: 700;
+  /* ⚠️ 上限 76px 不是随手定的。标题固定断成两行（「两个我自己定义、」/
+     「自己验收的 AI 产品。」），第二行 13 个字符在 1440 视口下需要 9.27 倍字号宽，
+     而这一栏只有 8.27 倍 —— 所以 84px 时「品。」会被挤到第三行，变成一个孤字。
+     76px 时最宽行占栏宽 92%，两行收得住，且留了一点安全余量。
+     5.3vw 这个斜率同理：栏宽与字号在 1160–1440 之间近似同比，斜率大于 5.4vw 就会折行。 */
+  font-size: clamp(34px, 5.3vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  margin: 0 0 26px;
+}
+.cover h1 em { color: var(--accent); }
+
+.cover-lede {
+  grid-column: 1 / 7;
+  font-size: 16.5px;
+  line-height: 1.9;
+  color: var(--on-night-2);
+  margin: 0;
+  max-width: 30em;
+}
+
+/* 数据矩阵：全站最密的一块，对应 seed 开头的密集段 */
+.matrix {
+  grid-column: 8 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--night-line);
+  border-left: 1px solid var(--night-line);
+}
+.cell {
+  border-right: 1px solid var(--night-line);
+  border-bottom: 1px solid var(--night-line);
+  padding: 15px 16px 13px;
+}
+.cell b {
+  display: block;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  margin-bottom: 6px;
+}
+.cell span {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  color: var(--on-night-3);
+  text-transform: uppercase;
+  line-height: 1.5;
+  display: block;
+}
+.cell.is-accent b { color: var(--accent); }
+
+/* ── 项目索引（深色 · 中密度） ────────────────────────────── */
+
+.band-head {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 20px;
+  border-bottom: 1px solid var(--on-night);
+  padding-bottom: 9px;
+  margin: clamp(48px, 6vw, 84px) 0 0;
+}
+.night .band-head { border-bottom-color: var(--on-night); }
+.band-head h2 {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(17px, 1.8vw, 21px);
+  letter-spacing: -.01em;
+  margin: 0;
+}
+
+.entry {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 60px 1fr 300px;
+  gap: 0 var(--gut);
+  padding: clamp(30px, 4vw, 48px) 0 6px;
+}
+
+/* 项目之间的分界线。
+   原来这条线是 .entry 的 border-bottom，于是它落在「项目卡」和「这个项目
+   自己的概览图」中间 —— 把同一个项目切成两半，同时让下一个项目的卡片和
+   上一个项目的图挤进同一段，看起来像下一段的文案被归到了上一段里。
+   现在线是一个独立元素，位置固定在两个项目之间，并且整幅铺满视口。 */
+.proj-sep {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 1px;
+  margin: 46px 0 0;
+}
+.proj-sep::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  height: 1px;
+  background: var(--night-line);
+}
+.entry-no {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  color: var(--accent);
+  padding-top: 6px;
+}
+.entry-body h3 {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(22px, 2.7vw, 34px);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  margin: 0 0 14px;
+}
+.entry-body h3 a:hover { color: var(--accent); }
+.entry-desc {
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: var(--on-night-2);
+  margin: 0 0 20px;
+  max-width: 30em;
+}
+.entry-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+/* 深色区（封面 / 索引）里换一套边色与字色；浅色区用默认那一套 */
+.night .tag { border-color: var(--night-3); color: var(--on-night-2); }
+.tag.live { border-color: #3F6B4A; color: #8FCFA0; background: #16241A; }
+.tag.hold { border-color: #6B4A3F; color: var(--accent-d); background: #241715; }
+
+.entry-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  padding-top: 4px;
+}
+.entry-stats b {
+  display: block;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+.entry-stats span {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  color: var(--on-night-3);
+  text-transform: uppercase;
+}
+.entry-stats div:first-child b { color: var(--accent); }
+
+.entry-go {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+/* 深色区块底部的出血条 */
+.night-bleed {
+  position: relative;
+  margin: clamp(30px, 4vw, 52px) calc(-1 * var(--edge)) 0;
+  overflow: hidden;
+}
+.night-bleed img { width: 100%; }
+.night-bleed .tagline {
+  position: absolute;
+  right: var(--edge);
+  bottom: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #EDE7DA;
+  text-shadow: 0 1px 8px rgba(0,0,0,.7);
+}
+
+/* ── 密度过渡带（疏） ─────────────────────────────────────── */
+
+.breather {
+  padding: clamp(56px, 8vw, 108px) 0 clamp(40px, 5vw, 72px);
+}
+.breather p {
+  grid-column: 3 / 11;
+  font-family: var(--disp);
+  font-weight: 400;
+  font-size: clamp(19px, 2.2vw, 27px);
+  line-height: 1.6;
+  letter-spacing: -.015em;
+  color: var(--ink-2);
+  margin: 0;
+}
+.breather .meta { grid-column: 3 / 11; margin-bottom: 18px; }
+
+/* ── 案例页：论证链 ───────────────────────────────────────── */
+
+.case-head { padding: clamp(48px, 6vw, 88px) 0 0; }
+.case-head .back {
+  grid-column: 1 / -1;
+  margin-bottom: 30px;
+  color: var(--ink-3);
+}
+.case-head .back:hover { color: var(--accent); }
+.case-head h1 {
+  grid-column: 3 / 12;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 66px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  margin: 0 0 22px;
+}
+.case-dek {
+  grid-column: 3 / 9;
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--ink-2);
+  margin: 0 0 34px;
+}
+.spec {
+  grid-column: 3 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 44px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding: 14px 0;
+}
+.spec div { display: flex; gap: 10px; }
+.spec dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+.spec dd { margin: 0; font-size: 14.5px; }
+
+/* 论证链容器：左侧一条竖线，每个 step 挂一个节点 */
+.chain { position: relative; }
+
+.step {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr) 260px;
+  column-gap: var(--gut);
+  padding: 0 0 clamp(40px, 5vw, 68px);
+  position: relative;
+}
+
+/* 竖线画在 step 上而不是 rail 上：rail 只有一行高，线会断 */
+.step::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+.step:first-of-type::before { top: 34px; }
+.step:last-of-type::before { bottom: auto; height: 34px; }
+
+.rail { position: relative; }
+
+/* 普通节点：竖线上的一个空心细圆 */
+.node {
+  position: absolute;
+  left: 8px;
+  top: 29px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--ink-3);
+  box-sizing: border-box;
+}
+
+/* 被推翻的一步：不画任何图形符号。只做两件事 ——
+   ① 竖线在这里真的断开（这一块和纸面同色，正好把线吃掉）；
+   ② 空心圆换成实心点，编号转成强调色。
+   「实心 / 空心」+「线断了」就是这一步的全部表达。
+   原先这里是一个手画的 ×，放大后像涂鸦，而且 × 的语义是「删除」，
+   和「这一步推翻的是它内部的一条规则」并不吻合。
+
+   ⚠️ 遮罩块的高度是这条设计的成败所在。最早写成 15px（跟点一样大），
+   像素采样确认线确实断开了 —— 但只断了 13px，而这条竖线连续延伸几百像素，
+   眼睛读到的是「线穿过一个点」，不是「线在这里断掉」，等于意图没兑现。
+   现在放大到 34px：点上下各留 13–14px 的空隙，断口才读得出来。
+   点的心必须仍在 33.5px（和普通节点同心），所以 top = 16 + 14 + 3.5。 */
+.node.fork {
+  border: 0;
+  background: var(--paper);
+  width: 15px;
+  height: 34px;
+  left: 5px;
+  top: 16px;
+}
+.node.fork::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.rail .step-num.is-fork { color: var(--accent); }
+
+.rail .step-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+.step-body { min-width: 0; padding-top: 20px; }
+.step-body h2 {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(21px, 2.5vw, 30px);
+  line-height: 1.22;
+  letter-spacing: -.02em;
+  margin: 0 0 18px;
+}
+.step-body h3 {
+  font-size: 15.5px;
+  font-weight: 600;
+  margin: 28px 0 8px;
+}
+.step-body p { margin: 0 0 18px; color: var(--ink-2); max-width: 31em; }
+.step-body p strong { color: var(--ink); font-weight: 600; }
+.step-body ul { list-style: none; margin: 0 0 20px; padding: 0; max-width: 31em; }
+.step-body li { position: relative; padding-left: 20px; margin-bottom: 11px; color: var(--ink-2); }
+.step-body li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .84em;
+  width: 8px; height: 1px;
+  background: var(--ink-3);
+}
+.step-body li strong { color: var(--ink); font-weight: 600; }
+
+/* 右侧事实栏：把长段落里可以独立成数字的东西抽出来 */
+.facts { padding-top: 20px; }
+.facts h4 {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 400;
+  margin: 0 0 10px;
+  border-top: 1px solid var(--ink);
+  padding-top: 8px;
+}
+.facts p { margin: 0 0 12px; font-size: 13.5px; line-height: 1.8; color: var(--ink-2); }
+.facts p strong { color: var(--ink); font-weight: 600; }
+.facts .big {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -.04em;
+  display: block;
+  margin-bottom: 4px;
+}
+.facts .big.is-accent { color: var(--accent); }
+
+/* 引文 */
+.pull {
+  margin: 28px 0;
+  padding-left: 22px;
+  border-left: 2px solid var(--accent);
+  max-width: 31em;
+}
+.pull p {
+  font-family: var(--disp);
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.42;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin: 0 0 9px;
+  max-width: none;
+}
+.pull cite {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--ink-3);
+}
+
+/* 决策块：左侧一条竖线，保留/推翻用节点颜色区分 */
+.decision {
+  margin: 22px 0;
+  padding: 14px 18px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--ink);
+  max-width: 34em;
+}
+.decision.kill { border-left-color: var(--accent); }
+.decision .label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+.decision.kill .label { color: var(--accent); }
+.decision h4 { font-size: 15.5px; font-weight: 600; margin: 0 0 7px; line-height: 1.5; }
+.decision p { margin: 0; font-size: 14.5px; color: var(--ink-2); max-width: none; }
+.decision p strong { color: var(--ink); font-weight: 600; }
+
+/* ── 事项上下文模型（FamCal） ───────────────────────────────
+   这个项目暂时没有界面截图。但它的核心结论本身可以画出来 ——
+   所以这里不摆占位图，而是把三类对象和各自要一起看的信息排成一张模型图。
+   深色区（首页概览）用 .night 覆盖一次，同一套结构两处都能用。 */
+.ctx-map {
+  border: 1px solid var(--rule);
+  background: #FBF9F4;
+  padding: 6px 24px;
+}
+.ctx-row {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 18px;
+  padding: 20px 0 22px;
+  border-top: 1px solid var(--rule-2);
+}
+.ctx-row:first-child { border-top: 0; }
+.ctx-row dt {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 3px;
+}
+.ctx-row .eg {
+  margin: 0 0 12px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.ctx-row .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.ctx-row .chip {
+  font-size: 12.5px;
+  line-height: 1.7;
+  padding: 2px 10px;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.night .ctx-map { background: var(--night-2); border-color: var(--night-line); }
+.night .ctx-row { border-top-color: var(--night-line); }
+.night .ctx-row .eg { color: var(--on-night); }
+.night .ctx-row .chip { border-color: var(--night-3); color: var(--on-night-2); }
+
+/* ── 截图标注系统 ─────────────────────────────────────────── */
+
+.shot {
+  position: relative;
+  margin: 26px 0;
+  background: var(--paper-3);
+  border: 1px solid var(--rule);
+  max-width: 34em;
+}
+.shot img { width: 100%; }
+
+/* 图注一律只写「这一屏解决了什么」，一句话。不再做 1/2/3/4 的编号图例 ——
+   编号会逼读者在图上找数字，而图本身才是重点；长图例还会把图压成配角。 */
+.shot-cap {
+  padding: 10px 14px 12px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+
+/* 宽版截图：撑满 + 出血 */
+.shot-wide {
+  grid-column: 2 / -1;
+  margin: 30px calc(-1 * var(--edge)) 30px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  background: var(--paper-2);
+}
+.shot-wide img { width: 100%; }
+.shot-wide .shot-cap {
+  border-top: 1px solid var(--rule);
+  max-width: 60em;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* 表格 */
+.table-wrap { margin: 26px 0; overflow-x: auto; max-width: 34em; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+th, td { text-align: left; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--rule-2); vertical-align: top; }
+th {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 400;
+  border-bottom: 1px solid var(--ink);
+  white-space: nowrap;
+}
+td { color: var(--ink-2); line-height: 1.7; }
+td:first-child { color: var(--ink); font-weight: 600; }
+/* 高亮行：底色从强调色派生（原先是暖粉 #F9E9E3，不属于这一版配色，
+   而且深色底上没有对应规则，会变成一块突兀的粉）。 */
+tr.hi td { background: #E7EFE9; }
+tr.hi td:last-child { color: var(--accent); font-weight: 600; }
+.night tr.hi td { background: rgba(127, 179, 154, .13); }
+.night th { color: var(--on-night-3); border-bottom-color: var(--on-night); }
+.night td { color: var(--on-night-2); border-bottom-color: var(--night-line); }
+.night td:first-child { color: var(--on-night); }
+
+/* 横向规格条 */
+.filmstrip {
+  grid-column: 2 / -1;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 0 16px;
+  margin: 26px calc(-1 * var(--edge)) 4px 0;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+.filmstrip::-webkit-scrollbar { height: 5px; }
+.filmstrip::-webkit-scrollbar-thumb { background: var(--rule); }
+.filmstrip figure {
+  flex: 0 0 auto;
+  width: 296px;
+  margin: 0;
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  scroll-snap-align: start;
+}
+.filmstrip img { width: 100%; height: 228px; object-fit: contain; object-position: center top; background: #F4F2EC; border-bottom: 1px solid var(--rule); }
+.filmstrip figcaption {
+  padding: 8px 10px 9px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+
+/* ── 关于（疏） ───────────────────────────────────────────── */
+
+.about-lede {
+  grid-column: 3 / 10;
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 1.16;
+  letter-spacing: -.03em;
+  margin: 0 0 30px;
+}
+.about-body { grid-column: 3 / 9; }
+.about-body p { margin: 0 0 18px; color: var(--ink-2); max-width: 31em; }
+.about-body p strong { color: var(--ink); font-weight: 600; }
+
+.pillars {
+  grid-column: 3 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 44px;
+}
+.pillars > div { background: var(--paper); padding: 20px 18px 22px; }
+.pillars dt {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.pillars dd { margin: 0; font-size: 14.5px; line-height: 1.8; color: var(--ink-2); }
+.pillars dd strong { color: var(--ink); font-weight: 600; }
+
+/* ── 时间线（最疏） ───────────────────────────────────────── */
+
+.timeline { grid-column: 3 / 11; margin-top: 44px; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+.tl-item .mono { color: var(--ink-3); padding-top: 4px; }
+.tl-item h4 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+.tl-item p { margin: 0; font-size: 14.5px; color: var(--ink-2); max-width: 36em; }
+
+/* ── 页脚（深色 · 收框） ──────────────────────────────────── */
+
+.colophon { margin-top: clamp(72px, 9vw, 132px); }
+.colophon-in { padding: clamp(48px, 6vw, 84px) 0 0; }
+.colophon .name {
+  grid-column: 1 / span 6;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(26px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  margin: 0 0 12px;
+}
+.colophon .who { grid-column: 1 / span 6; }
+.colophon .who p { margin: 0; font-size: 14px; color: var(--on-night-2); }
+.colophon .contact { grid-column: 9 / -1; }
+.colophon .contact p { margin: 0; font-size: 13.5px; line-height: 2.1; color: var(--on-night-2); }
+.colophon a:hover { color: var(--accent); }
+.folio-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--night-line);
+  margin-top: 44px;
+  padding: 14px 0 22px;
+}
+
+/* ── 批注层（当前页面未使用，保留为可选层）─────────────────────
+   用户要求「页面上不留任何说明自己缺什么的小字」，所以四个页面的
+   `.hint` 与右下角的开关按钮都已移除。这段样式先留着，需要重新启用时：
+   ① 给元素加 class="hint"（父元素要有 position:relative 做锚点）
+   ② 页面里放回 <button class="hint-toggle" id="hintBtn">批注：开</button>
+      + 切换 body 的 hints-on / no-hint 那段脚本
+   硬约束：开关批注不得引起任何回流。
+   所以一律 position:absolute —— 不参与文档流，开与关的布局完全一致。 */
+.hint {
+  position: absolute;
+  z-index: 6;
+  margin: 0;
+  padding: 9px 11px;
+  border: 1px dashed var(--accent);
+  background: rgba(245, 243, 236, .96);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.75;
+  letter-spacing: .04em;
+  color: #4C5A50;
+  text-transform: none;
+  pointer-events: none;
+}
+.hint b { color: var(--accent); font-weight: 500; }
+/* 深色底上的批注：原来是一块高亮白框，在封面里成了整页最抢眼的东西。
+   深色变体保留「虚线框 = 这是批注不是内容」的识别，但不跟标题抢注意力。 */
+.night .hint {
+  background: rgba(32, 29, 21, .96);
+  border-color: var(--accent-lit);
+  color: var(--on-night-2);
+}
+.night .hint b { color: var(--accent-lit); }
+body.no-hint .hint { display: none; }
+
+/* 右栏事实区内的批注：浮在右栏内容下方（右栏通常短于正文，下方是空的） */
+.facts { position: relative; }
+.facts .hint {
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 20px;
+}
+
+/* 封面内的批注：浮在左下角空白处（右侧是数据矩阵，放右下会压住最后一行） */
+.cover { position: relative; }
+.cover .hint {
+  left: 0;
+  bottom: 0;
+  width: min(330px, 34%);
+}
+
+.hint-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 9px 13px;
+  border: 1px solid var(--on-night);
+  background: var(--night);
+  color: var(--on-night);
+  cursor: pointer;
+}
+.hint-toggle:hover { background: var(--accent); border-color: var(--accent); }
+
+/* ══ 设备框：把产品 UI 放进真实设备里 ══════════════════════════
+   参考方向：暖底 + 设备并排 + 中间一台略大。
+   框体用 CSS 画（不是贴图）——分辨率无关、可响应式、不额外增加图片体积。 */
+
+/* 手机 · iPhone 比例 1170:2532 */
+.phone {
+  --pw: 250px;
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--pw);
+  aspect-ratio: 1170 / 2532;
+  padding: calc(var(--pw) * .036);
+  border-radius: calc(var(--pw) * .152);
+  background: linear-gradient(155deg,
+    #56504A 0%, #221E18 27%, #15120D 52%, #3A342C 77%, #1F1C16 100%);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.10) inset,
+    0 2px 4px rgba(0,0,0,.55) inset,
+    0 46px 72px -34px rgba(23,21,15,.60),
+    0 12px 26px -14px rgba(23,21,15,.32);
+}
+.phone .scr {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--pw) * .116);
+  overflow: hidden;
+  background: #F8F4F0;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.5);
+}
+.phone .scr img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* 桌面窗口 */
+.win {
+  border-radius: 11px;
+  overflow: hidden;
+  background: var(--paper-2);
+  box-shadow:
+    0 0 0 1px rgba(23,21,15,.12),
+    0 48px 78px -38px rgba(23,21,15,.55),
+    0 14px 30px -16px rgba(23,21,15,.30);
+}
+.win .bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 13px;
+  background: #E3DDCE;
+  border-bottom: 1px solid rgba(23,21,15,.08);
+}
+.win .bar i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #C6BFAD; }
+.win .bar .url {
+  margin-left: 10px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  background: var(--paper);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  color: var(--ink-3);
+}
+.win img {
+  display: block;
+  width: 100%;
+  /* 必须显式 height:auto —— HTML 上的 height="1125" 属性会变成 height:1125px，
+     它压过 aspect-ratio，会把窗口撑到两倍高。 */
+  height: auto;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* 手机平铺：中间一台大、两侧小，垂直居中让中间那台上下都突出 */
+.devices { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.devices .phone:nth-child(1) { --pw: 194px; z-index: 1; }
+.devices .phone:nth-child(2) { --pw: 242px; z-index: 3; }
+.devices .phone:nth-child(3) { --pw: 194px; z-index: 2; }
+.devices .phone:only-child { --pw: 252px; }
+.devices .phone:first-child:last-child { --pw: 252px; }
+
+/* 窗口层叠：后窗略小偏左上，前窗压上来 */
+.wins { position: relative; }
+.wins .win:nth-child(1) { width: 82%; }
+.wins .win:nth-child(2) { width: 90%; margin: -20% 0 0 10%; position: relative; z-index: 2; }
+
+/* 右出血图版：图版占右半，并越过页面右缘 —— 图片「长」出网格。
+   注意 .chain 本身带 grid12，所以论证链内的图版同样按 grid 定位，不能用 margin 左缩进。 */
+.plate,
+.chain-plate {
+  grid-column: 6 / -1;
+  margin: 44px calc(-1 * var(--edge)) 44px 0;
+}
+.plate figcaption,
+.chain-plate figcaption {
+  margin-top: 14px;
+  padding-right: var(--edge);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+.plate figcaption span,
+.chain-plate figcaption span { color: var(--accent); }
+.chain-plate > .phone { margin: 0 auto; }
+.chain-plate > .win { max-width: 620px; margin: 0 auto; }
+
+/* ── 图版左侧的导读 ─────────────────────────────────────────
+   图版只占右半（grid-column 6/-1），左半会空出一大片。
+   留白比塞满更难做，与其让图旁边挂着一片空气，不如把这段图的导读放进去。
+   两个元素都是显式列 + 自动行，会被排进同一行，不用写 grid-row。 */
+.plate-lead {
+  grid-column: 1 / 6;
+  align-self: start;
+  margin: 44px 0;
+}
+.plate-lead h3 {
+  font-family: var(--disp);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .01em;
+  margin: 0 0 12px;
+}
+.plate-lead p {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: var(--ink-2);
+  max-width: 30em;
+}
+.plate-lead p strong { color: var(--ink); font-weight: 600; }
+.night .plate-lead p { color: var(--on-night-2); }
+.night .plate-lead p strong { color: var(--on-night); }
+
+/* ── 知识地图：拆成卡片，而不是塞进一个小手机框 ──────────────
+   原图 1170×3224。塞进 252px 宽的手机框 = 21% 缩放，字全糊。
+   改法：沿「整行都是背景」的位置（行标准差 0.00 / 0.09）切成三张 ——
+   左一张高的、右两张叠的。每张约 680px 宽 = 58% 缩放，能看清。 */
+.map-band {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gut);
+  margin: 48px 0;
+  position: relative;
+}
+.map-lead { grid-column: 1 / 8; align-self: start; }
+.map-lead h3 {
+  font-family: var(--disp);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+.map-lead p {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: var(--ink-2);
+  max-width: 31em;
+}
+.map-lead p strong { color: var(--ink); font-weight: 600; }
+
+/* 色阶图例：直接抄界面里那条「牢固层级」，读者不用放大图去找 */
+.map-legend {
+  grid-column: 9 / -1;
+  align-self: start;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.map-legend p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 11px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.map-legend p:last-child { margin-bottom: 0; }
+.map-legend .sw {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(26,24,21,.14) inset;
+}
+
+.map-cards {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gut);
+  margin: 34px calc(-1 * var(--edge)) 0 0;
+}
+.map-col {
+  flex: 1 1 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.map-card { flex: 1 1 50%; min-width: 0; margin: 0; }
+.map-card img {
+  width: 100%;
+  border: 1px solid var(--rule);
+  background: #FBF9F4;
+  box-shadow: 0 20px 34px -26px rgba(23,21,15,.42);
+}
+.map-col .map-card { flex: 0 0 auto; }
+.map-card figcaption {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  line-height: 1.75;
+  color: var(--ink-3);
+}
+.map-band > figcaption {
+  grid-column: 1 / -1;
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+
+/* 图号标签：普通块级元素，放在图版导读的最上面一行。
+   早先它是绝对定位在图版左侧的（right: calc(100% + 26px)），但 grid item 上
+   绝对定位的百分比基准不是父元素宽度，算出来会跑到视口外；而且加了左侧导读
+   之后它会压在导读文字上。改成块级，问题一次消失。 */
+.plate,
+.chain-plate { position: relative; }
+.plate-tag {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  line-height: 1.7;
+  color: var(--accent);
+}
+.night .plate-tag { color: var(--accent); }
+
+/* 深色区内的图版说明要反白，否则深灰字压暖墨看不见 */
+.night .plate figcaption,
+.night .chain-plate figcaption { color: var(--on-night-3); }
+
+/* ── 响应式 ───────────────────────────────────────────────── */
+
+@media (max-width: 1160px) {
+  :root { --gut: 18px; }
+  .cover h1 { grid-column: 1 / 9; }
+  .cover-lede { grid-column: 1 / 8; }
+  .matrix { grid-column: 9 / -1; }
+  .entry { grid-template-columns: 48px 1fr 240px; }
+  .step { grid-template-columns: var(--rail) minmax(0, 1fr) 220px; }
+  .case-head h1 { grid-column: 2 / -1; }
+  .case-dek { grid-column: 2 / 10; }
+  .spec { grid-column: 2 / -1; }
+  .about-lede { grid-column: 2 / -1; }
+  .about-body { grid-column: 2 / 10; }
+  .pillars { grid-column: 2 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .timeline { grid-column: 2 / -1; }
+  .breather p, .breather .meta { grid-column: 2 / -1; }
+
+  /* 图版与设备组：中屏收窄 */
+  .plate,
+  .chain-plate { grid-column: 5 / -1; }
+  .plate-lead { grid-column: 1 / 5; }
+  .map-lead { grid-column: 1 / 7; }
+  .map-legend { grid-column: 8 / -1; }
+  .devices .phone:nth-child(1),
+  .devices .phone:nth-child(3) { --pw: 160px; }
+  .devices .phone:nth-child(2) { --pw: 200px; }
+  .devices .phone:only-child { --pw: 218px; }
+  .chain-plate > .phone { --pw: 218px; }
+}
+
+@media (max-width: 880px) {
+  :root { --edge: 20px; --rail: 34px; }
+  body { font-size: 15.5px; }
+  .masthead-in { flex-wrap: wrap; gap: 10px 18px; }
+  .masthead .stamp { display: none; }
+  .masthead nav { margin-left: 0; width: 100%; gap: 18px; }
+
+  .cover h1, .cover-lede { grid-column: 1 / -1; }
+  .matrix { grid-column: 1 / -1; margin-top: 32px; }
+
+  .entry { grid-template-columns: 1fr; row-gap: 14px; }
+  .entry-no { padding-top: 0; }
+  .entry-stats { gap: 20px; }
+
+  .step { grid-template-columns: var(--rail) minmax(0, 1fr); }
+  .facts { grid-column: 2 / -1; padding-top: 4px; }
+  /* 右栏事实区里的批注：桌面端浮在右栏下方的空白处没问题；窄屏下右栏变成
+     正文下面的一行，浮层就会压到下一个步骤的标题上。
+     做法：用 :has() 只给「确实带批注」的事实区常驻预留底部空间，
+     并把浮层改成锚在这个预留区里（bottom:0 而不是 top:100% —— top:100%
+     的基准含 padding，会把它继续往下推，等于没留）。
+     预留是常驻的，所以批注开与关的布局仍然完全一致。 */
+  .facts:has(.hint) { padding-bottom: 112px; }
+  .facts .hint { top: auto; bottom: 0; }
+  .step::before { left: 6px; }
+  .node { left: 1px; }
+  .node.fork { left: -2px; }
+
+  .case-head h1, .case-dek, .spec,
+  .about-lede, .about-body, .pillars, .timeline,
+  .breather p, .breather .meta,
+  .shot-wide, .filmstrip,
+  .colophon .name, .colophon .who, .colophon .contact {
+    grid-column: 1 / -1;
+  }
+  .shot-wide, .filmstrip { margin-right: calc(-1 * var(--edge)); }
+  .pillars { grid-template-columns: 1fr; }
+  .tl-item { grid-template-columns: 1fr; gap: 6px; }
+  .table-wrap, .shot, .decision, .pull { max-width: 100%; }
+  .night-bleed { margin-left: calc(-1 * var(--edge)); margin-right: calc(-1 * var(--edge)); }
+
+  /* 图版：小屏改为整幅出血，设备组按视口自适应缩小。
+     导读文字改为压在图上方的整幅一段，不再和图并排。 */
+  .plate,
+  .chain-plate { grid-column: 1 / -1; margin-left: calc(-1 * var(--edge)); }
+  .plate-lead { grid-column: 1 / -1; margin: 30px 0 0; }
+  .map-lead, .map-legend { grid-column: 1 / -1; }
+  .map-legend { margin-top: 26px; }
+  /* 卡片改为竖排：左卡片 → 右上 → 右下，读序和界面本身一致 */
+  .map-cards { flex-direction: column; gap: 22px; margin-right: 0; }
+  .map-col { flex: 1 1 auto; width: 100%; }
+  /* 三台并排的总宽必须留在视口内：侧*2 + 侧*1.25 + 间距*2 = 3.25*侧 + 32。
+     这里不能用固定 px —— 508px 的固定组合在 520 以下就会超出视口，
+     而 overflow-x:clip 会把它悄悄裁掉（scrollWidth 查不出来，只能靠元素右边界）。
+     用 min() 让它从 880 到 320 连续收缩，不产生断点跳变。 */
+  .devices .phone:nth-child(1),
+  .devices .phone:nth-child(3) { --pw: min(146px, calc((100vw - 48px) / 3.25)); }
+  .devices .phone:nth-child(2) { --pw: min(184px, calc((100vw - 48px) / 3.25 * 1.25)); }
+  .devices .phone:only-child { --pw: 190px; }
+  .chain-plate > .phone { --pw: 196px; }
+  /* 窄屏下数据矩阵占满整行，34% 宽的浮层会压住最后两格数据。
+     做法是永久留出这块空间（不是开关时才留），所以批注开与关的布局仍然完全一致。
+     ⚠️ 用 :has() 做条件 —— 页面上没有批注时不该白留这一段空白。 */
+  .cover:has(.hint) { padding-bottom: 128px; }
+  .cover .hint { left: 0; right: 0; width: auto; bottom: 0; }
+}
+
+@media (max-width: 520px) {
+  .matrix { grid-template-columns: 1fr 1fr; }
+  .entry-stats { flex-direction: column; gap: 14px; }
+  .masthead nav { gap: 14px; font-size: 13px; }
+  .chain-plate > .phone { --pw: 168px; }
+  .chain-plate > .win { max-width: 100%; }
+  .chain-plate figcaption, .plate figcaption { font-size: 9px; letter-spacing: .05em; }
+  .hint { font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

@@ -110,11 +110,11 @@
 <script>
 /* 站点里每一张图：文件名 / 用在哪 / 建议宽度 */
 var SLOTS = [
-  {f:'gloss-shelf.webp',        w:'首页 · 封面大图',                         width:1200},
-  {f:'gloss-reader.webp',       w:'首页项目01缩略图 · Gloss 案例页最后一节',  width:1000},
-  {f:'gloss-rewrite.png',       w:'Gloss 案例页 §06「规则」',                width:685},
-  {f:'gloss-shelf-empty.png',   w:'Gloss 案例页最后一节 · 书架空态',         width:1600},
-  {f:'gloss-spec-cover.webp',   w:'Gloss 案例页 §07 横滑第 1 张 · 规格总览',  width:800},
+  /* —— Gloss 案例页 —— */
+  {f:'win-g-reader.webp',       w:'Gloss 页首 · 阅读器三栏（窗口框）',        width:1800},
+  {f:'annot-word.webp',         w:'Gloss §02 · 236 条批注的 Word 原件',      width:1300},
+  {f:'gloss-panel-flat.webp',   w:'Gloss §06 · 原句与白话并排',              width:1244},
+  {f:'gloss-spec-cover.webp',   w:'Gloss §07 横滑第 1 张 · 规格总览',        width:800},
   {f:'gloss-spec-shelf.webp',   w:'Gloss §07 横滑第 2 张 · 首页书架',        width:800},
   {f:'gloss-spec-intake.webp',  w:'Gloss §07 横滑第 3 张 · 录入校验',        width:800},
   {f:'gloss-spec-reader.webp',  w:'Gloss §07 横滑第 4 张 · 阅读器三栏',      width:800},
@@ -123,13 +123,18 @@ var SLOTS = [
   {f:'gloss-spec-edit.webp',    w:'Gloss §07 横滑第 7 张 · 编辑白话',        width:800},
   {f:'gloss-spec-export.webp',  w:'Gloss §07 横滑第 8 张 · 设置与导出',      width:800},
   {f:'gloss-spec-audit.webp',   w:'Gloss §07 横滑第 9 张 · 审计清单',        width:800},
-  {f:'gloss-spec-principles-a.webp', w:'Gloss §07 原则卡（左半）',           width:1100},
-  {f:'gloss-spec-principles-b.webp', w:'Gloss §07 原则卡（右半）',           width:1100},
-  {f:'feynman-home.webp',       w:'Feynman 案例页顶部 · 首页',              width:682},
-  {f:'feynman-session.webp',    w:'Feynman 案例页顶部 · 讲述演练',           width:682},
-  {f:'feynman-map.webp',        w:'首页项目02缩略图 · Feynman 案例页 §04',   width:760},
-  {f:'feynman-quiz.webp',       w:'Feynman 案例页 §02 · 三级提示',           width:760},
-  {f:'feynman-reangle.webp',    w:'Feynman 案例页 §02 · 换个切入点',         width:760}
+  {f:'shelf-empty.webp',        w:'Gloss 最后一节 · 书架页空状态',           width:1400},
+  /* —— Feynman 案例页 —— */
+  {f:'phone-f-home.webp',       w:'Feynman 页首三台手机 · 左（首页）',        width:760},
+  {f:'phone-f-tell.webp',       w:'Feynman 页首三台手机 · 中（讲述）',        width:760},
+  {f:'phone-f-map.webp',        w:'Feynman 页首三台手机 · 右（知识地图）',    width:760},
+  {f:'phone-f-quiz.webp',       w:'Feynman §02 之后 · 三级渐进提示',          width:760},
+  {f:'map-a.webp',              w:'Feynman §04 知识地图卡片 · 上半',         width:1170},
+  {f:'map-b.webp',              w:'Feynman §04 知识地图卡片 · 中段',         width:1170},
+  {f:'map-c.webp',              w:'Feynman §04 知识地图卡片 · 下半',         width:1170},
+  /* —— 暂时没用上，首页「项目索引」以后加回来时会用到，先别删 —— */
+  {f:'win-g-shelf.webp',        w:'（暂未启用）首页 · Gloss 书架页',          width:1800},
+  {f:'win-g-top.webp',          w:'（暂未启用）首页 · Gloss 阅读页顶部',      width:1800}
 ];
 
 var $ = function(id){ return document.getElementById(id); };

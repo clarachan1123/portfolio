@@ -351,30 +351,29 @@ code {
 
 .entry-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
 
+/* 缩略图：只等比缩放，绝不裁切、绝不拉伸。
+   图片高度上限 620px（竖版手机截图放宽到 900px），宽度按原比例自动算出来，
+   所以无论放什么比例的图进来都不会被切掉内容。 */
 .entry-thumb {
   grid-column: 2;
-  margin-top: 30px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 30px auto 0;
   border: 1px solid var(--rule);
   background: var(--paper-3);
   overflow: hidden;
 }
 
 .entry-thumb img {
-  width: 100%;
-  max-height: 520px;
-  object-fit: cover;
-  object-position: center top;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 620px;
 }
 
-/* 方形图标类素材不裁切 */
-.entry-thumb.mark img {
-  max-height: none;
-  object-fit: contain;
-  width: 220px;
-  margin: 34px auto;
-  border: 1px solid var(--rule);
-  border-radius: 22%;
-}
+/* 竖版手机截图：整屏较高，单独放宽高度上限 */
+.entry-thumb.phone img { max-height: 900px; }
 
 /* ============================================================
    案例页长文
@@ -462,7 +461,16 @@ code {
   border-top: 1px solid var(--ink);
 }
 
-.section-body { max-width: var(--prose); }
+/* min-width:0 是必需的：section-body 是 grid 子项，默认 min-width:auto 会被
+   filmstrip 这类横向内容的 min-content 宽度顶开，导致整栏变宽、图被放大溢出 */
+.section-body { max-width: var(--prose); min-width: 0; }
+
+/* 规格章节：正文仍收窄到易读宽度，但图可以撑满整栏 */
+.section.wide .section-body { max-width: none; }
+.section.wide .section-body > p,
+.section.wide .section-body > h2,
+.section.wide .section-body > h3,
+.section.wide .section-body > ul { max-width: var(--prose); }
 
 .section h2 {
   font-family: var(--serif);
@@ -539,12 +547,11 @@ code {
   background: var(--paper-3);
 }
 
+/* 正文插图：同样只等比缩放，不裁切 */
 .figure img {
   width: 100%;
+  height: auto;
   border-bottom: 1px solid var(--rule);
-  max-height: 720px;
-  object-fit: cover;
-  object-position: center top;
 }
 
 .figure figcaption {
@@ -590,17 +597,63 @@ code {
   color: var(--ink-3);
 }
 
-/* 手机长截图：单张居中，不裁切 */
+/* 横向 filmstrip：把一份很长的规格图拆成多段并排展示 */
+
+.filmstrip {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 0 16px;
+  margin: 26px 0 4px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+
+.filmstrip::-webkit-scrollbar { height: 6px; }
+.filmstrip::-webkit-scrollbar-track { background: var(--paper-2); }
+.filmstrip::-webkit-scrollbar-thumb { background: var(--rule); }
+
+.filmstrip figure {
+  flex: 0 0 auto;
+  width: 330px;
+  margin: 0;
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+/* 各段原始高宽比差很多（最短 3.1:1、最长 1.3:1），
+   固定图区高度 + contain 可以让它们底边对齐、比例不失真 */
+.filmstrip img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+  /* 底色必须等于规格图自身的纸色（#F3F5F7），
+     否则 contain 留出的空白会显成一条灰带，像图没加载完 */
+  background: #F3F5F7;
+  border-bottom: 1px solid var(--rule);
+}
+
+.filmstrip figcaption {
+  padding: 8px 11px 9px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+
+/* 手机长截图：单张居中，按原始比例整屏展示 */
 
 .figure.phone {
   max-width: 380px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.figure.phone img {
-  max-height: none;
-  object-fit: fill;
 }
 
 /* 表格 */

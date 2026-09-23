@@ -7,3 +7,19 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# 素材（截图原图，只作参考，不随网站发布）
+素材/
+
+# 设计探索稿（早期方案对比，不是网站的一部分，不发布）
+design-explorations/
+lowfi/
+preview/
+
+# 字体中转目录与临时脚本（体积大，不进仓库）
+_fonts/
+_charset.txt
+_*.html
+
+# 本机工作数据
+.workbuddy-ai/

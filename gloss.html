@@ -15,7 +15,7 @@
           几个字，找到后只改标签之间的中文。存盘，浏览器按 F5。
 
   本页可改的位置（搜 → 对应位置）：
-    【案例 01 · 已上线】         页面顶部小标签
+    【案例 01 · 已部署】         页面顶部小标签
     【点一句读不懂的话】          大标题（<br> 是换行符）
     【读中文哲学书，最难的不是查不到】 导语
     【产品定义 · 规则设计 · 验收】  规格表：角色
@@ -30,11 +30,14 @@
     【用「永不做」划边界】        章节 04 标题
     【三个被砍掉的功能】          章节 05 标题
     【把「什么算改好了」写成】     章节 06 标题
-    【我发现自己不够可靠】        章节 07 标题
-    【我知道这个产品的边界在哪】   章节 08 标题
-    【已上线，持续迭代中】        章节 09 标题
-    【书架页 · 空状态】           图片下方说明
-    【阅读页高保真】             图片下方说明
+    【主流程之外的状态和异常】     章节 07 标题（规格章节）
+    【七个阶段，逐项写死】        章节 07 小标题
+    （横向规格图：9 张，每张下方说明都可改）
+    【我发现自己不够可靠】        章节 08 标题
+    【我知道这个产品的边界在哪】   章节 09 标题
+    【已部署，MVP 开发中】        章节 10 标题
+    【书架页空状态高保真设计稿】   图片下方说明
+    【阅读页高保真设计稿】        图片下方说明
     【陈利行 · CHEN LIXING】     页脚姓名
   ──────────────────────────────────────────────────────────────
   ⚠️ 三条铁律
@@ -53,7 +56,7 @@
     <nav class="nav">
       <a href="index.html">首页</a>
       <a href="gloss.html" aria-current="page">Gloss</a>
-      <a href="feynman.html">费曼学习助手</a>
+      <a href="feynman.html">Feynman</a>
       <a href="about.html">关于</a>
     </nav>
     <div class="meta">Portfolio · 2026</div>
@@ -64,14 +67,14 @@
 
   <section class="case-head">
     <a class="back meta" href="index.html">← 返回索引</a>
-    <div class="meta label">案例 01 · 已上线</div>
+    <div class="meta label">案例 01 · 已部署</div>
     <h1>点一句读不懂的话，<br>就地把它讲成白话</h1>
     <p class="dek">读中文哲学书，最难的不是查不到，而是每查一次都要离开这一页。Gloss 把「选中 → 切出去 → 搜索 → 对照 → 切回来」压成一次点击。</p>
 
     <dl class="spec">
       <div><dt>角色</dt><dd>产品定义 · 规则设计 · 验收</dd></div>
       <div><dt>时间</dt><dd>2026.08 — 至今</dd></div>
-      <div><dt>状态</dt><dd>MVP版本已上线，持续迭代中</dd></div>
+      <div><dt>状态</dt><dd>已部署上线，MVP 开发中</dd></div>
     </dl>
   </section>
 
@@ -152,7 +155,7 @@
     <div class="section-no">04<br>定位</div>
     <div class="section-body">
       <h2>用「永不做」划边界</h2>
-      <p>我花了更多时间在「不做什么」上。功能收敛到两条核心：<strong>白话改写</strong>（点句子，给出整句白话）和<strong>就地整句理解</strong>（不离开正文）。</p>
+      <p>我花了更多时间在「不做什么」上。功能收敛到两条核心：<strong>白话改写</strong>（点句子，给出整句白话）和<strong>听不懂</strong>（深化理解，不离开正文）。</p>
 
       <div class="decision">
         <span class="label">永不做</span>
@@ -168,7 +171,7 @@
   <section class="section">
     <div class="section-no">05<br>砍掉</div>
     <div class="section-body">
-      <h2>三个被砍掉的功能，和它们的理由</h2>
+      <h2>两个被砍掉的功能，和一个被推翻的假设</h2>
       <p>PRD 从 v0.1 迭代到 v1.3，砍掉的东西比加进去的多。下面是三个我印象最深的。</p>
 
       <div class="decision">
@@ -228,8 +231,67 @@
   </section>
 
   <!-- 07 -->
+  <section class="section wide">
+    <div class="section-no">07<br>规格</div>
+    <div class="section-body">
+      <h2>主流程之外的状态和异常，也写进了规格</h2>
+      <p>画出主流程不难，难的是把「加载中、失败、空态、边界、异常」也交代清楚。Gloss 的交互我写成了一份七个阶段的全状态规格——从首页书架的空态与多书态，到文档录入的异常阻断、阅读器三栏的文本度量、点句的六种状态矩阵，再到导出形态和一张未决项清单。</p>
+
+      <figure class="figure">
+        <img src="assets/img/gloss-spec-principles-a.webp" alt="规格开头的两条硬约束：画布与主题硬约束、禁止做的设计">
+        <img src="assets/img/gloss-spec-principles-b.webp" alt="规格中的核心排版原则与待确认标识定义">
+        <figcaption>规格开头先把不可协商的部分写死：1440px 桌面优先、纯浅色底、无登录无注册、不做阅读进度条；同时列出「禁止做的设计」——不做输入框、不做聊天框、不做浮动遮挡弹层、不做整段摘要。排版原则同样定成可执行的：白话是「撑开」而不是浮窗，占据物理空间把正文向下推移；白话字号与正文一致、视觉比正文浅，原句永不被遮挡。凡是 PRD 没写明的地方一律用黄色「待确认」标出，不自己补全。</figcaption>
+      </figure>
+
+      <h3>七个阶段，逐项写死</h3>
+      <p>下面每一段都是同一份规格图里的一节，按阶段顺序排列，横向滑动可以看完。</p>
+
+      <div class="filmstrip">
+        <figure>
+          <img src="assets/img/gloss-spec-cover.webp" alt="规格封面：系统规格说明与七个阶段索引">
+          <figcaption>规格总览 · 阶段索引</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-shelf.webp" alt="阶段一：首页书架的无数据空态与多文档常态">
+          <figcaption>阶段一 · 首页书架（空态 / 多书态）</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-intake.webp" alt="阶段二：文档录入校验、切句流水线与异常阻断">
+          <figcaption>阶段二 · 录入校验与异常阻断</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-reader.webp" alt="阶段三：阅读器标准三栏骨架与文本度量">
+          <figcaption>阶段三 · 阅读器三栏与文本度量</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-states.webp" alt="阶段四：点句撑开的六种状态矩阵">
+          <figcaption>阶段四 · 点句的六种状态</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-hear.webp" alt="阶段五：听不懂功能的整句理解展开">
+          <figcaption>阶段五 · 「听不懂」的展开</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-edit.webp" alt="阶段六：编辑白话与数据隔离规则">
+          <figcaption>阶段六 · 编辑白话与数据隔离</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-export.webp" alt="阶段七：设置面板结构与四种纸面导出形态">
+          <figcaption>阶段七 · 设置面板与导出形态</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/img/gloss-spec-audit.webp" alt="规格末尾的未决项与待验证清单">
+          <figcaption>审计 · 未决项与待验证清单</figcaption>
+        </figure>
+      </div>
+
+      <p>规格的最后是一张审计表：把「PRD 没写、需要人来定」的项逐条列出来，标明现状和归属，不擅自补全。这份清单后来直接变成了下一轮迭代的输入。</p>
+    </div>
+  </section>
+
+  <!-- 08 -->
   <section class="section">
-    <div class="section-no">07<br>自检</div>
+    <div class="section-no">08<br>自检</div>
     <div class="section-body">
       <h2>我发现自己不够可靠，于是停掉了人工评测</h2>
       <p>这是我做这个项目里最重要的一次判断。</p>
@@ -252,9 +314,9 @@
     </div>
   </section>
 
-  <!-- 08 -->
+  <!-- 09 -->
   <section class="section">
-    <div class="section-no">08<br>边界</div>
+    <div class="section-no">09<br>边界</div>
     <div class="section-body">
       <h2>我知道这个产品的边界在哪</h2>
       <p>PRD 里有一节是专门用来标注「哪些结论站不住」的。</p>
@@ -271,22 +333,22 @@
     </div>
   </section>
 
-  <!-- 09 -->
+  <!-- 10 -->
   <section class="section">
-    <div class="section-no">09<br>现状</div>
+    <div class="section-no">10<br>现状</div>
     <div class="section-body">
-      <h2>已上线，持续迭代中</h2>
-      <p>Gloss 目前MVP已上线，代码托管在GitHub，累计 75 次提交。</p>
+      <h2>已部署，MVP 开发中</h2>
+      <p>Gloss已部署在Vercel，功能一「白话」与功能二「听不懂」均已跑通，代码托管在GitHub。</p>
       <p>技术实现由 AI 编程助手完成（Next.js App Router + TypeScript，原生 CSS 变量，Vercel 部署）；我负责的部分是：<strong>问题定义、PRD 撰写与迭代、改写规则设计、评测集构建、任务拆解与验收</strong>。</p>
 
       <figure class="figure">
         <img src="assets/img/gloss-shelf-empty.png" alt="Gloss 书架页空状态">
-        <figcaption>书架页 · 空状态。竖向书脊、folio 页码与「导入新书」占位构成完整的档案感。</figcaption>
+        <figcaption>书架页空状态高保真设计稿。竖向书脊、folio 页码与「导入新书」占位构成完整的档案感。</figcaption>
       </figure>
 
       <figure class="figure">
         <img src="assets/img/gloss-reader.webp" alt="Gloss 阅读页高保真">
-        <figcaption>阅读页高保真。左栏目录、中栏正文、右栏阅读参数（字号 16.5px / 行距 2.05）；点句后就地撑开白话面板，原句与白话并排，术语加下划线可单独查看。</figcaption>
+        <figcaption>阅读页高保真设计稿。左栏目录、中栏正文、右栏阅读参数（字号 16.5px / 行距 2.05）；点句后就地撑开白话面板，原句与白话并排，术语加下划线可单独查看。</figcaption>
       </figure>
     </div>
   </section>

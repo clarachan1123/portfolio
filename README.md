@@ -6,10 +6,13 @@
 
 | 文件 | 页面 |
 |---|---|
-| `index.html` | 首页：封面 + 项目索引（01 Gloss / 02 Feynman）+ 关于 + 时间线 + 教育与工具 |
+| `index.html` | 首页：封面 + 项目索引（01 Gloss / 02 Feynman）+ 时间线 + 其他能力 |
 | `gloss.html` | Gloss 深度案例（10 章） |
-| `feynman.html` | 费曼学习助手案例（6 章） |
-| `about.html` | 跳转页 → `index.html#about`（老链接兼容，内容不再单独维护） |
+| `feynman.html` | 费曼学习助手案例（5 章） |
+
+> 2026-09-24 删掉了首页的「关于」区和 `about.html` 跳转页——「关于」的内容本来就已并进首页其他区，
+> 而那一区本身没有承担信息（学历信息未在站内出现，是有意为之）。
+> 导航栏同步减为三项：首页 / Gloss / Feynman。
 
 > 2026-09-23 全站换成 `design-explorations/merged*` 那一版设计（暖墨深色 + 羊皮纸纸色 + 墨绿强调色）。
 > **FamCal 没进首页索引**（只在时间线里有一条）——它的详情页还没做，所以整张卡先不放；
@@ -43,11 +46,10 @@
 ├── index.html          首页
 ├── gloss.html          Gloss 案例
 ├── feynman.html        费曼案例
-├── about.html          跳转页（→ index.html#about）
 ├── vercel.json         Vercel 配置（cleanUrls）
 ├── 改文案指南.md        改文案操作手册
 ├── 改图片指南.md        换图操作手册
-├── 图片工具.html        零依赖的换图工具（双击即用）
+├── 图片工具.html        零依赖的换图工具（双击即用，已 gitignore，不进仓库）
 ├── design-explorations/  改版设计稿（已 gitignore，不发布）
 └── assets/
     ├── merged.css      全部样式（站点唯一样式表）

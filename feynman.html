@@ -18,8 +18,8 @@
   怎么改：用记事本或 VS Code 打开本文件，Ctrl+F 搜下面【】里的
           几个字，找到后只改标签之间的中文。存盘，浏览器按 F5。
 
-  本页共 6 个章节（01 — 06）。可改位置：
-    【案例 02 · 未上线】         页首小标签
+  本页共 5 个章节（01 — 05）。可改位置：
+    【← 返回索引】               页首左上角的返回链接（三个页面都有）
     【你讲给 AI 听】             页首大标题（<br> 是换行符）
     【备考时我能读懂】            页首导语
     【角色】/【时间】/【状态】     大标题下方那三行规格
@@ -31,15 +31,14 @@
     【把品牌语气写成五把可执行的尺子】 章节 03 标题（下面那张表格每格都可改）
     【把「学没学懂」变成能看见的形状】 章节 04 标题
     【把「学没学懂」变成一张会长大的地图】 知识地图那段的标题
-    【功能做完了，但我知道它还不够好】 章节 05 标题
-    【现在的状态】               章节 06 标题
+    【功能做完了，但我知道它还不够好】 章节 05 标题（也是最后一章）
     【陈利行】                   页脚姓名
   ──────────────────────────────────────────────────────────────
   ⚠️ 右侧那些小字方框（class="facts"）是「旁注」，也可以改，
      它们和正文讲的是不同角度，改的时候注意别和正文说重复的话。
   ⚠️ 知识地图那一节是「完整手机 + 4 张同倍率放大卡」，图里的百分比数字
      来自真实截图，改文字时不要改这些数字。
-  ⚠️ 三条铁律
+  ⚠️ 四条铁律
      1. 只改中文。不要删除或改动 < > " " 这些符号，也不要动
         class="..." 里面的内容 —— 那是控制样式的。
      2. 要换行，写 <br>（例：第一行<br>第二行）。
@@ -57,7 +56,6 @@
       <a href="index.html">首页</a>
       <a href="gloss.html">Gloss</a>
       <a href="feynman.html" aria-current="page">Feynman</a>
-      <a href="index.html#about">关于</a>
     </nav>
     <div class="meta stamp">Portfolio · 2026</div>
   </div>
@@ -67,19 +65,18 @@
 <section class="page" id="feynman">
   <div class="grid12 case-head">
     <a class="back mono" href="index.html#index">← 返回索引</a>
-    <span class="mono" style="grid-column:3/-1;margin-bottom:16px;color:var(--accent)">案例 02 · 未上线</span>
     <h1>你讲给 AI 听，<br>AI 追问你</h1>
     <p class="case-dek">备考时我能读懂、能记住，却没法验证自己是不是真的理解了。问题出在只有输入、没有反馈——所以我把方向反过来。</p>
     <dl class="spec">
       <div><dt>角色</dt><dd>产品定义 · 语气规范 · 验收</dd></div>
       <div><dt>时间</dt><dd>2026.05 — 2026.07</dd></div>
-      <div><dt>状态</dt><dd>未上线（微信小程序需要注册个体户才能上线此类产品）</dd></div>
+      <div><dt>状态</dt><dd>已部署，MVP 开发中</dd></div>
     </dl>
   </div>
 
   <div class="grid12">
     <div class="plate-lead">
-      <span class="plate-tag">问答 · 澄清 · 知识地图</span>
+      <span class="plate-tag">问答 · 主题设定页 · 知识地图</span>
       <h3>把方向反过来：你答，它追问</h3>
       <p>市面上的学习工具都在解决「输入」，但缺的是<strong>反馈</strong>。费曼把方向反过来：AI 只负责在含糊的地方追问，思考留给用户自己。</p>
       <p>掌握程度是看不见的，所以最后落到一张色块地图上：<strong>色越深，这一块越牢</strong>。</p>
@@ -91,7 +88,6 @@
         <div class="phone mock"><div class="scr"><img src="assets/img/phone-f-clarify.webp" alt="费曼主题设定：把「探究维度」与「研学节奏」重新定义一遍" width="520" height="1055"></div></div>
         <div class="phone mock"><div class="scr"><img src="assets/img/phone-f-map.webp" alt="费曼知识地图：综合掌握度 64%，各知识板块按掌握度显示深浅" width="520" height="1055"></div></div>
       </div>
-      <figcaption>三屏是同一次会话 —— 先被追问，答不上来给台阶，方向不对就回头把主题定清楚，最后看见自己哪里虚。</figcaption>
     </figure>
   </div>
 
@@ -102,13 +98,9 @@
       <div class="step-body">
         <h2>能读懂、能记住，但没有内化知识</h2>
         <p>备考的时候我发现一个很难受的状态：书看完了，笔记也做了，但我说不清自己到底掌握到什么程度。<strong>能读懂、能记住，不等于真的理解了，不等于形成知识体系了。</strong></p>
-        <p>市面上大部分学习工具解决的是「输入」——更好的讲义、更清晰的笔记、更多的题库。但我缺的不是输入，是<strong>反馈</strong>：一个能告诉我「你刚才那段复述里，哪里其实是含糊的、是有漏洞的」的产品。</p>
+        <p>市面上大部分学习工具提供了全面的资源——更好的讲义、更清晰的笔记、更多的题库。但我缺的不是输入，是<strong>反馈</strong>：一个能告诉我「你刚才那段复述里，哪里其实是含糊的、是有漏洞的」的产品。</p>
         <p>费曼学习法的原义恰好就是这个：讲不清楚，就说明没懂。于是我把它做成产品——用户复述，AI 只负责追问和总结。</p>
       </div>
-      <aside class="facts">
-        <h4>只有输入，没有反馈</h4>
-        <p>这是费曼与 Gloss 的共同起点：两个产品都不是从功能出发，是从一个说不清的难受状态出发。</p>
-      </aside>
     </div>
 
     <div class="step">
@@ -129,7 +121,7 @@
         </div>
         <div class="decision kill">
           <span class="label">边界三</span>
-          <h4>不是激励类 App</h4>
+          <h4>不是激励类App</h4>
           <p>没有徽章、没有连续天数、没有排行榜、没有庆祝动画。成长的反馈在知识版图界面慢慢增长的板块，在学习总览里客观的总结。</p>
         </div>
 
@@ -150,7 +142,7 @@
 
     <figure class="chain-plate">
       <div class="phone mock"><div class="scr"><img src="assets/img/phone-f-ask.webp" alt="费曼问答页：第 3 轮焦点问题下展开「提示 1 · 方向启发」，右上角显示提示额度 1/3" width="520" height="1055"></div></div>
-      <figcaption>问答页。图里停在「提示 1 · 方向启发」，右上角 1/3 —— 提示是有额度的。</figcaption>
+      <figcaption>问答页——图里停在「提示 1 · 方向启发」，右上角 1/3 —— 提示是有额度的。</figcaption>
     </figure>
 
     <div class="step">
@@ -174,35 +166,23 @@
 
         <p>PRD 里还单独列了一张禁用词表：<strong>「太棒了」「你说得很好」「非常正确」</strong>——这类话会让用户误判自己的掌握程度，是产品要防的东西，不是要加的东西。</p>
       </div>
-      <aside class="facts">
-        <h4>禁用词</h4>
-        <p>太棒了<br>你说得很好<br>非常正确</p>
-        <p>这三句看起来是「好体验」，实际会让用户误判掌握程度。</p>
-      </aside>
     </div>
 
     <div class="step">
       <div class="rail"><span class="step-num">04</span><span class="node"></span></div>
       <div class="step-body">
         <h2>把「学没学懂」变成能看见的形状</h2>
-        <p>理解程度是看不见的，这是这个产品最难的部分。我的做法是：把用户聊过的知识板块按层级摆成一张版图，<strong>色块越深，表示这一块掌握得越牢</strong>——哪块是虚的，一眼就能看出来。</p>
-        <p>这套设计的用意是：比起被表扬，用户更需要<strong>看见自己思考的形状在长大</strong>。</p>
-
       </div>
-      <aside class="facts">
-        <h4>掌握度色阶</h4>
-        <p><span class="big">88%</span>关东漕运与汴水命脉（最深）</p>
-        <p><span class="big">20%</span>族群纽带（最浅）</p>
-        <p>综合掌握度 <strong>64%</strong></p>
-      </aside>
     </div>
 
     <figure class="map-band">
       <div class="map-lead">
         <span class="plate-tag">知识地图</span>
         <h3>把「学没学懂」变成一张会长大的地图</h3>
-        <p>它把用户聊过的知识板块按层级摆开，<strong>色块越深表示这一块掌握得越牢</strong>，哪块是虚的一眼就能看出来。</p>
+        <p>理解程度是看不见的，这是这个产品最难的部分。我的做法是：把用户聊过的知识板块按层级摆成一张版图，<strong>色块越深表示这一块掌握得越牢</strong>，哪块是虚的一眼就能看出来。</p>
         <p>用户不需要读任何数字 —— 颜色本身就是反馈。</p>
+        <p>这套设计的用意是：比起被表扬，用户更需要<strong>看见自己思考的形状在长大</strong>。</p>
+
       </div>
 
       <div class="map-legend">
@@ -225,19 +205,19 @@
                  JS 每帧现算坐标，连线随视口缩放不飘。 -->
             <figure class="map-zoom-note" data-box="0.0407,0.2023,0.9593,0.3538">
               <img src="assets/img/map-pillar.webp" alt="主支柱板块：关东漕运与汴水命脉，88%，答过 4 问，已形成完整经济因果链" width="1083" height="481">
-              <figcaption><b>88%</b>　从左边原样放大。徽标旁那句话把因果链写完了 —— 这就是「牢固」长什么样。</figcaption>
+              <figcaption><b>88%</b>　这就是「牢固」长什么样。</figcaption>
             </figure>
             <figure class="map-zoom-note w-turn" data-box="0.0356,0.5041,0.6370,0.6333">
               <img src="assets/img/map-turn.webp" alt="战局转折板块：哥舒翰出关与潼关溃败，42%，深绿实线框，顶部挂着「刚刚长出」标签" width="709" height="435">
-              <figcaption><b>42%</b>　深绿实线框，顶上挂着「刚刚长出」。上一轮它还是下面那种虚线框。</figcaption>
+              <figcaption><b>42%</b>　深绿实线框，顶上挂着「刚刚长出」。</figcaption>
             </figure>
             <figure class="map-zoom-note w-branch" data-box="0.0407,0.7628,0.4843,0.8229">
               <img src="assets/img/map-branch.webp" alt="潜在支脉 01：马嵬驿兵变玄宗失权，虚线框还没长出来" width="523" height="192">
-              <figcaption><b>潜在支脉</b>　虚线＝还没长出来的枝。位置排好了，聊到才会填实 —— 旁边 02 同理。</figcaption>
+              <figcaption><b>潜在支脉</b>　虚线＝还没长出来的枝。位置排好了，聊到才会填实。</figcaption>
             </figure>
             <figure class="map-zoom-note" data-box="0.0407,0.8311,0.9601,0.9149">
               <img src="assets/img/map-growth.webp" alt="生长观察：你的思维在军事制度与漕运经济两条脉络上最为扎实，在朝堂君臣心理防线上仍有雾气，无需急于填满" width="1084" height="266">
-              <figcaption><b>生长观察</b>　地图自己写的一句总结，末尾是「无需急于填满」。</figcaption>
+              <figcaption><b>生长观察</b>　一句目前的总结，末尾是「无需急于填满」。</figcaption>
             </figure>
           </div>
           <svg class="map-zoom-lines" aria-hidden="true"></svg>
@@ -249,30 +229,21 @@
       <div class="rail"><span class="step-num">05</span><span class="node"></span></div>
       <div class="step-body">
         <h2>功能做完了，但我知道它还不够好</h2>
-        <p>这个项目最终没有上线。目前功能基本完成，界面、对话引擎和知识地图都已经跑通。</p>
-        <p>停下来的原因是：我列出了它当时的问题，然后判断这些问题是<strong>产品的核心体验问题，不是可以带着上线的瑕疵</strong>。</p>
+        <p>这个项目目前以 MVP 形态部署上线，功能基本完成，界面、对话引擎和知识地图都已经跑通。</p>
+        <p>停下来的原因是：我列出了它当时的问题，然后判断这些问题是<strong>产品的核心体验问题，不是可以带着正式发布的瑕疵</strong>。</p>
         <div class="decision">
           <span class="label">PRD §12 · 已知问题</span>
           <h4>目前存在的问题</h4>
           <p>没有搭建好登录系统、云端系统，用户一旦清除本地缓存，所有知识板块、学习总览进度都清空。</p>
         </div>
-        <p>我选择先继续打磨核心体验，而不是把这些包一包就发出去。<strong>一个针对知识巩固内化的学习工具，必须能够长期稳定使用</strong>——记录自己的成长，建立长期知识体系。</p>
-        <p>这也是 Gloss 和费曼这两个项目的分水岭：Gloss 的核心闭环（点句 → 白话）成立，所以我让它上线；费曼的核心闭环（问答 → 地图反馈 → 形成总结 → 长期跟进）不成立，所以我把它停在原地。</p>
+        <p>我选择先继续打磨核心体验，而不是就这样当成正式版推出去。<strong>一个针对知识巩固内化的学习工具，必须能够长期稳定使用</strong>——记录自己的成长，建立长期知识体系。</p>
       </div>
       <aside class="facts">
         <h4>两个项目的分水岭</h4>
-        <p>上线 / 不上线，判据都是同一条：<strong>核心闭环成不成立</strong>。</p>
+        <p>正式发布 / 停在 MVP，判据都是同一条：<strong>核心闭环成不成立</strong>。</p>
       </aside>
     </div>
 
-    <div class="step">
-      <div class="rail"><span class="step-num">06</span><span class="node"></span></div>
-      <div class="step-body">
-        <h2>现在的状态</h2>
-        <p>费曼学习助手目前处于搁置状态，精力集中在 Gloss 上。它是我用 AI 编程助手完整跑通「需求定义 → 开发 → 自测 → 反馈优化」闭环的第一个项目——Gloss 上很多做法（把主观标准写成硬规则、先划边界再谈功能）都是在这个项目里试出来的。</p>
-      </div>
-      <aside class="facts"></aside>
-    </div>
 
   </div>
 </section>
@@ -281,13 +252,11 @@
   <div class="page">
     <div class="grid12 colophon-in">
       <h4 class="name">陈利行<br>CHEN LIXING</h4>
-      <div class="who"><p>产品经理 ｜ 深圳 ｜ 2026 届</p></div>
       <div class="contact">
-        <p>GitHub · clarachan1123<br>邮箱与电话 · 见简历</p>
+        <p>联系方式 · 见简历</p>
       </div>
       <div class="folio-bar">
         <span class="mono">Chen Lixing · Portfolio</span>
-        <span class="mono">产品作品集 · 2026 届</span>
       </div>
     </div>
   </div>

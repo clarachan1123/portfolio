@@ -915,20 +915,6 @@ tr.hi td:last-child { color: var(--accent); font-weight: 600; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-/* ── 时间线（最疏） ───────────────────────────────────────── */
-
-.timeline { grid-column: 3 / 11; margin-top: 44px; }
-.tl-item {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 24px;
-  padding: 18px 0;
-  border-top: 1px solid var(--rule);
-}
-.tl-item .mono { color: var(--ink-3); padding-top: 4px; }
-.tl-item h4 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
-.tl-item p { margin: 0; font-size: 14.5px; color: var(--ink-2); max-width: 36em; }
-
 /* ── 页脚（深色 · 收框） ──────────────────────────────────── */
 
 .colophon { margin-top: clamp(72px, 9vw, 132px); }
@@ -1382,7 +1368,6 @@ body.no-hint .hint { display: none; }
   .about-body { grid-column: 2 / 10; }
   .pillars { grid-column: 2 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .chapters { grid-column: 2 / -1; }
-  .timeline { grid-column: 2 / -1; }
   .breather p, .breather .meta { grid-column: 2 / -1; }
 
   /* 图版与设备组：中屏收窄 */
@@ -1428,7 +1413,7 @@ body.no-hint .hint { display: none; }
   .node.fork { left: -2px; }
 
   .case-head h1, .case-dek, .spec,
-  .about-lede, .about-body, .pillars, .chapters, .timeline,
+  .about-lede, .about-body, .pillars, .chapters,
   .breather p, .breather .meta,
   .shot-wide, .filmstrip,
   .colophon .name, .colophon .who, .colophon .contact {
@@ -1437,7 +1422,6 @@ body.no-hint .hint { display: none; }
   .shot-wide, .filmstrip { margin-right: calc(-1 * var(--edge)); }
   .skills-aside { grid-column: 1 / -1; margin-top: 28px; padding-top: 0; }
   .pillars { grid-template-columns: 1fr; }
-  .tl-item { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap, .shot, .decision, .pull { max-width: 100%; }
   /* 两列的表（费曼「五把尺子」）窄屏不需要横滑，直接折行；多列的竞品表照旧横滑 */
   .table-wrap.fit table { min-width: 0; }

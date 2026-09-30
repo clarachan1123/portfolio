@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gloss · 案例 01 — 点一句读不懂的话，就地把它讲成白话</title>
 <meta name="description" content="Gloss 的产品推导过程：236 条真实批注、20 句分层评测集、5 次 PRD 迭代，以及两处被我自己推翻的假设。">
+<meta name="theme-color" content="#17150F">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="陈利行 · 产品作品集">
+<meta property="og:title" content="Gloss · 案例 01 — 点一句读不懂的话，就地把它讲成白话">
+<meta property="og:description" content="Gloss 的产品推导过程：236 条真实批注、20 句分层评测集、5 次 PRD 迭代，以及两处被我自己推翻的假设。">
+<meta property="og:url" content="https://clara-lixing.kicp.fun/gloss.html">
+<meta property="og:image" content="https://clara-lixing.kicp.fun/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/space-grotesk@5/index.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/400.css">
@@ -23,6 +35,8 @@
     【点一句读不懂的话】         页首大标题（<br> 是换行符）
     【读中文哲学书】             页首导语
     【角色】/【时间】/【状态】     大标题下方那三行规格
+    【我做了什么】/【关键判断】    规格下方的四格摘要（问题 / 我做了什么 / 关键判断 / 现状）
+    【批注证据】                 摘要下方那一行章节跳转（10 个短名，点了跳到对应章）
     【三栏各管一件事】           界面概览那段的标题
     【问题不是 AI 做不到】       章节 01 标题
     【236 条批注】               章节 02 标题
@@ -73,6 +87,27 @@
       <div><dt>时间</dt><dd>2026.08 — 至今</dd></div>
       <div><dt>状态</dt><dd>MVP 已上线，持续迭代中</dd></div>
     </dl>
+
+    <!-- 一屏摘要：给只读 30 秒的人。四格内容都取自下面各章，改正文时记得同步这里。 -->
+    <dl class="pillars tldr">
+      <div><dt>问题</dt><dd>一句读不懂，要走七步：选中、切出去、搜索、输入、翻找、对照、切回来。<strong>不是 AI 做不到，是摩擦高到人不愿意做。</strong></dd></div>
+      <div><dt>我做了什么</dt><dd>用自己的 236 条真实批注建了 20 句分层评测集；PRD 从 v0.1 迭代到 v1.3；把「什么算改好了」写成三条 AI 能执行的硬规则。</dd></div>
+      <div><dt>关键判断</dt><dd>永不做问答框；砍掉 2 个功能、推翻 1 个假设；发现自评分歧率 64%，<strong>主动停掉了人工评测</strong>。</dd></div>
+      <div><dt>现状</dt><dd>MVP 已上线，「白话」与「听不懂」两个功能跑通。代码由 AI 编程助手实现，我负责定义、规则与验收。</dd></div>
+    </dl>
+
+    <nav class="chapters" aria-label="章节">
+      <a href="#g01"><span>01</span>摩擦</a>
+      <a href="#g02"><span>02</span>批注证据</a>
+      <a href="#g03"><span>03</span>竞品</a>
+      <a href="#g04"><span>04</span>永不做</a>
+      <a href="#g05"><span>05</span>砍掉与推翻</a>
+      <a href="#g06"><span>06</span>硬规则</a>
+      <a href="#g07"><span>07</span>全状态规格</a>
+      <a href="#g08"><span>08</span>停掉人工评测</a>
+      <a href="#g09"><span>09</span>边界</a>
+      <a href="#g10"><span>10</span>现状</a>
+    </nav>
   </div>
 
   <!-- 界面概览：阅读器三栏 + 白话面板 -->
@@ -95,7 +130,7 @@
   <div class="grid12 chain">
 
     <!-- 01 -->
-    <div class="step">
+    <div class="step" id="g01">
       <div class="rail"><span class="step-num">01</span><span class="node"></span></div>
       <div class="step-body">
         <h2>问题不是 AI 做不到，是摩擦高到用户不愿意去做</h2>
@@ -112,7 +147,7 @@
     </div>
 
     <!-- 02 -->
-    <div class="step">
+    <div class="step" id="g02">
       <div class="rail"><span class="step-num">02</span><span class="node"></span></div>
       <div class="step-body">
         <h2>236 条批注：先证明这个问题真的存在</h2>
@@ -139,7 +174,7 @@
     </div>
 
     <!-- 03 -->
-    <div class="step">
+    <div class="step" id="g03">
       <div class="rail"><span class="step-num">03</span><span class="node"></span></div>
       <div class="step-body">
         <h2>三款竞品，六个维度</h2>
@@ -170,7 +205,7 @@
     </div>
 
     <!-- 04 -->
-    <div class="step">
+    <div class="step" id="g04">
       <div class="rail"><span class="step-num">04</span><span class="node"></span></div>
       <div class="step-body">
         <h2>用「永不做」划边界</h2>
@@ -185,7 +220,7 @@
     </div>
 
     <!-- 05 分叉 -->
-    <div class="step">
+    <div class="step" id="g05">
       <div class="rail"><span class="step-num is-fork">05</span><span class="node fork"></span></div>
       <div class="step-body">
         <h2>两个被砍掉的功能，和一个被推翻的假设</h2>
@@ -212,7 +247,7 @@
     </div>
 
     <!-- 06 -->
-    <div class="step">
+    <div class="step" id="g06">
       <div class="rail"><span class="step-num is-fork">06</span><span class="node fork"></span></div>
       <div class="step-body">
         <h2>把「什么算改好了」写成 AI 能执行的硬规则</h2>
@@ -252,7 +287,7 @@
     </div>
 
     <!-- 07 -->
-    <div class="step">
+    <div class="step" id="g07">
       <div class="rail"><span class="step-num">07</span><span class="node"></span></div>
       <div class="step-body">
         <h2>主流程之外的状态和异常，也写进了规格</h2>
@@ -285,7 +320,7 @@
     </div>
 
     <!-- 08 分叉 -->
-    <div class="step">
+    <div class="step" id="g08">
       <div class="rail"><span class="step-num is-fork">08</span><span class="node fork"></span></div>
       <div class="step-body">
         <h2>我发现自己不够可靠，于是停掉了人工评测</h2>
@@ -313,7 +348,7 @@
     </div>
 
     <!-- 09 -->
-    <div class="step">
+    <div class="step" id="g09">
       <div class="rail"><span class="step-num">09</span><span class="node"></span></div>
       <div class="step-body">
         <h2>我知道这个产品的边界在哪</h2>
@@ -328,7 +363,7 @@
     </div>
 
     <!-- 10 -->
-    <div class="step">
+    <div class="step" id="g10">
       <div class="rail"><span class="step-num">10</span><span class="node"></span></div>
       <div class="step-body">
         <h2>MVP 已上线，持续迭代中</h2>
@@ -362,7 +397,7 @@
     <div class="grid12 colophon-in">
       <h4 class="name">陈利行<br>CHEN LIXING</h4>
       <div class="contact">
-        <p>联系方式 · 见简历</p>
+        <p>邮箱 · <a href="mailto:lixingchan1123@gmail.com">lixingchan1123@gmail.com</a></p>
       </div>
       <div class="folio-bar">
         <span class="mono">Chen Lixing · Portfolio</span>

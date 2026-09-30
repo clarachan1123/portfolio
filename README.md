@@ -54,6 +54,9 @@
 └── assets/
     ├── merged.css      全部样式（站点唯一样式表）
     ├── style.css       旧版样式，已不再被任何页面引用
+    ├── favicon.svg     浏览器标签页图标
+    ├── apple-touch-icon.png  手机收藏到桌面时的图标（180×180，由 favicon.svg 渲染）
+    ├── og.png          链接分享预览图（1200×630）。是一张**静态图**：改了首页主标题或项目名，要找 agent 重新生成
     └── img/            图片（WebP）
 ```
 

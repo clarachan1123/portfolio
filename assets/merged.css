@@ -16,7 +16,9 @@
   --night-3:  #2C2820;
   --on-night: #F2EEE4;
   --on-night-2: #A79F8C;
-  --on-night-3: #6B6455;
+  /* 次要字色：原 #6B6455 / #8B8371 对比度只有 3.1 / 3.3，标签小字压在底色上看不清，
+     提到 4.5 以上（暖墨上 5.0，羊皮纸上 4.8）。 */
+  --on-night-3: #8E8674;
   --night-line: #332E24;
 
   /* 浅色区块 —— 羊皮纸。取自素材实测：Gloss 首页 #F5F3EC / 阅读页 #F2EFE8 /
@@ -26,7 +28,7 @@
   --paper-3: #DFD9CB;
   --ink:     #1A1815;
   --ink-2:   #57503F;
-  --ink-3:   #8B8371;
+  --ink-3:   #716A58;
   --rule:    #D6D0C0;
   --rule-2:  #E5E0D3;
 
@@ -84,7 +86,7 @@ em { font-style: normal; }
 
 .mono, .meta {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   line-height: 1.7;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -224,7 +226,7 @@ em { font-style: normal; }
 }
 .cell span {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .1em;
   color: var(--on-night-3);
   text-transform: uppercase;
@@ -309,7 +311,7 @@ em { font-style: normal; }
 .entry-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .tag {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .12em;
   text-transform: uppercase;
   padding: 3px 8px;
@@ -338,7 +340,7 @@ em { font-style: normal; }
 }
 .entry-stats span {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .1em;
   color: var(--on-night-3);
   text-transform: uppercase;
@@ -369,7 +371,7 @@ em { font-style: normal; }
   right: var(--edge);
   bottom: 14px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: #EDE7DA;
@@ -428,7 +430,7 @@ em { font-style: normal; }
   padding: 14px 0;
 }
 .spec div { display: flex; gap: 10px; }
-.spec dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+.spec dt { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
 .spec dd { margin: 0; font-size: 14.5px; }
 
 /* 论证链容器：左侧一条竖线，每个 step 挂一个节点 */
@@ -508,7 +510,7 @@ em { font-style: normal; }
   left: 0;
   top: 0;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: .14em;
   font-variant-numeric: tabular-nums;
   color: var(--ink-2);
@@ -545,7 +547,7 @@ em { font-style: normal; }
 .facts { padding-top: 20px; }
 .facts h4 {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -586,7 +588,7 @@ em { font-style: normal; }
 }
 .pull cite {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .13em;
   text-transform: uppercase;
   font-style: normal;
@@ -605,7 +607,7 @@ em { font-style: normal; }
 .decision .label {
   display: block;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -635,7 +637,7 @@ em { font-style: normal; }
 .ctx-row:first-child { border-top: 0; }
 .ctx-row dt {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--accent);
@@ -678,7 +680,7 @@ em { font-style: normal; }
   padding: 10px 14px 12px;
   border-top: 1px solid var(--rule);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .08em;
   line-height: 1.8;
   color: var(--ink-3);
@@ -707,7 +709,7 @@ table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 56
 th, td { text-align: left; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--rule-2); vertical-align: top; }
 th {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -752,7 +754,7 @@ tr.hi td:last-child { color: var(--accent); font-weight: 600; }
 .filmstrip figcaption {
   padding: 8px 10px 9px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .08em;
   line-height: 1.65;
   color: var(--ink-3);
@@ -779,7 +781,7 @@ tr.hi td:last-child { color: var(--accent); font-weight: 600; }
 .skills .table-wrap { max-width: 100%; }
 .skills table { min-width: 0; }
 .skills-aside { grid-column: 10 / -1; margin-top: 44px; }
-.skills-aside .mono { letter-spacing: .06em; overflow-wrap: anywhere; }
+.skills-aside .mono { letter-spacing: .04em; text-transform: none; overflow-wrap: anywhere; }
 .skills-aside a { border-bottom: 1px solid var(--rule); }
 .skills-aside a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
@@ -795,7 +797,7 @@ tr.hi td:last-child { color: var(--accent); font-weight: 600; }
 .pillars > div { background: var(--paper); padding: 20px 18px 22px; }
 .pillars dt {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--accent);
@@ -803,6 +805,33 @@ tr.hi td:last-child { color: var(--accent); font-weight: 600; }
 }
 .pillars dd { margin: 0; font-size: 14.5px; line-height: 1.8; color: var(--ink-2); }
 .pillars dd strong { color: var(--ink); font-weight: 600; }
+
+/* Gloss 页首摘要：复用 .pillars 的四格网格（响应式断点也跟着它走），只调间距 */
+.pillars.tldr { margin-top: 30px; }
+
+/* 摘要下的章节跳转。顶栏是 sticky 的，跳过去时给章节标题留出顶栏的高度 */
+.chapters {
+  grid-column: 3 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin-top: 18px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+.chapters a span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--ink-3);
+  margin-right: 6px;
+}
+.chapters a:hover,
+.chapters a:hover span { color: var(--accent); }
+.step[id] { scroll-margin-top: 84px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* ── 时间线（最疏） ───────────────────────────────────────── */
 
@@ -835,7 +864,8 @@ tr.hi td:last-child { color: var(--accent); font-weight: 600; }
 .colophon .who p { margin: 0; font-size: 14px; color: var(--on-night-2); }
 .colophon .contact { grid-column: 9 / -1; }
 .colophon .contact p { margin: 0; font-size: 13.5px; line-height: 2.1; color: var(--on-night-2); }
-.colophon a:hover { color: var(--accent); }
+.colophon .contact a { border-bottom: 1px solid var(--night-3); }
+.colophon a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .folio-bar {
   grid-column: 1 / -1;
   display: flex;
@@ -1049,7 +1079,7 @@ body.no-hint .hint { display: none; }
   margin-top: 14px;
   padding-right: var(--edge);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .08em;
   line-height: 1.8;
   color: var(--ink-3);
@@ -1130,7 +1160,7 @@ body.no-hint .hint { display: none; }
   gap: 10px;
   margin: 0 0 11px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .08em;
   line-height: 1.7;
   color: var(--ink-2);
@@ -1155,9 +1185,15 @@ body.no-hint .hint { display: none; }
 .map-zoom {
   grid-column: 1 / -1;
   margin: 34px calc(-1 * var(--edge)) 0 0;
+  container-type: inline-size;
 }
+/* 整组总宽 = 手机 .56 + 间距 .22 + 卡片 1 = 1.78 × --zw。
+   ⚠️ 不能用 vw 算：vw 含滚动条宽度，Windows 上有 17px 滚动条，按 54vw 算出来整组比容器宽，
+   最右那 17px（正好是 88% 角标）被 overflow-x:clip 裁掉。改按容器宽（cqw）反推 --zw，
+   第一行 54vw 留给不支持容器查询单位的旧浏览器。 */
 .map-zoom-in {
   --zw: clamp(200px, 54vw, 776px);
+  --zw: clamp(200px, calc(100cqw / 1.78), 776px);
   position: relative;
   display: flex;
   align-items: center;
@@ -1188,7 +1224,7 @@ body.no-hint .hint { display: none; }
 .map-zoom-note figcaption {
   margin-top: 9px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .08em;
   line-height: 1.75;
   color: var(--ink-3);
@@ -1220,7 +1256,7 @@ body.no-hint .hint { display: none; }
   grid-column: 1 / -1;
   margin-top: 22px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .08em;
   line-height: 1.8;
   color: var(--ink-3);
@@ -1236,7 +1272,7 @@ body.no-hint .hint { display: none; }
   display: block;
   margin-bottom: 12px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .12em;
   line-height: 1.7;
   color: var(--accent);
@@ -1262,6 +1298,7 @@ body.no-hint .hint { display: none; }
   .about-lede { grid-column: 2 / -1; }
   .about-body { grid-column: 2 / 10; }
   .pillars { grid-column: 2 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chapters { grid-column: 2 / -1; }
   .timeline { grid-column: 2 / -1; }
   .breather p, .breather .meta { grid-column: 2 / -1; }
 
@@ -1307,7 +1344,7 @@ body.no-hint .hint { display: none; }
   .node.fork { left: -2px; }
 
   .case-head h1, .case-dek, .spec,
-  .about-lede, .about-body, .pillars, .timeline,
+  .about-lede, .about-body, .pillars, .chapters, .timeline,
   .breather p, .breather .meta,
   .shot-wide, .filmstrip,
   .colophon .name, .colophon .who, .colophon .contact {
@@ -1352,7 +1389,7 @@ body.no-hint .hint { display: none; }
   .masthead nav { gap: 14px; font-size: 13px; }
   .chain-plate > .phone { --pw: 168px; }
   .chain-plate > .win { max-width: 100%; }
-  .chain-plate figcaption, .plate figcaption { font-size: 9px; letter-spacing: .05em; }
+  .chain-plate figcaption, .plate figcaption { font-size: 10.5px; letter-spacing: .04em; }
   .hint { font-size: 9px; }
 }
 

@@ -8,6 +8,36 @@
    两处「推翻」用珊瑚橙的 × 打断论证链；首尾用深色区块收框。
    ══════════════════════════════════════════════════════════════ */
 
+/* ── 字体：本地托管 ────────────────────────────────────────────
+   原来从 cdn.jsdelivr.net 加载，国内访问不稳，而 <head> 里的样式表会阻塞渲染，
+   CDN 慢的时候整页白屏。现在只放 latin 子集（全站西文只用到这个范围；
+   → ← 两个箭头不在任何子集里，本来就回退到中文字体）。许可证见 assets/fonts/LICENSE.txt。 */
+@font-face {
+  font-family: "Space Grotesk Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url(fonts/space-grotesk-latin-wght-normal.woff2) format("woff2-variations"),
+       url(fonts/space-grotesk-latin-wght-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 :root {
   /* 深色区块 —— 暖墨。原 B 用的是冷黑 #101114，与羊皮纸素材并置时发青；
      这里换成带暖调的墨色，与截图底色同源。 */
@@ -211,8 +241,40 @@ em { font-style: normal; }
 }
 
 /* 数据矩阵：全站最密的一块，对应 seed 开头的密集段 */
+/* 封面入口：导语在上、按钮在下，按钮底边与右侧数据矩阵底边对齐。
+   用显式行号是因为矩阵要同时跨「导语 + 按钮」两行；窄屏下全部撤掉，按 DOM 顺序往下排。 */
+.cover-lede { grid-row: 3; align-self: start; }
+.cover-go {
+  grid-column: 1 / 7;
+  grid-row: 4;
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.cover-go a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--night-3);
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--on-night);
+  transition: border-color .15s, color .15s, background-color .15s;
+}
+.cover-go a:hover { border-color: var(--accent); color: var(--accent); }
+.cover-go a.primary { background: var(--accent); border-color: var(--accent); color: var(--night); font-weight: 600; }
+.cover-go a.primary:hover { background: transparent; color: var(--accent); }
+.cover-go a.mail { border-color: transparent; padding-left: 6px; padding-right: 6px; color: var(--on-night-2); text-decoration: underline; text-decoration-color: var(--night-3); text-underline-offset: 5px; }
+.cover-go a.mail:hover { color: var(--accent); text-decoration-color: var(--accent); }
+/* 窄屏邮件链接会自己折到下一行，去掉左内边距才和上面的按钮左对齐 */
+@media (max-width: 520px) { .cover-go a.mail { padding-left: 0; } }
+
 .matrix {
   grid-column: 8 / -1;
+  grid-row: 3 / span 2;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   border-top: 1px solid var(--night-line);
@@ -242,6 +304,8 @@ em { font-style: normal; }
   display: block;
 }
 .cell.is-accent b { color: var(--accent); }
+/* 项目名单独占第二行：写成「条真实批注 · Gloss」的话，1024 宽下会断成「条真实批注 ·」+「GLOSS」 */
+.cell span small { display: block; font-size: inherit; margin-top: 2px; color: var(--on-night-3); opacity: .75; }
 
 /* ── 项目索引（深色 · 中密度） ────────────────────────────── */
 
@@ -1307,6 +1371,7 @@ body.no-hint .hint { display: none; }
   :root { --gut: 18px; }
   .cover h1 { grid-column: 1 / 9; }
   .cover-lede { grid-column: 1 / 8; }
+  .cover-go { grid-column: 1 / 8; }
   .matrix { grid-column: 9 / -1; }
   .entry { grid-template-columns: 48px 1fr 240px; }
   .step { grid-template-columns: var(--rail) minmax(0, 1fr) 220px; }
@@ -1340,7 +1405,8 @@ body.no-hint .hint { display: none; }
   .masthead .stamp { display: none; }
   .masthead nav { margin-left: 0; width: 100%; gap: 18px; }
 
-  .cover h1, .cover-lede { grid-column: 1 / -1; }
+  .cover h1, .cover-lede, .cover-go { grid-column: 1 / -1; }
+  .cover-lede, .cover-go, .matrix { grid-row: auto; }
   .matrix { grid-column: 1 / -1; margin-top: 32px; }
 
   .entry { grid-template-columns: 1fr; row-gap: 14px; }

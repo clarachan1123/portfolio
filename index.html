@@ -17,10 +17,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/space-grotesk@5/index.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/400.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/500.css">
+<link rel="preload" href="assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/merged.css">
 
 <!--
@@ -41,8 +39,9 @@
     【2026 届】               封面右上小字
     【两个我自己定义】         封面主标题（<br> 是换行符，可留可删）
     【两个项目的代码都由】     封面副标题
+    【读 Gloss 案例】/【读费曼案例】/【发邮件联系我】 封面副标题下面那三个入口按钮
     【条真实批注】/【句分层评测集】/【级渐进提示】/【把语气尺子】
-                             封面数据矩阵 4 格（前两格是 Gloss，后两格是费曼）。数字写在 <b> 里、说明写在
+                             封面数据矩阵 4 格（前两格是 Gloss，后两格是费曼，项目名写在 <small> 里）。数字写在 <b> 里、说明写在
                              紧跟的 <span> 里，改哪一格就搜哪一格的小字
     【项目索引】              项目索引区标题
     【01 — 02】              区标题右侧的计数（以后加到第 3 个项目就改 01 — 03）
@@ -111,11 +110,17 @@
 
     <p class="cover-lede">两个项目的代码都由 AI 编程助手实现，我负责定义问题、拆解任务、设计规则、约束 agent、验收结果。</p>
 
+    <div class="cover-go">
+      <a class="primary" href="gloss.html">读 Gloss 案例 <span aria-hidden="true">→</span></a>
+      <a href="feynman.html">读费曼案例 <span aria-hidden="true">→</span></a>
+      <a class="mail" href="mailto:lixingchan1123@gmail.com">发邮件联系我</a>
+    </div>
+
     <div class="matrix">
-      <div class="cell"><b>236</b><span>条真实批注 · Gloss</span></div>
-      <div class="cell"><b>20</b><span>句分层评测集 · Gloss</span></div>
-      <div class="cell is-accent"><b>3</b><span>级渐进提示 · 费曼</span></div>
-      <div class="cell"><b>5</b><span>把语气尺子 · 费曼</span></div>
+      <div class="cell"><b>236</b><span>条真实批注<small>Gloss</small></span></div>
+      <div class="cell"><b>20</b><span>句分层评测集<small>Gloss</small></span></div>
+      <div class="cell is-accent"><b>3</b><span>级渐进提示<small>费曼</small></span></div>
+      <div class="cell"><b>5</b><span>把语气尺子<small>费曼</small></span></div>
     </div>
 
   </div>

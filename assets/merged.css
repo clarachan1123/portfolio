@@ -432,6 +432,8 @@ em { font-style: normal; }
 .spec div { display: flex; gap: 10px; }
 .spec dt { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
 .spec dd { margin: 0; font-size: 14.5px; }
+.spec dd a { color: var(--accent); border-bottom: 1px solid currentColor; }
+.spec dd a:hover { border-bottom-width: 2px; }
 
 /* 论证链容器：左侧一条竖线，每个 step 挂一个节点 */
 .chain { position: relative; }
@@ -1355,6 +1357,8 @@ body.no-hint .hint { display: none; }
   .pillars { grid-template-columns: 1fr; }
   .tl-item { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap, .shot, .decision, .pull { max-width: 100%; }
+  /* 两列的表（费曼「五把尺子」）窄屏不需要横滑，直接折行；多列的竞品表照旧横滑 */
+  .table-wrap.fit table { min-width: 0; }
   .night-bleed { margin-left: calc(-1 * var(--edge)); margin-right: calc(-1 * var(--edge)); }
 
   /* 图版：小屏改为整幅出血，设备组按视口自适应缩小。
@@ -1391,6 +1395,95 @@ body.no-hint .hint { display: none; }
   .chain-plate > .win { max-width: 100%; }
   .chain-plate figcaption, .plate figcaption { font-size: 10.5px; letter-spacing: .04em; }
   .hint { font-size: 9px; }
+}
+
+/* ── 键盘焦点：只在用键盘操作时出现，鼠标点击不显示 ─────────── */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── 案例页末尾：跳到另一个案例 ─────────────────────────────── */
+.case-next {
+  grid-column: 3 / -1;
+  display: block;
+  margin-top: clamp(56px, 7vw, 96px);
+  padding: 26px 0 30px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+.case-next .mono { display: block; color: var(--ink-3); margin-bottom: 10px; }
+.case-next strong {
+  display: block;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.25;
+  letter-spacing: -.02em;
+}
+.case-next .go { display: inline-block; margin-top: 14px; font-size: 14px; color: var(--accent); }
+.case-next:hover strong { color: var(--accent); }
+/* 断点跟 .case-head h1 一致：1160 以下从第 2 列起，880 以下占满 */
+@media (max-width: 1160px) { .case-next { grid-column: 2 / -1; } }
+@media (max-width: 880px)  { .case-next { grid-column: 1 / -1; } }
+
+/* ── 点图放大（assets/zoom.js）─────────────────────────────── */
+.zoomable { cursor: zoom-in; }
+.zoom-open, .zoom-open body { overflow: hidden; }
+.zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 72px;
+  background: rgba(23, 21, 15, .92);
+  cursor: zoom-out;
+}
+.zoom[hidden] { display: none; }
+.zoom-fig { margin: 0; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; }
+.zoom-fig img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 150px);
+  width: auto;
+  height: auto;
+  background: var(--paper);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6);
+  cursor: default;
+}
+.zoom-fig figcaption {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: var(--on-night-2);
+  text-align: center;
+}
+.zoom-btn {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--night-3);
+  border-radius: 50%;
+  background: var(--night-2);
+  color: var(--on-night);
+  font: 20px/1 var(--mono);
+  cursor: pointer;
+}
+.zoom-btn:hover { border-color: var(--accent-lit); color: var(--accent-lit); }
+.zoom-btn[hidden] { display: none; }
+.zoom-close { top: 14px; right: 16px; }
+.zoom-prev { left: 14px; top: 50%; margin-top: -22px; }
+.zoom-next { right: 14px; top: 50%; margin-top: -22px; }
+@media (max-width: 880px) {
+  .zoom { padding: 60px 12px 24px; }
+  .zoom-prev, .zoom-next { top: auto; bottom: 14px; margin-top: 0; }
+  .zoom-fig figcaption { margin-bottom: 52px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

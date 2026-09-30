@@ -53,6 +53,7 @@
 ├── design-explorations/  改版设计稿（已 gitignore，不发布）
 └── assets/
     ├── merged.css      全部样式（站点唯一样式表）
+    ├── zoom.js         Gloss 案例页的「点图放大」（截图、规格图、浏览器窗口图）
     ├── style.css       旧版样式，已不再被任何页面引用
     ├── favicon.svg     浏览器标签页图标
     ├── apple-touch-icon.png  手机收藏到桌面时的图标（180×180，由 favicon.svg 渲染）

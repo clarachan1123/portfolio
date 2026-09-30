@@ -33,7 +33,7 @@
     【主流程之外的状态】         章节 07 标题（横向规格图 9 张，图注可改）
     【我发现自己不够可靠】        章节 08 标题
     【我知道这个产品的边界】      章节 09 标题
-    【已部署，MVP 开发中】        章节 10 标题
+    【MVP 已上线，持续迭代中】    章节 10 标题
     【书架页空态】               页末书架空态图的说明（那两段）
     【陈利行】                   页脚姓名
   ──────────────────────────────────────────────────────────────
@@ -71,7 +71,7 @@
     <dl class="spec">
       <div><dt>角色</dt><dd>产品定义 · 规则设计 · 验收</dd></div>
       <div><dt>时间</dt><dd>2026.08 — 至今</dd></div>
-      <div><dt>状态</dt><dd>已部署，MVP 开发中</dd></div>
+      <div><dt>状态</dt><dd>MVP 已上线，持续迭代中</dd></div>
     </dl>
   </div>
 
@@ -86,7 +86,7 @@
 
     <figure class="plate">
       <div class="win">
-        <div class="bar"><i></i><i></i><i></i><span class="url">gloss-jet.vercel.app</span></div>
+        <div class="bar"><i></i><i></i><i></i><span class="url">withglossline.com</span></div>
         <img src="assets/img/win-g-reader.webp" alt="Gloss 阅读页：中栏正文点句后就地撑开白话面板，右栏为阅读参数" width="1800" height="1125">
       </div>
     </figure>
@@ -99,7 +99,7 @@
       <div class="rail"><span class="step-num">01</span><span class="node"></span></div>
       <div class="step-body">
         <h2>问题不是 AI 做不到，是摩擦高到用户不愿意去做</h2>
-        <p>我读专业课书籍时反复遇到同一件事：一句话读不懂，于是选中、切到AI、打开搜索、输入、在一堆结果里翻找、对照原文、再切回来。这一趟走完，刚才读到哪已经忘了。</p>
+        <p>我读专业课书籍时反复遇到同一件事：一句话读不懂，于是选中、切到 AI、打开搜索、输入、在一堆结果里翻找、对照原文、再切回来。这一趟走完，刚才读到哪已经忘了。</p>
         <p>而这件事的荒谬之处在于——<strong>AI 早就能把这句话讲明白</strong>。它不是能力问题，是摩擦问题。七步操作的成本，高到足以让人放弃一个本来很有价值的功能。</p>
         <div class="pull"><p>产品的全部价值，就是把七步压成一次点击。</p></div>
         <p>这个判断定下来之后，后面所有的取舍都有了统一的尺子：<strong>任何增加阅读中断的设计，无论多有用，都不做。</strong></p>
@@ -219,7 +219,7 @@
         <p>「这句白话改得不好！」是主观感觉，模型执行不了。我做的事是把它翻译成三条可判定的硬规则。其中一条，最后推翻了我自己的初始设定。</p>
 
         <h3>规则一：长度上限</h3>
-        <p>最初我定的是「白话长度应为原句的50%–80%」，听起来很合理——白话嘛，应该更短。后来，我把这条废除了。</p>
+        <p>最初我定的是「白话长度应为原句的 50%–80%」，听起来很合理——白话嘛，应该更短。后来，我把这条废除了。</p>
         <p>原因是：我拿评测集里 20 句做过一次统计，<strong>我自己写的批注与原句的长度比，中位数是 111%，最高到 220%</strong>。也就是说，这条规则会毙掉我一多半真实的批注。</p>
 
         <div class="pull">
@@ -247,7 +247,7 @@
         <h4>规则一的自我推翻</h4>
         <p><span class="big is-accent">111%</span>真实批注中位数</p>
         <p><span class="big">220%</span>最高值</p>
-        <p>按照原定区间50%–80%，会毙掉一多半真实批注 —— 所以被废除。</p>
+        <p>按照原定区间 50%–80%，会毙掉一多半真实批注 —— 所以被废除。</p>
       </aside>
     </div>
 
@@ -331,14 +331,14 @@
     <div class="step">
       <div class="rail"><span class="step-num">10</span><span class="node"></span></div>
       <div class="step-body">
-        <h2>已部署，MVP 开发中</h2>
+        <h2>MVP 已上线，持续迭代中</h2>
         <p>Gloss 已部署在 Vercel，功能一「白话」与功能二「听不懂」均已跑通，代码托管在 GitHub。</p>
-        <p>技术实现由 AI 编程助手完成（Next.js App Router + TypeScript，原生 CSS 变量，Vercel 部署）；我负责的部分是：<strong>问题定义、PRD 撰写与迭代、改写规则设计、约束agent、评测集构建、任务拆解与验收</strong>。</p>
+        <p>技术实现由 AI 编程助手完成（Next.js App Router + TypeScript，原生 CSS 变量，Vercel 部署）；我负责的部分是：<strong>问题定义、PRD 撰写与迭代、改写规则设计、约束 agent、评测集构建、任务拆解与验收</strong>。</p>
       </div>
       <aside class="facts">
         <h4>访问</h4>
-        <p>Gloss 已上线，可在浏览器直接打开使用。（需开启代理）</p>
-        <p class="mono" style="letter-spacing:.06em;color:var(--accent)">gloss-jet.vercel.app</p>
+        <p>Gloss 已上线，国内可直接在浏览器打开使用。</p>
+        <p class="mono" style="letter-spacing:.06em"><a href="https://withglossline.com" target="_blank" rel="noopener" style="color:var(--accent)">withglossline.com</a></p>
       </aside>
     </div>
 
@@ -349,7 +349,7 @@
 
     <figure class="chain-plate">
       <div class="win tall">
-        <div class="bar"><i></i><i></i><i></i><span class="url">gloss-jet.vercel.app</span></div>
+        <div class="bar"><i></i><i></i><i></i><span class="url">withglossline.com</span></div>
         <img src="assets/img/shelf-empty.webp" alt="Gloss 书架页空状态：竖向书脊、folio 页码与「导入新书」占位" width="1400" height="1120">
       </div>
     </figure>

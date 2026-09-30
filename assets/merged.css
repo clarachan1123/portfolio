@@ -773,6 +773,16 @@ tr.hi td:last-child { color: var(--accent); font-weight: 600; }
 .about-body p { margin: 0 0 18px; color: var(--ink-2); max-width: 31em; }
 .about-body p strong { color: var(--ink); font-weight: 600; }
 
+/* 首页「其他能力」：原先是写在 HTML 上的内联 grid-column，内联样式压过媒体查询，
+   窄屏下表格仍挤在 3–9 列、右栏 GitHub 地址被 overflow-x:clip 裁掉。改成类。 */
+.skills { margin-top: 44px; }
+.skills .table-wrap { max-width: 100%; }
+.skills table { min-width: 0; }
+.skills-aside { grid-column: 10 / -1; margin-top: 44px; }
+.skills-aside .mono { letter-spacing: .06em; overflow-wrap: anywhere; }
+.skills-aside a { border-bottom: 1px solid var(--rule); }
+.skills-aside a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
 .pillars {
   grid-column: 3 / -1;
   display: grid;
@@ -1304,6 +1314,7 @@ body.no-hint .hint { display: none; }
     grid-column: 1 / -1;
   }
   .shot-wide, .filmstrip { margin-right: calc(-1 * var(--edge)); }
+  .skills-aside { grid-column: 1 / -1; margin-top: 28px; padding-top: 0; }
   .pillars { grid-template-columns: 1fr; }
   .tl-item { grid-template-columns: 1fr; gap: 6px; }
   .table-wrap, .shot, .decision, .pull { max-width: 100%; }
@@ -1337,7 +1348,7 @@ body.no-hint .hint { display: none; }
 
 @media (max-width: 520px) {
   .matrix { grid-template-columns: 1fr 1fr; }
-  .entry-stats { flex-direction: column; gap: 14px; }
+  .entry-stats { gap: 22px; }
   .masthead nav { gap: 14px; font-size: 13px; }
   .chain-plate > .phone { --pw: 168px; }
   .chain-plate > .win { max-width: 100%; }

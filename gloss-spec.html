@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gloss · 规格原件 — 核心交互流程与全状态低保真线框图</title>
+<meta name="description" content="Gloss v1.1 规格原件：首页书架、录入切句、阅读器三栏、点句六种状态、听不懂、编辑锁定、设置导出，以及未决项清单。">
+<meta name="theme-color" content="#17150F">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/merged.css">
+<link rel="stylesheet" href="assets/gloss-spec.css">
+
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="brand">CHEN LIXING <span>陈利行</span></div>
+    <nav>
+      <a href="index.html">首页</a>
+      <a href="gloss.html" aria-current="page">Gloss</a>
+      <a href="family.html">家庭协作</a>
+      <a href="feynman.html">Feynman</a>
+    </nav>
+    <div class="meta stamp">Portfolio · 2026</div>
+  </div>
+</header>
+
+<main class="spec-page">
+  <p class="spec-page-back"><a href="gloss.html#g05">← 回到 Gloss 案例 · 05 全状态规格</a></p>
+  <div class="spec-fit"><div class="spec-doc"><span id="overview" class="spec-anchor"></span><header class="max-w-[1720px] mx-auto mb-10 pb-8 border-b border-neutral-300">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="wire-badge bg-neutral-900 text-white">SYSTEM SPECIFICATION &amp; WIREFRAME FLOW</span>
+          <span class="wire-badge bg-neutral-200 text-neutral-800">PRD v1.1 对应版本</span>
+          <span class="wire-badge bg-amber-100 text-amber-900 border border-amber-300">纯黑白灰低保真 · 逻辑检验专用</span>
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight text-neutral-900 flex items-center gap-3">
+          Gloss 核心产品交互流程与全状态低保真线框图
+        </h1>
+        <p class="text-sm text-neutral-600 mt-2 max-w-4xl leading-relaxed">
+          定位：<strong>长期阅读空间</strong>（非单次转换工具）。核心原则：<strong>一切服务于阅读连续性</strong>，将 AI 工具 7 步提炼为“就地单句点击”。本图根据 PRD v1.1 与设计 Brief 严格平铺全生命周期流程（用户真实步骤、全交互状态、异常链路及 PRD 待确认项标记）。
+        </p>
+      </div>
+
+      <!-- 快速跳转导航 -->
+      <nav class="flex flex-wrap gap-2 text-xs font-mono-code">
+        <a href="#stage-1" class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-800 rounded transition">1. 首页书架与录入</a>
+        <a href="#stage-2" class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-800 rounded transition">2. 解析/断句与异常处理</a>
+        <a href="#stage-3" class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-800 rounded transition">3. 阅读器核心框架 (三栏)</a>
+        <a href="#stage-4" class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-800 rounded transition">4. 功能一：点句撑开与六大状态</a>
+        <a href="#stage-5" class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-800 rounded transition">5. 功能二：听不懂 (就地阅读理解)</a>
+        <a href="#stage-6" class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-800 rounded transition">6. 编辑、锁定与异常恢复</a>
+        <a href="#stage-7" class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-800 rounded transition">7. 阅读/复习模式与导出</a>
+      </nav>
+    </div>
+
+    <!-- 规范图例与设计约束摘要 -->
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4 bg-white p-4 border border-neutral-200 text-xs text-neutral-700">
+      <div class="">
+        <span class="font-bold text-neutral-900 block mb-1">📐 画布与主题硬约束</span>
+        1440px 桌面优先，纯浅色底（黑白灰表达），无登录/无注册，无阅读进度百分比/无进度条。
+      </div>
+      <div class="">
+        <span class="font-bold text-neutral-900 block mb-1">💬 禁忌负向设计 (Do Not)</span>
+        无输入框/聊天框、无浮动遮挡弹层、无整段摘要生成、无社交/评论、无功能二延伸追问。
+      </div>
+      <div class="">
+        <span class="font-bold text-neutral-900 block mb-1">⚡ 核心排版原则</span>
+        撑开而非浮窗（占据物理空间向下推移）；白话字号与正文一致、视觉比正文浅；原句永不遮挡。
+      </div>
+      <div class="">
+        <span class="font-bold text-amber-800 block mb-1">⚠️ 待确认标识定义</span>
+        凡 PRD 未予明确说明（如中文字体商用选型、白话语气风格、半句点击支持度等）均以黄色 <span class="badge-pending">待确认</span> 标出。
+      </div>
+    </div>
+  </header><section id="stage-1" class="space-y-6">
+      <div class="flex items-baseline justify-between border-b pb-2 border-neutral-300">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-neutral-500">STAGE 01 / 入口与长期书架</span>
+          <h2 class="text-xl font-bold text-neutral-900">首页书架：无数据空态与多文档常态</h2>
+        </div>
+        <span class="text-xs text-neutral-500 font-mono-code">路由: / (访客身份，无账号体系)</span>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        
+        <!-- S-01: 首次到访 / 空状态 -->
+        <div class="space-y-3">
+          <div class="p-4 bg-neutral-100 border border-neutral-200 rounded-sm">
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-800 text-white">S-01 · 首次到访空态 (Empty Shelf)</span>
+              <span class="text-xs font-mono-code text-neutral-500">PRD 3.5 P1 / Design Brief 6.1</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-1"><strong>在流程中的位置：</strong>用户首次打开网站，无本地缓存书卷数据。</p>
+            <p class="text-xs text-neutral-600 mb-1"><strong>可执行操作：</strong>① 点击虚线书脊上传文件 (docx/txt/PDF)；② 点击 3 本内置示例书脊进入试用。</p>
+            <p class="text-xs text-neutral-600"><strong>后继流转：</strong>上传触发校验解析 → 进入 Stage 2；点击示例直接免上传 → 进入 Stage 3 (/read/sample)。</p>
+          </div>
+
+          <!-- 低保真画框 1440 比例微缩视口 -->
+          <div class="wf-canvas p-6 rounded border border-neutral-300 min-h-[460px] flex flex-col justify-between grid-dot">
+            <!-- 极简 Header -->
+            <div class="flex justify-between items-center pb-4 border-b border-neutral-200">
+              <div class="text-base font-bold font-serif-sc tracking-widest text-neutral-800">GLOSS <span class="text-xs font-normal font-mono-code text-neutral-400">/ 难书自阅读空间</span></div>
+              <div class="text-xs font-mono-code text-neutral-500 flex items-center gap-4">
+                <span class="">无注册模式 (数据存本地)</span>
+                <span class="border border-neutral-300 px-2 py-0.5 rounded">访客</span>
+              </div>
+            </div>
+
+            <!-- 书架主体区 -->
+            <div class="my-auto py-8">
+              <div class="text-center mb-8">
+                <p class="text-xs font-mono-code text-neutral-400 mb-1">STAGE: SHELF // 0 BOOKS IN RECENT</p>
+                <h3 class="text-lg font-serif-sc font-semibold text-neutral-700">放一本读不懂的书进来</h3>
+                <p class="text-xs text-neutral-500 mt-1">压缩七步操作为一次点句。读难书，不跳过，理解留在原地。</p>
+              </div>
+
+              <!-- 书架物理底座与书脊排列 -->
+              <div class="max-w-3xl mx-auto">
+                <div class="flex items-end justify-center gap-3 border-b-4 border-neutral-800 pb-0.5 px-6">
+                  
+                  <!-- 虚线书脊：上传触发入口 -->
+                  <div class="w-14 h-64 dashed-wire-active flex flex-col items-center justify-between p-2 cursor-pointer hover:border-neutral-900 transition group" title="点击或拖拽文件到此处">
+                    <span class="text-[10px] font-mono-code text-neutral-500">+ 上传</span>
+                    <div class="wf-spine text-xs font-mono-code font-bold text-neutral-600 tracking-wider">放入新书</div>
+                    <span class="text-[9px] font-mono-code text-neutral-400">docx/txt</span>
+                  </div>
+
+                  <!-- 示例书 1 -->
+                  <div class="w-11 h-60 border border-neutral-400 bg-neutral-50 flex flex-col items-center justify-between p-2 cursor-pointer hover:bg-neutral-100 transition">
+                    <span class="text-[9px] font-mono-code text-neutral-400 border-b border-neutral-300 w-full text-center pb-0.5">示例</span>
+                    <div class="wf-spine text-xs font-serif-sc text-neutral-700">政治经济学批判</div>
+                    <span class="text-[9px] font-mono-code text-neutral-400">马克思</span>
+                  </div>
+
+                  <!-- 示例书 2 -->
+                  <div class="w-12 h-62 border border-neutral-400 bg-neutral-50 flex flex-col items-center justify-between p-2 cursor-pointer hover:bg-neutral-100 transition">
+                    <span class="text-[9px] font-mono-code text-neutral-400 border-b border-neutral-300 w-full text-center pb-0.5">示例</span>
+                    <div class="wf-spine text-xs font-serif-sc text-neutral-700">精神现象学</div>
+                    <span class="text-[9px] font-mono-code text-neutral-400">黑格尔</span>
+                  </div>
+
+                  <!-- 示例书 3 -->
+                  <div class="w-10 h-58 border border-neutral-400 bg-neutral-50 flex flex-col items-center justify-between p-2 cursor-pointer hover:bg-neutral-100 transition">
+                    <span class="text-[9px] font-mono-code text-neutral-400 border-b border-neutral-300 w-full text-center pb-0.5">示例</span>
+                    <div class="wf-spine text-xs font-serif-sc text-neutral-700">存在与时间</div>
+                    <span class="text-[9px] font-mono-code text-neutral-400">海德格尔</span>
+                  </div>
+
+                </div>
+                <!-- 书架木纹底边指示 -->
+                <div class="h-2 bg-neutral-300 border-t border-neutral-400"></div>
+              </div>
+            </div>
+
+            <!-- 底部提示信息 (遵守无进度百分比约束) -->
+            <div class="flex justify-between items-center text-[11px] font-mono-code text-neutral-400 pt-3 border-t border-neutral-100">
+              <span class="">支持 .docx / .txt / 文字层 PDF (≤20MB, ≤5万字)</span>
+              <span class="">※ 严禁展示进度条或百分比 (Brief §2)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- S-02: 最近文档常驻 / 抽出一本为封面 -->
+        <div class="space-y-3">
+          <div class="p-4 bg-neutral-100 border border-neutral-200 rounded-sm">
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-800 text-white">S-02 · 多书常态与封面抽出 (Shelf With Books)</span>
+              <span class="text-xs font-mono-code text-neutral-500">PRD 2.1 &amp; 3.6 F10 / Brief 6.1</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-1"><strong>在流程中的位置：</strong>用户回访或已录入多本书。页面背景根据选中书脊产生淡色微调。</p>
+            <p class="text-xs text-neutral-600 mb-1"><strong>可执行操作：</strong>① 点击任意书脊将其抽为正面大封面；② 点击抽出的书封面直接跳入阅读器上次位置；③ 点击上传虚线添加新书。</p>
+            <p class="text-xs text-neutral-600"><strong>后继流转：</strong>点击选中书封面 → 路由转入 <code class="font-mono-code">/read/:docId</code>，恢复滚动位置与已存批注。</p>
+          </div>
+
+          <!-- 低保真画框 -->
+          <div class="wf-canvas p-6 rounded border border-neutral-300 min-h-[460px] flex flex-col justify-between bg-neutral-50/50">
+            <div class="flex justify-between items-center pb-4 border-b border-neutral-200">
+              <div class="text-base font-bold font-serif-sc tracking-widest text-neutral-800">GLOSS</div>
+              <div class="text-xs font-mono-code text-neutral-600 flex items-center gap-3">
+                <span class="">本地已存 12 卷文献</span>
+                <span class="border border-dashed border-neutral-400 px-2 py-0.5 cursor-pointer">+ 导入文件</span>
+              </div>
+            </div>
+
+            <!-- 书架排列：多本书脊 + 一本抽出正面显示 -->
+            <div class="my-auto py-4">
+              <div class="max-w-4xl mx-auto flex items-end justify-center gap-2 border-b-4 border-neutral-800 pb-0.5 px-4">
+                
+                <!-- 虚线添加书位 -->
+                <div class="w-9 h-56 dashed-wire flex flex-col items-center justify-center p-1 text-neutral-400 hover:text-neutral-700 cursor-pointer">
+                  <span class="wf-spine text-[10px] font-mono-code">+ 导入</span>
+                </div>
+
+                <!-- 书脊们 (varying widths & heights) -->
+                <div class="w-8 h-56 border border-neutral-300 bg-white flex flex-col items-center justify-between p-1 cursor-pointer">
+                  <span class="text-[8px] font-mono-code text-neutral-400">·</span>
+                  <div class="wf-spine text-[11px] font-serif-sc text-neutral-600">纯粹理性批判</div>
+                  <span class="text-[8px] font-mono-code text-neutral-400">康德</span>
+                </div>
+
+                <div class="w-10 h-60 border border-neutral-300 bg-neutral-100 flex flex-col items-center justify-between p-1 cursor-pointer">
+                  <span class="text-[8px] font-mono-code text-neutral-400">·</span>
+                  <div class="wf-spine text-[11px] font-serif-sc text-neutral-600">规训与惩罚</div>
+                  <span class="text-[8px] font-mono-code text-neutral-400">福柯</span>
+                </div>
+
+                <!-- ★ 被选中抽出的书 (Front Cover Pulled Forward) -->
+                <div class="relative -mb-1 z-10 mx-2 cursor-pointer group">
+                  <div class="w-48 h-68 border-2 border-neutral-900 bg-white p-4 shadow-lg flex flex-col justify-between transition-transform transform -translate-y-2">
+                    <div>
+                      <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-mono-code text-neutral-400">RECENT ACTIVE</span>
+                        <span class="wire-badge bg-neutral-100 text-neutral-700 border border-neutral-300">上次读到第 14 节</span>
+                      </div>
+                      <h4 class="font-serif-sc text-base font-bold text-neutral-900 mt-4 leading-snug">政治经济学批判</h4>
+                      <p class="text-xs font-serif-sc text-neutral-500 mt-1">序言与导言手稿</p>
+                    </div>
+
+                    <div class="border-t border-neutral-200 pt-3 space-y-1 text-[11px] font-mono-code text-neutral-600">
+                      <div class="flex justify-between">
+                        <span class="">总字数</span>
+                        <span class="font-bold">32,480 字</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="">留存白话</span>
+                        <span class="font-bold">14 句批注</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="">上次打开</span>
+                        <span class="">昨日 23:14</span>
+                      </div>
+                      <div class="mt-2 pt-2 border-t border-dashed border-neutral-300 text-center text-neutral-900 font-bold group-hover:underline">
+                        点击继续阅读 →
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-center mt-1 text-[10px] font-mono-code text-neutral-400">[选中抽出态]</div>
+                </div>
+
+                <!-- 其它书脊 -->
+                <div class="w-9 h-58 border border-neutral-300 bg-white flex flex-col items-center justify-between p-1 cursor-pointer">
+                  <div class="wf-spine text-[11px] font-serif-sc text-neutral-600">正义论</div>
+                  <span class="text-[8px] font-mono-code text-neutral-400">罗尔斯</span>
+                </div>
+                <div class="w-11 h-64 border border-neutral-300 bg-white flex flex-col items-center justify-between p-1 cursor-pointer">
+                  <div class="wf-spine text-[11px] font-serif-sc text-neutral-600">理想国</div>
+                  <span class="text-[8px] font-mono-code text-neutral-400">柏拉图</span>
+                </div>
+                <div class="w-7 h-54 border border-neutral-300 bg-neutral-200 flex flex-col items-center justify-between p-1 cursor-pointer">
+                  <div class="wf-spine text-[11px] font-serif-sc text-neutral-600">单向度的人</div>
+                  <span class="text-[8px] font-mono-code text-neutral-400">马尔库塞</span>
+                </div>
+                <div class="w-8 h-56 border border-neutral-300 bg-white flex flex-col items-center justify-between p-1 cursor-pointer">
+                  <div class="wf-spine text-[11px] font-serif-sc text-neutral-600">启蒙辩证法</div>
+                  <span class="text-[8px] font-mono-code text-neutral-400">阿多诺</span>
+                </div>
+                <div class="w-10 h-60 border border-neutral-300 bg-white flex flex-col items-center justify-between p-1 cursor-pointer">
+                  <div class="wf-spine text-[11px] font-serif-sc text-neutral-600">忧郁的热带</div>
+                  <span class="text-[8px] font-mono-code text-neutral-400">列维-斯特劳斯</span>
+                </div>
+
+              </div>
+              <div class="h-2 bg-neutral-300 border-t border-neutral-400 max-w-4xl mx-auto"></div>
+            </div>
+
+            <div class="flex justify-between items-center text-[11px] font-mono-code text-neutral-400 pt-3 border-t border-neutral-100">
+              <span class="">背景已微调至《政治经济学批判》淡冷灰调</span>
+              <span class="">点击书架任意区域取消抽出 / 双击直接进入</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><section id="stage-2" class="space-y-6">
+      <div class="flex items-baseline justify-between border-b pb-2 border-neutral-300">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-neutral-500">STAGE 02 / 解析处理与容错链路</span>
+          <h2 class="text-xl font-bold text-neutral-900">文档录入校验、切句流水线与 43 类异常阻断处理</h2>
+        </div>
+        <span class="text-xs text-neutral-500 font-mono-code">PRD 3.4 业务流程 &amp; 3.9 异常规约</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- P2: 解析中状态 -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <span class="wire-badge bg-neutral-800 text-white">P2 · 文档解析处理中</span>
+              <span class="text-[10px] font-mono-code text-neutral-400">耗时 ≤3s (5万字)</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-4"><strong>用户动作：</strong>拖入文件后就地展示加载态，禁止白屏等待。</p>
+            
+            <!-- 骨架进度模拟 -->
+            <div class="border border-neutral-200 bg-neutral-50 p-6 rounded text-center my-6 space-y-4">
+              <div class="inline-block w-8 h-8 border-2 border-neutral-400 border-t-neutral-900 rounded-full animate-spin"></div>
+              <div>
+                <p class="text-sm font-bold font-mono-code text-neutral-800">正在切句并提取结构...</p>
+                <p class="text-xs text-neutral-500 mt-1 font-mono-code">56 句已索引 / 自动识别引文与专有名词</p>
+              </div>
+              <div class="w-full bg-neutral-200 h-1 rounded overflow-hidden">
+                <div class="bg-neutral-800 h-full w-2/3"></div>
+              </div>
+              <p class="text-[11px] text-neutral-400">已自动规整段落与句法标点，不破坏引文完整性</p>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2">
+            ➔ 成功：切句成功后即刻平滑跳转进入 Stage 3 主阅读器
+          </div>
+        </div>
+
+        <!-- 扫描件异常 A5 / 混合 PDF A6 阻断 -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <span class="wire-badge bg-neutral-900 text-white">A5/A6 · 扫描件识别与拦截</span>
+              <span class="wire-badge bg-neutral-100 text-neutral-700">PRD 3.9 A5</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-4"><strong>关键规约：</strong>扫描件无文字层，严禁静默失败或输出乱码，必须告知原因及 v2 规划。</p>
+
+            <div class="border border-neutral-300 bg-white p-4 rounded space-y-3">
+              <div class="flex items-center gap-2 text-neutral-800">
+                <span class="w-4 h-4 border border-neutral-800 flex items-center justify-center font-mono-code text-xs font-bold">!</span>
+                <h4 class="text-xs font-bold">检测到此文件为扫描件 (无文字层)</h4>
+              </div>
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                当前版本（v1.1 MVP）仅支持具有内嵌文本层的 docx、txt 或文字版 PDF。扫描件 OCR 纠错功能正在 W3 设计原型规划中（将在 v2 支持）。
+              </p>
+              <div class="p-2.5 bg-neutral-100 border border-neutral-200 text-[11px] font-mono-code text-neutral-700">
+                建议：可先将文字复制为 txt，或使用微信/系统自带 OCR 提取纯文本后上传。
+              </div>
+              <div class="flex gap-2 pt-2">
+                <button class="px-3 py-1 text-xs border border-neutral-800 font-medium hover:bg-neutral-800 hover:text-white">改用粘贴文本</button>
+                <button class="px-3 py-1 text-xs border border-neutral-300 text-neutral-600 hover:bg-neutral-100">返回书架</button>
+              </div>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2">
+            ※ 混合型 PDF 则顶部横幅提示“第 X–Y 页为扫描页，已跳过”
+          </div>
+        </div>
+
+        <!-- B1: 无标点文本 AI 断句预警 / 超限提示 -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <span class="wire-badge bg-neutral-900 text-white">B1 · AI 自动断句轻提示</span>
+              <span class="wire-badge bg-neutral-100 text-neutral-700">PRD 3.9 B1</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-4"><strong>关键规约：</strong>对于古籍无标点或 OCR 乱换行，禁止按字数硬切，触发一次性 AI 断句预处理并在阅读器顶端留痕。</p>
+
+            <div class="border border-neutral-300 bg-white p-4 rounded space-y-3">
+              <div class="border-b border-neutral-200 pb-2">
+                <span class="text-[10px] font-mono-code text-neutral-400">READER TOP BANNER</span>
+                <div class="flex items-center justify-between text-xs mt-1 bg-neutral-100 p-2 border border-neutral-300">
+                  <span class="">ℹ️ 本文档原格式缺少常规标点，已自动进行语义切句（可能存在微小偏差）</span>
+                  <span class="text-neutral-400 cursor-pointer">✕</span>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-xs text-neutral-600">
+                <p class=""><strong>其他切句保护规则：</strong></p>
+                <ul class="list-disc pl-4 space-y-1 text-[11px] text-neutral-500 font-mono-code">
+                  <li class="">超长句（&gt;250字）：于分号/冒号处安全分割</li>
+                  <li class="">成对书名号/引号内句号：绝不切断</li>
+                  <li class="">分号作为独立停顿单元切分</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2">
+            ➔ 用户继续正常阅读，每句依然独立可点
+          </div>
+        </div>
+
+      </div>
+    </section><section id="stage-3" class="space-y-6">
+      <div class="flex items-baseline justify-between border-b pb-2 border-neutral-300">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-neutral-500">STAGE 03 / 阅读器核心视口 (The Reader Core)</span>
+          <h2 class="text-xl font-bold text-neutral-900">阅读器标准三栏骨架与文本度量 (1440px Desktop)</h2>
+        </div>
+        <span class="text-xs text-neutral-500 font-mono-code">Brief §2 三栏布局约束 · 中栏居中绝对主导</span>
+      </div>
+
+      <div class="wf-canvas p-6 rounded border border-neutral-300">
+        <div class="flex justify-between items-center pb-3 mb-4 border-b border-neutral-200">
+          <div class="flex items-center gap-4">
+            <a href="#stage-1" class="text-xs font-mono-code border border-neutral-300 px-2 py-1 hover:bg-neutral-100 text-neutral-700">← 返回书架</a>
+            <h3 class="font-serif-sc font-bold text-sm text-neutral-800">政治经济学批判 · 序言</h3>
+            <span class="text-xs font-mono-code text-neutral-400">| 卡尔·马克思 (1859)</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs font-mono-code">
+            <span class="text-neutral-500">记忆定位：第 4 段 / 第 14 句</span>
+            <span class="wire-badge bg-neutral-100 text-neutral-700 border border-neutral-300">常驻本地缓存</span>
+          </div>
+        </div>
+
+        <!-- 三栏布局低保真分解 -->
+        <div class="grid grid-cols-12 gap-6 min-h-[520px]">
+          
+          <!-- 左栏：目录与已保存句子索引 (2 Col ~ 220px) -->
+          <div class="col-span-2 border-r border-neutral-200 pr-4 flex flex-col justify-between text-xs">
+            <div class="space-y-4">
+              <div>
+                <span class="text-[10px] font-mono-code text-neutral-400 block mb-2 uppercase tracking-wider">Document Index</span>
+                <div class="space-y-1.5 font-serif-sc text-neutral-600">
+                  <div class="p-1 bg-neutral-100 font-bold text-neutral-900 border-l-2 border-neutral-900">1. 导言与写作背景</div>
+                  <div class="p-1 hover:text-neutral-900 cursor-pointer pl-2">2. 市民社会的解剖</div>
+                  <div class="p-1 hover:text-neutral-900 cursor-pointer pl-2">3. 经济的物质基础</div>
+                  <div class="p-1 hover:text-neutral-900 cursor-pointer pl-2">4. 结语</div>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-neutral-200">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-[10px] font-mono-code text-neutral-400 uppercase tracking-wider">已留存白话 (2)</span>
+                  <span class="text-[10px] font-mono-code text-neutral-400">点击定位</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="p-2 border border-neutral-200 bg-neutral-50 hover:border-neutral-400 cursor-pointer rounded-sm">
+                    <p class="text-[11px] font-serif-sc text-neutral-700 line-clamp-2">"我学的专业本来是法律，但我只是把它排在哲学..."</p>
+                    <span class="text-[9px] font-mono-code text-neutral-400 mt-1 block">第 1 段 · 已编辑</span>
+                  </div>
+                  <div class="p-2 border border-neutral-200 bg-neutral-50 hover:border-neutral-400 cursor-pointer rounded-sm">
+                    <p class="text-[11px] font-serif-sc text-neutral-700 line-clamp-2">"法的关系正像国家的形式一样..."</p>
+                    <span class="text-[9px] font-mono-code text-neutral-400 mt-1 block">第 3 段 · 含术语</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-[10px] font-mono-code text-neutral-400 pt-3 border-t border-neutral-100">
+              [左栏] 目录结构与沉淀索引
+            </div>
+          </div>
+
+          <!-- 中栏：正文核心展示与排版度量 (8 Col ~ 720px Measure) -->
+          <div class="col-span-8 px-8 py-2 overflow-y-auto">
+            <div class="max-w-[680px] mx-auto space-y-6"><!-- 章节标题 -->
+              <div class="border-b border-neutral-200 pb-4 mb-6">
+                <h2 class="text-xl font-serif-sc font-bold text-neutral-900">序言 (Preface)</h2>
+                <p class="text-xs font-mono-code text-neutral-400 mt-1">字数：56 句 / 平均 54.8 字 / 9 句超 80 字 · 排版基准：16px / 1.95 行距</p>
+              </div>
+
+              <!-- 段落 1 -->
+              <p class="text-base font-serif-sc text-neutral-700" style="line-height: 1.95;">
+                我学的专业本来是法律，但我只是把它排在哲学和历史之次当作辅助学科来研究。1842—1843年间，我作为"莱茵报"的主编，第一次遇到要对所谓物质利益发表意见的难事。
+              </p>
+
+              <!-- 段落 2 -->
+              <p class="text-base font-serif-sc text-neutral-700" style="line-height: 1.95;">
+                我在巴黎开始研究政治经济学，后来因基佐先生下令驱逐移居布鲁塞尔，在那里继续进行研究。我所得到的、并且一经得到就用于指导我的研究工作的总的结果，可以简要地表述如下。
+              </p>
+
+              <!-- 段落 3 (待触发难句，展示 hover 态) -->
+              <div class="p-3 -mx-2 rounded bg-neutral-100/70 border border-dashed border-neutral-400 cursor-pointer">
+                <p class="text-base font-serif-sc text-neutral-900" style="line-height: 1.95;">
+                  法的关系正像国家的形式一样，既不能从它们本身来理解，也不能从所谓人类精神的一般发展来理解，相反，它们根源于物质的生活关系，这种物质的生活关系的总和，黑格尔按照十八世纪的英国人和法国人的先例，称之为"市民社会"，而对市民社会的解剖应该到政治经济学中去寻求。
+                </p>
+                <div class="flex justify-between items-center mt-2 text-[10px] font-mono-code text-neutral-500">
+                  <span class="">[R-01 句子鼠标 Hover 悬停态: 微变色提示可点击 · 严守 16px/1.95 物理基线]</span>
+                  <span class="">单击就地出白话 ↵</span>
+                </div>
+              </div>
+
+              <!-- 段落 4 -->
+              <p class="text-base font-serif-sc text-neutral-700" style="line-height: 1.95;">
+                社会的物质生产力发展到一定阶段，便同它们一直在其中运动的现存生产关系或财产关系发生矛盾。于是这些关系便由生产力的发展形式变成生产力的桎梏。那时社会革命的时代就到来了。
+              </p></div>
+          </div>
+
+          <!-- 右栏：阅读与沉淀参数仪表盘 (2 Col ~ 220px) -->
+          <div class="col-span-2 border-l border-neutral-200 pl-4 flex flex-col justify-between text-xs font-mono-code">
+            <div class="space-y-5">
+              <div>
+                <span class="text-[10px] text-neutral-400 block mb-2 uppercase tracking-wider">VIEW MODE (呈现模式)</span>
+                <div class="grid grid-cols-2 gap-1 bg-neutral-100 p-0.5 border border-neutral-300">
+                  <button class="py-1 text-center bg-white border border-neutral-300 font-bold text-neutral-800 text-[11px]">撑开 (默认)</button>
+                  <button class="py-1 text-center text-neutral-500 hover:text-neutral-800 text-[11px]">覆盖</button>
+                </div>
+                <span class="text-[9px] text-neutral-400 mt-1 block">撑开占据布局物理空间，推移下文</span>
+              </div>
+
+              <div>
+                <span class="text-[10px] text-neutral-400 block mb-2 uppercase tracking-wider">SAVED MODE (保存形态)</span>
+                <div class="grid grid-cols-2 gap-1 bg-neutral-100 p-0.5 border border-neutral-300">
+                  <button class="py-1 text-center bg-white border border-neutral-300 font-bold text-neutral-800 text-[11px]">阅读模式</button>
+                  <button class="py-1 text-center text-neutral-500 hover:text-neutral-800 text-[11px]">复习模式</button>
+                </div>
+                <span class="text-[9px] text-neutral-400 mt-1 block">阅读模式折叠为细小标记；复习模式全部展开</span>
+              </div>
+
+              <div class="space-y-3 pt-3 border-t border-neutral-200"><div>
+                  <div class="flex justify-between text-[11px] text-neutral-600 mb-1">
+                    <span class="">字号大小 (正文基准)</span>
+                    <span class="font-bold font-mono-code">16px</span>
+                  </div>
+                  <div class="w-full bg-neutral-200 h-1 rounded">
+                    <div class="bg-neutral-800 h-full w-1/2"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-[11px] text-neutral-600 mb-1">
+                    <span class="">行距度量 (≥1.9 规范)</span>
+                    <span class="font-bold font-mono-code">1.95</span>
+                  </div>
+                  <div class="w-full bg-neutral-200 h-1 rounded">
+                    <div class="bg-neutral-800 h-full w-3/4"></div>
+                  </div>
+                </div></div>
+
+              <div class="pt-3 border-t border-neutral-200 space-y-2">
+                <button class="w-full py-1.5 border border-neutral-800 text-neutral-800 hover:bg-neutral-800 hover:text-white transition text-xs font-bold">
+                  导出文档...
+                </button>
+                <div class="text-[10px] text-neutral-400 text-center">支持 docx / PDF · 可选形态</div>
+              </div>
+            </div>
+
+            <div class="text-[10px] font-mono-code text-neutral-400 pt-3 border-t border-neutral-100">
+              [右栏] 紧凑克制的参数面板 (Brief §8 G)
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><section id="stage-4" class="space-y-6">
+      <div class="flex items-baseline justify-between border-b pb-2 border-neutral-300">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-neutral-500">STAGE 04 / 核心交付状态 (F4 &amp; Brief §6.3)</span>
+          <h2 class="text-xl font-bold text-neutral-900">功能一：点句撑开完整状态矩阵 (R-01 至 R-06)</h2>
+        </div>
+        <span class="text-xs text-neutral-500 font-mono-code">就地撑开占据物理高度 · 原文保持并排可见</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+        <!-- R-01: 静息/悬停态 (Resting & Hover) -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-900 text-white">R-01 · 静息态与 Hover</span>
+              <span class="text-xs font-mono-code text-neutral-400">无遮挡/无形变</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-3"><strong>触发：</strong>光标掠过任意句子。轻微底色变深，提供“可交互”提示，严禁移动下方文字。</p>
+
+            <div class="border border-neutral-200 p-4 bg-white rounded space-y-2">
+              <p class="text-xs font-serif-sc text-neutral-500">前文句子正文内容...</p>
+              <div class="p-1.5 bg-neutral-100 border-l-2 border-neutral-600">
+                <p class="text-xs font-serif-sc font-medium text-neutral-900">
+                  “法的关系正像国家的形式一样，既不能从它们本身来理解...”
+                </p>
+              </div>
+              <p class="text-xs font-serif-sc text-neutral-500">后文段落平稳紧接，未产生任何撑开...</p>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-4">
+            ➔ 单击：立即触发 R-02；鼠标移开：恢复纯净文本
+          </div>
+        </div>
+
+        <!-- R-02: 生成流式中 (Generating & Streaming) -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-900 text-white">R-02 · 生成中 (流式填充)</span>
+              <span class="text-xs font-mono-code text-neutral-400">首字延迟 P90≤2.5s</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-3"><strong>交互：</strong>点击行视口锚定不变，下方气泡平滑展开；文本以 3–5 字块逐步吐出。</p>
+
+            <div class="border border-neutral-200 p-4 bg-white rounded space-y-2">
+              <div class="p-1.5 bg-neutral-100 border border-neutral-300">
+                <p class="text-xs font-serif-sc text-neutral-900">
+                  “法的关系正像国家的形式一样，既不能从它们本身来理解...”
+                </p>
+              </div>
+              
+              <!-- 撑开气泡流式态 -->
+              <div class="ml-2 pl-3 border-l-2 border-neutral-400 py-2 space-y-2 bg-neutral-50/70 p-2">
+                <div class="flex items-center gap-2 text-[10px] font-mono-code text-neutral-500">
+                  <span class="inline-block w-1.5 h-1.5 bg-neutral-700 rounded-full animate-pulse"></span>
+                  <span class="">改写中 (按原句 50%–80% 压缩)...</span>
+                </div>
+                <p class="text-xs font-serif-sc text-neutral-600 leading-relaxed">
+                  法律和国家是什么样，不由它们自己决定，也不是思想演变的结果<span class="inline-block w-1.5 h-3 bg-neutral-400 ml-0.5 animate-blink"></span>
+                </p>
+              </div>
+
+              <p class="text-xs font-serif-sc text-neutral-400">[下方原文已平滑推移至此]</p>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-4">
+            ➔ 用户中途滚动出视口/点击别处：触发 abort 中止，不缓存
+          </div>
+        </div>
+
+        <!-- R-03: 白话生成完成 · 术语显现 (Complete with Flagged Term) -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-900 text-white">R-03 · 白话就绪 + 术语标记</span>
+              <span class="text-xs font-mono-code text-neutral-400">PRD 核心基准帧</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-3"><strong>关键规范：</strong>白话同字号但色浅；术语整词绝不折行(whitespace-nowrap)仅作难句视觉提示；「听不懂」为全句深入理解且无深色实心强调；动作行仅保留「保存 · 编辑 · 听不懂 · 收起」。</p>
+
+            <div class="border border-neutral-200 p-4 bg-white rounded space-y-2">
+              <div class="p-1 bg-neutral-100">
+                <p class="text-xs font-serif-sc text-neutral-900">
+                  “法的关系正像国家的形式一样，既不能从它们本身来理解，也不能从所谓人类精神的一般发展来理解，相反，它们根源于物质的生活关系，这种物质的生活关系的总和，黑格尔按照十八世纪的英国人和法国人的先例，称之为"市民社会"，而对市民社会的解剖应该到政治经济学中去寻求。”
+                </p>
+              </div>
+
+              <!-- 撑开白话容器 (带左侧细线与功能按钮) -->
+              <div class="ml-2 pl-3 border-l-2 border-neutral-800 bg-neutral-50 p-3 rounded-sm space-y-2"><div class="flex justify-between items-center text-[10px] font-mono-code text-neutral-400 border-b border-neutral-200 pb-1"><span class="">GLOSS 白话改写 (73字 / 压缩比 55%)</span><span class="">双击可编辑</span></div><p class="text-xs font-serif-sc text-neutral-600 leading-relaxed">法律和国家是什么样，不由它们自己决定，也不是思想演变的结果，而是由人们怎么谋生的现实关系决定的。这些关系就是黑格尔说的「<span class="underline decoration-neutral-800 font-semibold text-neutral-800 bg-neutral-200/60 px-1 py-0.5 rounded-sm whitespace-nowrap inline-block">市民社会</span>」，要看懂它得去学经济学。</p><div class="flex justify-between items-center pt-2 border-t border-neutral-200 text-xs font-mono-code"><div class="flex items-center gap-2"><button class="px-2.5 py-0.5 border border-neutral-300 text-neutral-700 hover:bg-neutral-100 whitespace-nowrap font-medium rounded-sm">保存</button><button class="px-2.5 py-0.5 border border-neutral-300 text-neutral-700 hover:bg-neutral-100 whitespace-nowrap font-medium rounded-sm">编辑</button><button class="px-2.5 py-0.5 border border-neutral-300 text-neutral-700 hover:bg-neutral-100 whitespace-nowrap font-medium rounded-sm">听不懂</button></div><button class="px-2.5 py-0.5 border border-neutral-200 text-neutral-500 hover:bg-neutral-100 whitespace-nowrap text-xs rounded-sm">收起</button></div></div>
+
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-4">➔ 操作行均等克制（无主按钮）；点「听不懂」：进 Stage 5 整句阅读理解；「翻错了」移至右键菜单</div>
+        </div>
+
+        <!-- R-04: 阅读模式 · 已保存折叠态 (Saved Collapsed) -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-900 text-white">R-04 · 阅读模式折叠 (Reading Mode)</span>
+              <span class="text-xs font-mono-code text-neutral-400">默认日常模式</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-3"><strong>原则：</strong>一页有 10+ 保存句子时，绝不破坏正文阅读连贯性。折叠为行末微小标记。</p>
+
+            <div class="border border-neutral-200 p-4 bg-white rounded space-y-3">
+              <p class="text-xs font-serif-sc text-neutral-700 leading-relaxed">
+                我学的专业本来是法律，但我只是把它排在哲学和历史之次当作辅助学科来研究。
+                <span class="inline-flex items-center text-[10px] font-mono-code border border-neutral-300 bg-neutral-100 px-1 ml-1 text-neutral-600 cursor-pointer" title="点击展开此白话">§ 白话</span>
+              </p>
+              
+              <p class="text-xs font-serif-sc text-neutral-700 leading-relaxed">
+                法的关系正像国家的形式一样，既不能从它们本身来理解，也不能从所谓人类精神的一般发展来理解...
+                <span class="inline-flex items-center text-[10px] font-mono-code border border-neutral-800 bg-neutral-200 px-1 ml-1 font-bold text-neutral-900 cursor-pointer" title="点击展开此白话">§ 已存</span>
+              </p>
+
+              <div class="p-2 bg-neutral-50 border border-dashed border-neutral-200 text-[10px] font-mono-code text-neutral-500">
+                [视觉表现] 仅在标点旁保留极轻巧锚点，整页排版密度与纸质书高度一致
+              </div>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-4">
+            ➔ 右侧切换“复习模式”或单击标记：即刻转为 R-05 全部铺开
+          </div>
+        </div>
+
+        <!-- R-05: 复习模式 · 全部展开常驻 (Review Mode Expanded) -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-900 text-white">R-05 · 复习模式展开 (Review Mode)</span>
+              <span class="text-xs font-mono-code text-neutral-400">用于期末/二轮重温</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-3"><strong>状态：</strong>所有已保存的白话均完整常驻在原句下方，无须逐句点击，直接通读对照。</p>
+
+            <div class="border border-neutral-200 p-4 bg-white rounded space-y-3">
+              <div class="space-y-1">
+                <p class="text-xs font-serif-sc text-neutral-900 font-medium">“我学的专业本来是法律...”</p>
+                <div class="ml-2 pl-2 border-l border-neutral-400 text-[11px] font-serif-sc text-neutral-500">
+                  ↳ 白话：我本科学法律，但主要还是为了辅助研究哲学历史。
+                </div>
+              </div>
+
+              <div class="space-y-1 pt-2 border-t border-neutral-100">
+                <p class="text-xs font-serif-sc text-neutral-900 font-medium">“法的关系正像国家的形式一样...”</p>
+                <div class="ml-2 pl-2 border-l border-neutral-800 text-[11px] font-serif-sc text-neutral-600">
+                  ↳ 白话：法律和国家不由自己决定，而是人们谋生的现实关系决定的。
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-4">
+            ➔ 两种保存形态可在设置面板自由切换（气泡常驻 vs inline 小字）
+          </div>
+        </div>
+
+        <!-- R-06: 异常失败重试态 (Failed with Retry) -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-900 text-white">R-06 · 生成超时/失败 (Failed)</span>
+              <span class="text-xs font-mono-code text-neutral-400">PRD 3.9 C1/C2</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-3"><strong>原则：</strong>绝对不阻断正文继续阅读。撑开区显示轻量报错文案，提供手动重试入口。</p>
+
+            <div class="border border-neutral-200 p-4 bg-white rounded space-y-2">
+              <div class="p-1 bg-neutral-100">
+                <p class="text-xs font-serif-sc text-neutral-800">“社会的物质生产力发展到一定阶段...”</p>
+              </div>
+
+              <!-- 失败告警区 (低保真轻灰边框) -->
+              <div class="ml-2 pl-3 border-l-2 border-neutral-500 bg-neutral-100 p-2.5 rounded-sm space-y-2">
+                <div class="flex items-center justify-between text-xs text-neutral-800 font-mono-code">
+                  <span class="">⚠️ 暂时无法生成白话 (网络或超时)</span>
+                  <button class="px-2 py-0.5 border border-neutral-800 font-bold hover:bg-neutral-800 hover:text-white">点击重试 ↻</button>
+                </div>
+                <p class="text-[11px] text-neutral-500 font-mono-code">错误已自动打点上报，不影响您继续向下阅读</p>
+              </div>
+
+              <p class="text-xs font-serif-sc text-neutral-400">下文正常展示，阅读视线不被强弹窗打断...</p>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-4">
+            ➔ 点重试：重新走快模型流式；按 Esc 或点别处：收起当前失败态
+          </div>
+        </div>
+
+      </div>
+    </section><section id="stage-5" class="space-y-6">
+      <div class="flex items-baseline justify-between border-b pb-2 border-neutral-300">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-neutral-500">STAGE 05 / 第二核心功能 (F8 &amp; PRD 2.4)</span>
+          <h2 class="text-xl font-bold text-neutral-900">功能二「听不懂」：整句阅读理解深入展开（结合上下文，非术语查词）</h2>
+        </div>
+        <span class="text-xs text-neutral-500 font-mono-code">核心纪律：整句理解非术语查词 · 每句限用1次 · 按钮置灰结果常驻不失 · 绝不可追问</span>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+        <!-- 左侧：功能二差异化纪律说明 -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="wire-badge bg-neutral-900 text-white">HARD CONSTRAINTS</span>
+            <span class="font-bold text-xs">为什么它不是普通 AI 聊天框？</span>
+          </div>
+
+          <div class="space-y-3 text-xs text-neutral-600 leading-relaxed"><div class="p-3 border border-neutral-200 bg-neutral-50"><span class="font-bold text-neutral-900 block mb-1">1. 整句阅读理解，非术语查词</span>高亮术语仅是难句线索提示，绝非点击查词词条。无论一句话包含多少术语，每句只有且仅有<strong>一次「听不懂」</strong>机会。</div><div class="p-3 border border-neutral-200 bg-neutral-50"><span class="font-bold text-neutral-900 block mb-1">2. 自动带入上下文 (≤250字)</span>系统结合前后句与全篇线索对整句作大白话透彻拆解，不做整章发散，精准击破该句思维卡点。</div><div class="p-3 border border-neutral-200 bg-neutral-50"><span class="font-bold text-neutral-900 block mb-1">3. 已使用态 (Used State) 永久保留</span>触发后「听不懂」按钮立即置灰禁用（opacity-40、不可再点）。展开内容就地常驻，即便折叠后再次点开原句，解释依然在，绝不重复调用生成、永不丢失。</div><div class="p-2 border border-neutral-300 text-[11px] font-mono-code text-neutral-500">※ 杜绝聊天对话框：无追问输入框、无次级跳转，关闭或折叠即维持沉浸心流。</div></div>
+        </div>
+
+        <!-- 中右侧：线框展示 · 功能二完整内嵌面板 -->
+        <div class="xl:col-span-2 wf-canvas p-6 rounded border border-neutral-300 space-y-4"><div class="flex justify-between items-start"><div class="space-y-1"><div class="flex items-center gap-2"><span class="wire-badge bg-neutral-800 text-white">F8 视觉交互原型</span><h3 class="text-sm font-bold text-neutral-900">整句阅读理解深入展开（结合上下文，非术语查词）</h3><span class="wire-badge bg-neutral-200 text-neutral-800">已使用态 (Used State)</span></div><p class="text-xs text-neutral-500">点击操作行「听不懂」后：原地二级撑开整句大白话透析；同时「听不懂」按钮变为置灰禁用态，结果常驻保留且永不二次请求。</p></div><span class="text-xs font-mono-code text-neutral-400">上限 ≤250 字</span></div><div class="border border-neutral-300 bg-white p-4 rounded space-y-3"><div class="p-2 bg-neutral-100 text-xs font-serif-sc text-neutral-800">原句：...这种物质的生活关系的总和，黑格尔按照十八世纪的英国人和法国人的先例，称之为"市民社会"，而对市民社会的解剖应该到政治经济学中去寻求。</div><div class="ml-2 pl-3 border-l-2 border-neutral-400 text-xs font-serif-sc text-neutral-600"><div class="flex justify-between items-center text-[10px] font-mono-code text-neutral-400 mb-1"><span class="">功能一 · 基础白话</span><span class="text-neutral-500">标记词为难句信号，非查词词条</span></div><p class="leading-relaxed">白话改写：法律和国家不由自己决定，而是由人们谋生的现实关系决定的。这些关系就是黑格尔说的「<span class="text-neutral-900 underline bg-neutral-200/60 px-1 py-0.5 rounded-sm whitespace-nowrap inline-block font-semibold">市民社会</span>」，要看懂它得去学经济学。</p><div class="mt-2 flex items-center justify-between text-xs font-mono-code pt-1 border-t border-neutral-200"><div class="flex items-center gap-2"><button class="px-2.5 py-0.5 border border-neutral-300 text-neutral-700 hover:bg-neutral-100 whitespace-nowrap font-medium rounded-sm">保存</button><button class="px-2.5 py-0.5 border border-neutral-300 text-neutral-700 hover:bg-neutral-100 whitespace-nowrap font-medium rounded-sm">编辑</button><button disabled="" class="px-2.5 py-0.5 border border-neutral-200 text-neutral-400 bg-neutral-100 whitespace-nowrap font-medium rounded-sm cursor-not-allowed" title="本句已生成阅读理解，不可重复调用">听不懂 (已用)</button></div><button class="px-2.5 py-0.5 border border-neutral-200 text-neutral-500 hover:bg-neutral-100 whitespace-nowrap text-xs rounded-sm">收起</button></div></div><div class="ml-4 p-4 border border-neutral-700 bg-neutral-50 rounded-sm space-y-3"><div class="flex justify-between items-center border-b border-neutral-200 pb-2"><div class="flex items-center gap-2"><span class="font-bold text-xs font-serif-sc text-neutral-900">整句阅读理解 · 语境透析</span><span class="wire-badge bg-neutral-200 text-neutral-700 text-[10px]">一次性生成 · 常驻保留</span></div><span class="text-[10px] font-mono-code text-neutral-400">再次展开此句无需重算</span></div><p class="text-xs font-serif-sc text-neutral-700 leading-relaxed">这里的「<span class="whitespace-nowrap inline-block font-semibold">市民社会</span>」不是现代意义上的民间公益组织，而是指<strong>人们在商品经济中为了满足私人利益而结成的各种物质交往与交易关系的总和</strong>。黑格尔认为国家高于市民社会，而马克思在此倒转了这个关系：不是国家决定了市民社会，恰恰是市民社会（经济现实）决定了国家与法律形式。因此解剖社会的钥匙必须到经济学里找。</p><div class="flex justify-between items-center pt-2 border-t border-neutral-200 text-[11px] font-mono-code"><div class="flex items-center gap-2"><span class="text-neutral-400">字数：208 字 (合规)</span><span class="text-neutral-300">|</span><span class="text-neutral-500">上下文已锚定：前言第 3 段</span></div><div class="flex gap-2"><button class="px-2 py-0.5 border border-neutral-300 text-neutral-700 hover:bg-neutral-100 whitespace-nowrap">一并保存进批注</button><button class="px-2 py-0.5 border border-neutral-200 text-neutral-500 hover:bg-neutral-100 whitespace-nowrap">仅留白话</button></div></div></div></div><div class="flex justify-between items-center text-[11px] font-mono-code text-neutral-500"><span class="">※ 严禁出现"此外/值得一提的是"等套话 · 无论句中几处术语，全句仅有 1 个「听不懂」</span><span class="">折叠后重开依然留存 · 永不丢失</span></div></div>
+
+      </div>
+    </section><section id="stage-6" class="space-y-6">
+      <div class="flex items-baseline justify-between border-b pb-2 border-neutral-300">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-neutral-500">STAGE 06 / 深度交互与用户接管</span>
+          <h2 class="text-xl font-bold text-neutral-900">编辑白话 (F14)、Ctrl 锁定防收起、右键菜单与数据隔离</h2>
+        </div>
+        <span class="text-xs text-neutral-500 font-mono-code">编辑白话仅存本地，严禁污染服务端共享句子缓存</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- F14: 双击进入编辑白话 -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="wire-badge bg-neutral-900 text-white">F14 · 双击编辑白话</span>
+              <span class="wire-badge bg-neutral-100 text-neutral-700">P1 功能</span>
+            </div>
+            <p class="text-xs text-neutral-600 mb-3"><strong>触发：</strong>双击撑开区文字，就地变为文本框。用自己的话重述即理解沉淀之时。</p>
+
+            <div class="border border-neutral-300 bg-white p-3 rounded space-y-2">
+              <div class="text-[10px] font-mono-code text-neutral-500 flex justify-between">
+                <span class="">EDITING MODE (编辑中)</span>
+                <span class="">ESC 放弃 / ⌘+Enter 保存</span>
+              </div>
+              
+              <!-- 编辑文本框 -->
+              <textarea class="w-full h-24 p-2 text-xs font-serif-sc border border-neutral-800 bg-neutral-50 focus:outline-none leading-relaxed resize-none text-neutral-900">法律和国家的形式，根源于人们为了过日子搞出的经济交往（即市民社会），看懂社会必须抓经济基础。</textarea>
+              
+              <div class="flex justify-between items-center pt-1 text-[11px] font-mono-code">
+                <span class="text-neutral-400">已精简至 49 字</span>
+                <div class="flex gap-2">
+                  <button class="px-2 py-0.5 border border-neutral-300 text-neutral-600 hover:bg-neutral-100">取消</button>
+                  <button class="px-2 py-0.5 bg-neutral-900 text-white font-bold">完成修改</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-3">
+            ※ 数据安全红线：用户编辑版本存入本地 localStorage，绝不上报公共缓存 (D12)
+          </div>
+        </div>
+
+        <!-- F15: Ctrl 锁定撑开态 (Lock Expand) -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between"><div><div class="flex justify-between items-start mb-2"><span class="wire-badge bg-neutral-900 text-white">F15 · Ctrl 锁定防收起</span><span class="wire-badge bg-neutral-100 text-neutral-700">PRD 3.7 &amp; 4.2</span></div><p class="text-xs text-neutral-600 mb-3"><strong>无任何独立按钮/图钉：</strong>锁定仅由快捷键 <code class="font-mono-code">Ctrl + 点击</code> 触发。唯一视觉反馈为外边框轻微加深（由浅灰变为深黑），无额外图标或徽章。</p><div class="border border-neutral-200 bg-white p-3 rounded space-y-2"><div class="p-2 bg-neutral-50 border-2 border-neutral-900 transition-colors"><p class="text-xs font-serif-sc text-neutral-800">“法的关系正像国家的形式一样...”</p><div class="mt-2 text-xs font-serif-sc text-neutral-600 pl-2 border-l border-neutral-600">↳ 白话：法律不是凭空来的，取决于社会物质利益分配。</div></div><div class="p-2 bg-neutral-100 text-[11px] font-mono-code text-neutral-600 space-y-1"><div class="">• 触发方式：Ctrl + 点击句子（无显式图钉/锁定按钮）</div><div class="">• 视觉信号：展开框边框颜色微深 (border-neutral-900)</div><div class="">• 点击空白处/滚动：不收起，多句锁定可并存通读</div><div class="">• 解除锁定：再次 Ctrl + 点击原句恢复普通态</div></div></div></div><div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-3">※ 极简无侵入：页面零增生控件，排版视线无干扰</div></div>
+
+        <!-- 右键快捷菜单与「翻错了」上报 -->
+        <div class="wf-canvas p-5 rounded border border-neutral-300 flex flex-col justify-between"><div><div class="flex justify-between items-start mb-2"><span class="wire-badge bg-neutral-900 text-white">右键菜单与二级能力收拢</span><span class="wire-badge bg-neutral-100 text-neutral-700">PRD 3.7 &amp; F9</span></div><p class="text-xs text-neutral-600 mb-3"><strong>规约：</strong>二级动作（翻错了、查看原文、听不懂）统归右键菜单，正文行下操作区零冗余。</p><div class="border border-neutral-200 bg-white p-3 rounded space-y-3 relative"><p class="text-xs font-serif-sc text-neutral-600">在任意原句或白话气泡上右键呼出菜单：</p><div class="w-48 border border-neutral-800 bg-white shadow-md p-1 font-mono-code text-xs space-y-0.5"><div class="px-2 py-1 hover:bg-neutral-100 cursor-pointer flex justify-between items-center"><span class="whitespace-nowrap">听不懂 (整句理解)</span><span class="text-neutral-400 text-[10px]">↵</span></div><div class="px-2 py-1 hover:bg-neutral-100 cursor-pointer flex justify-between items-center"><span class="whitespace-nowrap">锁定/解锁撑开</span><span class="text-neutral-400 text-[10px]">Ctrl+Click</span></div><div class="px-2 py-1 hover:bg-neutral-100 cursor-pointer text-neutral-500 flex justify-between items-center"><span class="whitespace-nowrap">查看上下文原文</span><span class="text-[9px] text-neutral-400">覆盖模式</span></div><div class="border-t border-neutral-200 my-1"></div><div class="px-2 py-1 hover:bg-neutral-100 cursor-pointer text-neutral-800 flex justify-between items-center"><span class="whitespace-nowrap">翻错了 (一键上报)</span><span class="text-[10px] text-neutral-400">反馈</span></div></div><div class="text-[10px] font-mono-code text-neutral-500 bg-neutral-50 p-2 border border-neutral-200">右键点「翻错了」后仅弹出 1 秒静默 Toast：“已记录此句，感谢反馈”，绝不阻断阅读。</div></div></div><div class="text-[11px] font-mono-code text-neutral-500 border-t pt-2 mt-3">※ 右键承载次级功能，主操作行仅保留 4 个最简常驻动作</div></div>
+
+      </div>
+    </section><section id="stage-7" class="space-y-6">
+      <div class="flex items-baseline justify-between border-b pb-2 border-neutral-300">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-neutral-500">STAGE 07 / 成果导出与设置浮层</span>
+          <h2 class="text-xl font-bold text-neutral-900">设置面板结构 (M1) 与 4 种纸面导出形态 (F11/F17)</h2>
+        </div>
+        <span class="text-xs text-neutral-500 font-mono-code">Brief §6.4 &amp; PRD 3.6 F11 / 不强求注册，本地导出即可带走</span>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+
+        <!-- M1: 设置面板线框 (4 Cols) -->
+        <div class="xl:col-span-5 wf-canvas p-5 rounded border border-neutral-300 space-y-4">
+          <div class="flex justify-between items-start border-b border-neutral-200 pb-2">
+            <div>
+              <span class="wire-badge bg-neutral-900 text-white">M1 · 设置仪表盘抽屉</span>
+              <h3 class="text-sm font-bold text-neutral-900 mt-1">阅读与导出全局偏好设置</h3>
+            </div>
+            <span class="text-xs font-mono-code text-neutral-400">Brief §6.4</span>
+          </div>
+
+          <div class="space-y-4 text-xs font-mono-code">
+            
+            <!-- 呈现模式 -->
+            <div>
+              <label class="font-bold text-neutral-800 block mb-1">呈现模式 (DISPLAY MODE)</label>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="p-2 border border-neutral-800 bg-neutral-100 text-neutral-900 font-bold cursor-pointer">
+                  [●] 撑开 (Inline Expand)
+                  <p class="text-[10px] font-normal text-neutral-500 mt-0.5">默认：气泡在行下方，绝不遮挡文字</p>
+                </div>
+                <div class="p-2 border border-neutral-300 text-neutral-600 hover:border-neutral-500 cursor-pointer">
+                  [○] 覆盖 (Overlay Mode)
+                  <p class="text-[10px] font-normal text-neutral-400 mt-0.5">白话就地替换原句，Hover 查看原句</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 保存批注默认显示形态 -->
+            <div>
+              <label class="font-bold text-neutral-800 block mb-1">批注沉淀展现形态</label>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="p-2 border border-neutral-800 bg-neutral-100 text-neutral-900 font-bold cursor-pointer">
+                  [●] 行下更小浅色小字 (默认)
+                </div>
+                <div class="p-2 border border-neutral-300 text-neutral-600 hover:border-neutral-500 cursor-pointer">
+                  [○] 气泡卡片常驻
+                </div>
+              </div>
+            </div>
+
+            <!-- 导出目标格式 -->
+            <div>
+              <label class="font-bold text-neutral-800 block mb-1">导出格式与纸面形态</label>
+              <div class="grid grid-cols-2 gap-2 mb-2">
+                <button class="p-2 border border-neutral-800 bg-white font-bold text-center">导出 Word (.docx)</button>
+                <button class="p-2 border border-neutral-300 text-neutral-600 text-center hover:border-neutral-500">导出 PDF (.pdf)</button>
+              </div>
+              <div class="text-[11px] text-neutral-500">
+                纸面静态形态选择：行下小字（默认）/ 批注框 / 脚注尾注 / 双栏对照
+              </div>
+            </div>
+
+            <!-- 中文字体选型声明 -->
+            <div class="p-3 border border-neutral-300 bg-neutral-50 space-y-1"><div class="flex justify-between items-center">
+                <span class="font-bold text-neutral-900">中文字体与阅读版心规范</span>
+                <span class="badge-pending">待确认</span>
+              </div>
+              <p class="text-[11px] text-neutral-600 leading-relaxed">
+                长文阅读正文字号强制设为 <strong>16px</strong>（提供 16–18px 调节），正文行高固定为 <strong>1.95（≥1.9）</strong>以保证学术长难句视线呼吸感。字体选型优先兼顾免商用 WebFont 体积与字重平衡。
+              </p></div>
+
+          </div>
+        </div>
+
+        <!-- F11: 4 种纸面导出形态矩阵对比 (7 Cols) -->
+        <div class="xl:col-span-7 wf-canvas p-5 rounded border border-neutral-300 space-y-4">
+          <div class="flex justify-between items-start border-b border-neutral-200 pb-2">
+            <div>
+              <span class="wire-badge bg-neutral-900 text-white">F11 / F17 · 纸面导出形态规约</span>
+              <h3 class="text-sm font-bold text-neutral-900 mt-1">离线交付文档：四大纸面排版低保真原型</h3>
+            </div>
+            <span class="text-xs font-mono-code text-neutral-400">PRD 3.6 &amp; 4.4</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-serif-sc">
+            
+            <!-- 形态 1: 行下小字 (默认) -->
+            <div class="border border-neutral-300 p-3 bg-white space-y-1.5">
+              <div class="flex justify-between font-mono-code text-[10px] text-neutral-400 border-b pb-1">
+                <span class="font-bold text-neutral-800">形态 1 · 行下小字 (默认)</span>
+                <span class="">DOCX / PDF 推荐</span>
+              </div>
+              <p class="text-neutral-900 text-xs font-medium">“法的关系正像国家的形式一样，既不能从它们本身来理解...”</p>
+              <p class="text-[11px] text-neutral-500 pl-3 border-l border-neutral-400">
+                ↳ [白话] 法律与国家形态是由经济关系决定的，需从经济学求解。
+              </p>
+              <p class="text-neutral-900 text-xs mt-1">“社会的物质生产力发展到一定阶段...”</p>
+              <div class="text-[9px] font-mono-code text-neutral-400 pt-1">整句与白话绑定为不可分割块，杜绝跨页断裂</div>
+            </div>
+
+            <!-- 形态 2: 批注框 -->
+            <div class="border border-neutral-300 p-3 bg-white space-y-1.5">
+              <div class="flex justify-between font-mono-code text-[10px] text-neutral-400 border-b pb-1">
+                <span class="font-bold text-neutral-800">形态 2 · 批注框 (气泡纸面化)</span>
+                <span class="">最贴近屏幕感</span>
+              </div>
+              <p class="text-neutral-900 text-xs">法的关系正像国家的形式一样，既不能从它们本身来理解...</p>
+              <div class="border border-neutral-800 p-2 bg-neutral-50 text-[11px] text-neutral-700">
+                【白话批注】：法律是现实经济利益关系的外壳，核心是黑格尔提的市民社会。
+              </div>
+              <p class="text-neutral-900 text-xs">社会的物质生产力发展到一定阶段...</p>
+            </div>
+
+            <!-- 形态 3: 脚注 / 尾注 -->
+            <div class="border border-neutral-300 p-3 bg-white space-y-1.5">
+              <div class="flex justify-between font-mono-code text-[10px] text-neutral-400 border-b pb-1">
+                <span class="font-bold text-neutral-800">形态 3 · 脚注与文末尾注</span>
+                <span class="">学术论文习惯</span>
+              </div>
+              <p class="text-neutral-900 text-xs leading-relaxed">
+                这种物质的生活关系的总和，黑格尔称之为"市民社会"<sup class="font-bold text-neutral-900">[1]</sup>，而对市民社会的解剖应该到政治经济学中寻求...
+              </p>
+              <div class="border-t border-neutral-300 pt-2 text-[10px] text-neutral-600 font-mono-code">
+                [1] 白话：即商品经济中为私人利益形成的现实交往关系总和。
+              </div>
+            </div>
+
+            <!-- 形态 4: 左右双栏对照 -->
+            <div class="border border-neutral-300 p-3 bg-white space-y-1.5">
+              <div class="flex justify-between font-mono-code text-[10px] text-neutral-400 border-b pb-1">
+                <span class="font-bold text-neutral-800">形态 4 · 双栏左右对照</span>
+                <span class="">经典译本形态</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                <div class="pr-2 border-r border-neutral-200">
+                  <span class="font-mono-code text-[9px] text-neutral-400 block">[左栏 · 难句原文]</span>
+                  法的关系正像国家的形式一样，既不能从本身理解...
+                </div>
+                <div class="text-neutral-600">
+                  <span class="font-mono-code text-[9px] text-neutral-400 block">[右栏 · 通俗白话]</span>
+                  法律与国家是由人们谋生的物质基础决定的...
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="p-2.5 bg-neutral-100 border border-neutral-200 text-xs font-mono-code text-neutral-700 flex justify-between items-center">
+            <span class="">※ H4 分页硬规则：分页排版时，带白话的句子必须保证整句+白话不跨页断开</span>
+            <span class="text-neutral-500">支持批量导出已存 14 句批注</span>
+          </div>
+        </div>
+
+      </div>
+    </section><span id="audit" class="spec-anchor"></span><section class="space-y-4 pt-6 border-t-2 border-neutral-400">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono-code font-bold text-amber-800 uppercase">AUDIT LOG &amp; OPEN QUESTIONS</span>
+          <h2 class="text-lg font-bold text-neutral-900">PRD 明确未决与待验证项核查清单 (无擅自补全)</h2>
+        </div>
+        <span class="text-xs font-mono-code text-neutral-500">对应 PRD 第 6 节 &amp; 7 节</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs bg-white border border-neutral-300">
+          <thead class="bg-neutral-100 border-b border-neutral-300 font-mono-code text-neutral-700">
+            <tr>
+              <th class="p-2.5 border-r border-neutral-300">编号</th>
+              <th class="p-2.5 border-r border-neutral-300">待确认事项</th>
+              <th class="p-2.5 border-r border-neutral-300">分类</th>
+              <th class="p-2.5 border-r border-neutral-300">PRD 现状说明</th>
+              <th class="p-2.5">线框图中当前处理策略</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200 font-mono-code text-neutral-700">
+            <tr>
+              <td class="p-2.5 border-r border-neutral-200 font-bold">Q-01</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans"><span class="badge-pending">待确认</span> 中文字体选型</td>
+              <td class="p-2.5 border-r border-neutral-200">设计/阻塞型</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans">免费可商用长文衬线字体有限，需权衡体积与首屏性能</td>
+              <td class="p-2.5 font-sans">线框图内以通用衬线宋体占位，标注待设计在 UI 阶段终审</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 border-r border-neutral-200 font-bold">Q-02</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans"><span class="badge-pending">待确认</span> 白话语气风格</td>
+              <td class="p-2.5 border-r border-neutral-200">产品/设计</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans">学术中性客观 vs 更加生活化口语</td>
+              <td class="p-2.5 font-sans">当前遵循已确认的 73 字哲学专业评测样例，保持克制</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 border-r border-neutral-200 font-bold">Q-03</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans"><span class="badge-pending">待确认</span> 点击粒度是否支持半句</td>
+              <td class="p-2.5 border-r border-neutral-200">产品定义</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans">长难句中分号/冒号间的半句独立意群是否允许切分点击</td>
+              <td class="p-2.5 font-sans">MVP 默认仅以标点整句为交互单元，超 250 字安全网才分切</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 border-r border-neutral-200 font-bold">Q-04</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans"><span class="badge-pending">待确认</span> 锁定态视觉标记形态</td>
+              <td class="p-2.5 border-r border-neutral-200">交互细节</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans">Ctrl 锁定撑开后，是否显示图钉小图标或高亮边框</td>
+              <td class="p-2.5 font-sans">已确认为纯无控件交互：仅按 Ctrl+点击，边框微变深 (border-neutral-900)，严禁图钉小标与界面控件增生</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 border-r border-neutral-200 font-bold">Q-05</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans"><span class="badge-pending">待确认</span> 术语第二次出现是否重复标记</td>
+              <td class="p-2.5 border-r border-neutral-200">算法规则</td>
+              <td class="p-2.5 border-r border-neutral-200 font-sans">同一文档中“市民社会”再次出现时是否仍挂载“听不懂”</td>
+              <td class="p-2.5 font-sans">线框图暂维持单句独立上下文判断，不擅自增加跨句去重逻辑</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section><footer class="max-w-[1720px] mx-auto mt-16 pt-8 border-t border-neutral-300 flex flex-col md:flex-row justify-between items-center text-xs text-neutral-500 font-mono-code gap-4">
+    <div class="">GLOSS WIREFRAME FLOW // SPECIFICATION COMPLETE FOR DEV &amp; PORTFOLIO</div>
+    <div class="">Strictly follows PRD v1.1 &amp; Design Brief · Single HTML Document · No Extraneous Features</div>
+  </footer></div></div>
+</main>
+
+<script src="assets/spec-fit.js" defer></script>
+</body>
+</html>

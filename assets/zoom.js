@@ -2,7 +2,7 @@
    同一组（同一条横滑、或同一页的单张截图）里可以用 ← → 翻页，Esc 或点背景关闭。
    JS 不跑也不影响阅读 —— 只是图不能放大。 */
 (function () {
-  var SEL = '.filmstrip img, .shot img, .win img';
+  var SEL = '.filmstrip img, .shot img, .shot-wide img, .win img';
   var imgs = Array.prototype.slice.call(document.querySelectorAll(SEL));
   if (!imgs.length) return;
 
@@ -40,6 +40,7 @@
   function show(i) {
     idx = (i + group.length) % group.length;
     var img = group[idx];
+    big.classList.remove('swap'); void big.offsetWidth; big.classList.add('swap');
     big.src = img.currentSrc || img.src;
     big.alt = img.alt;
     cap.textContent = captionOf(img) + (group.length > 1 ? '　' + (idx + 1) + ' / ' + group.length : '');
@@ -55,10 +56,16 @@
     box.querySelector('.zoom-close').focus();
   }
 
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function close() {
-    box.hidden = true;
-    document.documentElement.classList.remove('zoom-open');
-    if (opener) opener.focus();
+    /* 先播 160ms 淡出（动效 CSS 里的 .closing），再真正隐藏；减少动态效果时立即关 */
+    box.classList.add('closing');
+    setTimeout(function () {
+      box.classList.remove('closing');
+      box.hidden = true;
+      document.documentElement.classList.remove('zoom-open');
+      if (opener) opener.focus();
+    }, reduce ? 0 : 160);
   }
 
   imgs.forEach(function (img) {

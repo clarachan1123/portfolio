@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>家庭协作效率提升 · 案例 02 — 让家里的信息被记录、被共享、被理解</title>
+<meta name="description" content="实习期间主导的家庭共享日历项目：附件能力、本地日历双向同步、Future Tab 三项已上线，另附 AI 家庭管家方案。">
+<meta name="theme-color" content="#17150F">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="陈利行 · 作品集">
+<meta property="og:title" content="家庭协作效率提升 · 案例 02 — 让家里的信息被记录、被共享、被理解">
+<meta property="og:description" content="实习期间主导的家庭共享日历项目：附件能力、本地日历双向同步、Future Tab 三项已上线，另附 AI 家庭管家方案。">
+<meta property="og:url" content="https://clara-lixing.kicp.fun/family.html">
+<meta property="og:image" content="https://clara-lixing.kicp.fun/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/merged.css">
+
+<!--
+  ══════════════════════════════════════════════════════════════
+  ✏️  改文案指南 · 家庭协作案例页 family.html
+  ──────────────────────────────────────────────────────────────
+  ⚠️ 改文案时务必遵守：
+     · 全页不出现产品名、公司名、官网域名、真实竞品名（竞品一律写 A / B / C）
+     · 不写定价、免费额度、存储空间、成本、MAU / 收入推算、路线图周次、里程碑阈值
+     · 不写 App Store 版本号与上线日期（能直接查到是哪款产品）
+     · 不写对前公司产品的负面判断（评分真假、付费墙等）
+     · 「百万级下载」可以保留
+  ──────────────────────────────────────────────────────────────
+  结构：一个共同问题 → 被记录（附件）→ 被共享（日历同步）→ 被理解（Future Tab）
+        → 延伸方案（AI 家庭管家，不写上线状态）
+  每章顺序：眉题（功能名 + 已上线 / 方案）→ 大标题（写成一句结论）→ 用户原话
+           → 一段说明 → 原型图 → 决策卡（两张并排）
+  ⚠️ 每章的结论标题在页首「一条线」导航里还出现一次，改标题时两处一起改。
+  可改位置：
+    【让家里的信息】              页首大标题
+    【一款百万级下载】            页首导语
+        【章节导航】                  页首「一条线」，五块分别对应五章
+    【记了，却存在信息缺失】          章节 01
+    【被记录 · 附件能力】          章节 02 眉题（下面一行是结论标题）
+    【被共享 · 本地日历双向同步】   章节 03 眉题
+    【被理解 · Future Tab】        章节 04 眉题
+    【延伸方案 · AI 家庭管家】      章节 05 眉题
+    【动手试】                    每章一个小实验台的标题和说明（指标对照 / 冲突沙盒 / 排序实验台 / 全流程路由图）；
+                                  实验台里的数字和规则写在 assets/family-lab.js 顶部，照 PRD v2，改规则要两处一起改
+    【上线后看什么】              每个实验台底下那一行目标值（是 PRD 的目标，不是上线结果，别写成结果）
+    【看完整原型】                收起的手机原型；手机里的英文界面文字可以直接改，红色编号旁的批注在每组手机下面
+    【最后一项还只是方案】         第 04、05 章之间那一屏间奏（只有一句话）
+    【回头看】                    页尾深色收尾：四个「不做」+ 最后一句底线（【不替人做主】）
+  ══════════════════════════════════════════════════════════════
+-->
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="brand">CHEN LIXING <span>陈利行</span></div>
+    <nav>
+      <a href="index.html">首页</a>
+      <a href="gloss.html">Gloss</a>
+      <a href="family.html" aria-current="page">家庭协作</a>
+      <a href="feynman.html">Feynman</a>
+    </nav>
+    <div class="meta stamp">Portfolio · 2026</div>
+  </div>
+</header>
+
+<section class="page" id="family">
+  <div class="grid12 case-head">
+    <a class="back mono" href="index.html#index">← 返回索引</a>
+    <h1>让家里的信息<br>被记录、被共享、被理解</h1>
+    <p class="case-dek">一款百万级下载的出海家庭共享日历 App。实习期间我主导了四项功能。</p>
+    <dl class="spec">
+      <div><dt>角色</dt><dd>主导 · 需求分析到上线验收</dd></div>
+      <div><dt>时间</dt><dd>2025.10 — 2026.02（实习）</dd></div>
+    </dl>
+
+    <!-- 一条线：章节导航。每一块都能点，跳到对应章节。
+         问题用深色块，三项已上线用浅色块，延伸方案用牛皮纸色、虚线隔开。 -->
+    <nav class="thread" aria-label="章节导航">
+      <a class="thread-problem" href="#ch-problem">
+        <span class="k">01 · 共同的问题</span>
+        <strong>记了，<br>却存在信息缺失</strong>
+        <span class="s">材料、安排、轻重，三处断点</span>
+      </a>
+      <span class="thread-arrow" aria-hidden="true">→</span>
+      <a href="#ch-attach">
+        <span class="k">02 · 被记录</span>
+        <strong>附件是事项的属性，不是存放区</strong>
+      </a>
+      <a href="#ch-sync">
+        <span class="k">03 · 被共享</span>
+        <strong>我改的一定生效，我没改的一定不变</strong>
+      </a>
+      <a href="#ch-future">
+        <span class="k">04 · 被理解</span>
+        <strong>最多高亮 3 个，不加任何推送</strong>
+      </a>
+      <span class="thread-sep" aria-hidden="true"></span>
+      <a class="thread-plan" href="#ch-ai">
+        <span class="k">05 · 延伸</span>
+        <strong>AI 只出草稿，确认权留给人</strong>
+      </a>
+    </nav>
+  </div>
+
+  <div class="grid12 chain">
+
+    <!-- 01：开场。深色底 + 三个断点逐行放大、逐行右移（阶梯），背后一个出血的空心大字 -->
+    <div class="step is-dark" id="ch-problem">
+      <span class="ghost-no" aria-hidden="true">01</span>
+      <div class="rail"><span class="step-num">01</span><span class="node"></span></div>
+      <div class="step-body">
+        <p class="step-kicker">共同的问题</p>
+        <h2>记了，却存在信息缺失</h2>
+        <p style="max-width: 561px">用户是英语区有学龄孩子的家庭。家里通常有一位「安排者」负责收信息、建事项，一位「执行者」负责去办。问题出在两人之间的那一段：</p>
+        <ul class="stair">
+          <li><strong>材料不在事项上。</strong>日历里只有标题和时间，学校通知、预约截图还在群聊里，需要回去查找。</li>
+          <li><strong>安排不在常看的地方。</strong>大家每天看的是手机自带的日历，家庭安排却只在 App 里，要么看两个地方，要么手动抄一遍。</li>
+          <li><strong>事项多了看不出轻重。</strong>孩子的比赛和买牛奶在列表里长得一样，分不清轻重缓急。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 02 被记录 · 附件能力 -->
+    <!-- 每章的顺序：眉题（功能名 + 状态）→ 结论标题 → 用户原话 → 一段说明 → 原型图 → 决策卡。
+         原型图放在章节里面，先看图再读决策；两张决策卡并排。 -->
+    <div class="step" id="ch-attach">
+      <span class="ghost-no" aria-hidden="true">02</span>
+      <div class="rail"><span class="step-num">02</span><span class="node"></span></div>
+      <div class="step-body">
+        <p class="step-kicker">被记录 · 附件能力</p>
+        <h2>附件是事项的属性，<br>不是一个存放区</h2>
+        <p>需求是「希望支持上传附件」。<br>访谈和评论里，用户说的原话：</p>
+        <div class="pull"><p>「日历能看到安排，但是具体信息还是要去聊天记录找。」</p></div>
+        <p>妈妈收到学校通知，建好「Field trip」，再把通知 PDF 发到家庭群；当天早上爸爸打开日历只看到一个标题，去群里往上翻，翻不到，打电话问妈妈。存东西的地方用户早就有了，群聊、相册、备忘录都能存，<strong>缺的是「这份材料属于哪件事」</strong>。</p>
+      </div>
+      <aside class="facts">
+        <h4>上线节奏</h4>
+        <p>分两批上线：先「日程 + 照片」，再扩到任务、清单项和文档。照片是用户手上最现成的材料，先用最小范围看执行者会不会去看。</p>
+      </aside>
+      <!-- 动手试 · 附件指标对照（规则照 PRD v2；脚本 assets/family-lab.js，下面存的是默认状态，脚本加载后重画） -->
+      <section class="lab" data-lab="att" aria-label="附件指标对照">
+        <div class="lab-head"><p class="lab-k">动手试 · 指标</p><h3 class="lab-t">同一批数据，换个指标，结论就反过来</h3><p class="lab-d">只看上传率，附件功能看着很成功；看「执行的人有没有打开」，才知道材料是不是真的跟着事项走了。点 Dad 那一列试试。</p></div>
+        <div class="lab-body" data-lab-body><div class="la-grid"><div><p class="lab-cap">10 件事 · 示意数据<span>点右边的头像：执行的那个人在开始前打开过没有</span></p><ul class="la-list"><li class="la-row"><span class="la-t">Field trip<small>Fri</small></span><span class="la-f">PDF · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad on" data-i="0" aria-pressed="true" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Swim meet<small>Sat</small></span><span class="la-f">Photo · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad" data-i="1" aria-pressed="false" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Piano recital<small>Sat</small></span><span class="la-f">Photo · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad on" data-i="2" aria-pressed="true" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Buy birthday gift<small>Sat</small></span><span class="la-f">Photo · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad" data-i="3" aria-pressed="false" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Dentist – Mike<small>Mon</small></span><span class="la-f">Photo · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad" data-i="4" aria-pressed="false" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Lisa's birthday party<small>Oct 31</small></span><span class="la-f">Photo · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad" data-i="5" aria-pressed="false" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Picture Day<small>Nov 5</small></span><span class="la-f">PDF · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad" data-i="6" aria-pressed="false" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Parent–Teacher Conference<small>Nov 12</small></span><span class="la-f">PDF · Mom 传的</span><span class="la-v"><i class="la-av on mom" title="Mom 自己看过">M</i><button type="button" class="la-av dad" data-i="7" aria-pressed="false" title="Dad 在开始前打开过">D</button></span></li><li class="la-row"><span class="la-t">Flight to Orlando<small>Nov 20</small></span><span class="la-f">PDF · Dad 传的</span><span class="la-v"><i class="la-av on dad" title="Dad 自己看过">D</i><button type="button" class="la-av mom on" data-i="8" aria-pressed="true" title="Mom 在开始前打开过">M</button></span></li><li class="la-row none"><span class="la-t">Soccer practice<small>Thu</small></span><span class="la-f">没有附件</span><span class="la-v"></span></li></ul></div><div class="la-metrics"><div class="la-m dim"><p class="la-mk">上传率<small>挂了附件的事项占比</small></p><b>90%</b><p class="la-mn">看着很好，但只说明有人在传。</p></div><div class="la-m"><p class="la-mk">非上传者查看率<small>挂了附件的事项里，至少一位非上传者在开始前打开过的比例</small></p><b>33%</b><div class="la-bar"><i style="width:33%"></i><span class="t40" title="成功线">40%</span><span class="t60" title="挑战目标">60%</span></div><p class="la-mn">3 / 9 件事被执行的人看过。没过 40% 的成功线：多数附件只有上传的人自己看过，等于又一个网盘。</p></div><div class="la-m sm"><p class="la-mk">上传者本人查看占比<small>反向指标 · 超过 80% 说明退化成个人存储</small></p><b>75%</b></div></div></div></div>
+        <div class="lab-goal"><p class="lab-gk">上线后看什么<small>PRD 里定的目标值，不是上线结果</small></p><ul><li><span>北极星 · 非上传者查看率</span><b>≥ 40%</b><small>挑战 ≥ 60%</small></li><li><span>添加成功率</span><b>≥ 98%</b></li><li><span>反向 · 上传者本人查看占比</span><b>> 80% 语境</b><small>只有自己看 = 退化成个人存储</small></li></ul></div>
+      </section>
+      <details class="proto-fold">
+        <summary><span>看完整原型</span><small>4 屏 · 可以点 · 打开后自动演示一遍</small></summary>
+      <!-- 02 附件 · 可交互原型（照原型图用 HTML 重搭；交互写法见 assets/proto.js 顶部） -->
+      <figure class="proto" data-proto="att" data-demo='[data-go="att-2"] | .sheet [data-hint] | ~2800 | .grid3 [data-go="att-3"] | [data-set="del=yes"] | ~1800 | .toast b | ~900 | .close | @att-4 | ~1200' style="--cols:4" aria-label="事件附件 · 可交互低保真原型">
+        <div class="proto-screens">
+          <section class="ps" id="att-1">
+            <p class="ps-tag"><b>P1</b>事件详情 + 附件区</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Event</span><span>Edit</span></div>
+              <p class="h1">Field trip <svg class="clip" viewBox="0 0 12 20" aria-hidden="true"><path d="M8.5 5v9.2a2.5 2.5 0 0 1-5 0V4.3a3.3 3.3 0 0 1 6.6 0v9.9a5.1 5.1 0 0 1-10.2 0V6.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></p>
+              <p class="meta">Fri, Oct 16 · 8:00 AM<br>Lincoln Elementary, front gate</p>
+              <div class="chips"><span class="chip"><i class="mike"></i>Mike</span><span class="chip"><i class="dad"></i>Dad</span></div>
+              <p class="lbl">Notes</p>
+              <p class="val">Bring a packed lunch</p>
+              <p class="sec">
+                <span>Attachments (<span data-when="up=done&amp;del=" class="st-off">5</span><span data-when="up!=done&amp;del=, up=done&amp;del=yes|gone">4</span><span data-when="up!=done&amp;del=yes|gone" class="st-off">3</span>)</span>
+                <span class="plus blue" data-go="att-2" data-hint>+</span>
+              </p>
+              <div class="grid3">
+                <span class="ph" data-go="att-3" data-when="del="></span>
+                <span class="ph" data-go="att-3"><i class="newdot"></i></span>
+                <span class="ph" data-go="att-3"></span>
+                <span class="ph upl st-off" data-when="up=ing" data-set="up="><span class="prog"><i></i></span></span>
+                <span class="ph st-off" data-when="up=done" data-go="att-3"></span>
+                <i class="mk">1</i><i class="mk l mid">2</i>
+              </div>
+              <div class="row"><span class="ico pdf">PDF</span><span><span class="t">Field trip notice.pdf</span><span class="s">1.2 MB · Mom</span></span><i class="mk mid">3</i></div>
+              <p class="meta" style="margin-top:.8em">Added by Mom, Dad</p>
+            </div></div>
+            <ol class="ps-notes">
+              <li>附件区位于备注之下，标题带数量；「+」即添加入口。没有任何「全部附件」的独立入口。</li>
+              <li>照片在上（3 列网格，最多 6 张，其余「+N」）；蓝点 = 他人新加、我还没看过，<strong>不推送</strong>。</li>
+              <li>文档在下：类型图标 + 文件名 + 大小 + 添加人。标题后的回形针也会出现在日历与列表中。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="att-2">
+            <p class="ps-tag"><b>P2</b>添加附件面板</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Event</span><span></span></div>
+              <p class="h1">Field trip</p>
+              <p class="sec">Attachments (4)</p>
+              <div class="grid3">
+                <span class="ph"></span>
+                <span class="ph lv-off"><span class="pct">62%</span><span class="prog"><i></i></span></span>
+                <span class="ph"></span>
+                <i class="mk mid">1</i>
+              </div>
+              <div class="dim bleed" data-go="att-1"></div>
+              <div class="sheet bleed">
+                <p class="h2" style="margin-bottom:.4em">Add attachment</p>
+                <div class="row" data-set="up=ing" data-then="2600: up=done" data-then-if="up=ing" data-go="att-1"><span class="ico">◉</span><span class="t">Take photo</span><span class="end">›</span></div>
+                <div class="row" data-set="up=ing" data-then="2600: up=done" data-then-if="up=ing" data-go="att-1" data-hint><span class="ico">▣</span><span><span class="t">Photos</span><span class="s">Up to 9 at a time</span></span><span class="end">›</span><i class="mk btm">2</i></div>
+                <div class="row" data-set="up=ing" data-then="2600: up=done" data-then-if="up=ing" data-go="att-1"><span class="ico">▤</span><span><span class="t">Files</span><span class="s">PDF, Word, Excel… up to 25 MB</span></span><span class="end">›</span></div>
+                <div class="card fill plan"><span><span class="t">Free plan limits apply</span><span class="s">Included in your plan</span></span><span class="blue">Upgrade</span><i class="mk l btm">3</i></div>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>上传在后台进行、显示进度、点它可取消；离开页面不中断。</li>
+              <li>三个来源，说明里直接写清上限，减少失败。</li>
+              <li>免费版的额度只在面板里平静地说明，<strong>不弹付费墙</strong>。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="att-3">
+            <p class="ps-tag"><b>P3</b>预览 + 删除撤销</p>
+            <div class="lp"><div class="lp-scr dark">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span class="close" data-go="att-1">✕</span><span>2 of 3</span><span>···</span></div>
+              <div class="photo"><span data-when="del=">Photo · swipe ←→</span><span class="st-off" data-when="del=yes|gone">Removed</span></div>
+              <p class="meta" style="margin-top:.8em">Added by Mom · Oct 3</p>
+              <div class="btns"><span class="btn dk">Share</span><span class="btn dk" data-set="del=yes" data-then="5000: del=gone" data-then-if="del=yes" data-when="del=" data-hint>Delete</span><span class="btn dk off st-off" data-when="del=yes|gone">Delete</span><i class="mk">1</i></div>
+              <div class="toast" data-when="del=yes"><span>Attachment removed</span><b data-set="del=">Undo</b><i class="mk">2</i></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>预览页注明添加人与时间；分享走系统分享，<strong>不生成公开链接</strong>。</li>
+              <li>任一成人可删任一附件；删除不弹确认框，改为 5 秒「Undo」+ 动态流记录。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="att-4">
+            <p class="ps-tag"><b>P4</b>任务附件 + 错误提示</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Task</span><span></span></div>
+              <div class="row" style="border:0;padding-top:0"><span class="ck" data-tog></span><span class="h2" style="font-size:1.25em">Buy birthday gift</span></div>
+              <p class="meta">Due Sat · Assigned to <span class="chip"><i class="dad"></i>Dad</span></p>
+              <p class="sec">Attachments (2)</p>
+              <div class="grid3"><span class="ph"><span class="fn">toy.png</span></span><span class="ph"><span class="fn">size.jpg</span></span><i class="mk">1</i></div>
+              <div class="card err" style="margin-top:.9em"><p class="t">Couldn't add 'Party plan.mov'</p><p class="s">Videos aren't supported. Try a photo or a PDF.</p><i class="mk l mid">2</i></div>
+              <div class="card err"><p class="t">'Hotel booking.pdf' is over 25 MB</p><p class="s">Try a smaller copy, or export only the pages you need.</p><span class="btn" style="margin-top:.6em" data-go="att-2" data-hint>Choose another</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>任务、清单项与事件用同一套附件区——爸爸执行时打开任务就能看到「买哪个」，不用翻 WhatsApp。</li>
+              <li>每种失败都说清原因 + 下一步，不出现「Error」。</li>
+            </ol>
+          </section>
+        </div>
+        <p class="proto-tip">滚到这里会自动演示一遍，点一下就停；也可以自己点手机里的按钮往下走，点空白处会标出能点的地方。</p>
+      </figure>
+      </details>
+      <div class="step-body step-after">
+        <p>所以我把附件定义成事项的属性，而不是一个存放区：日程、任务、清单项共用一套附件能力，可见范围和生命周期都跟着事项走，事项删了附件一起删。</p>
+        <div class="decisions">
+          <div class="decision kill">
+            <span class="label">永不做</span>
+            <h4>独立的附件中心，和「先存后挂」</h4>
+            <p>App 里已经有备忘录能放照片。附件一旦能脱离事项单独存在，就会退化成第二个备忘录。所以附件只能在事项详情里添加和查看，数据层不允许出现不属于任何事项的附件。</p>
+          </div>
+          <div class="decision">
+            <span class="label">北极星</span>
+            <h4>看「非上传者查看率」，不看上传率</h4>
+            <p>只有执行的那个人真的打开了，「资料跟着事项走」才成立。传了没人看，等于又多了一个网盘。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 被共享 · 本地日历双向同步 -->
+    <!-- 03 的原型图往左出血，和 02 / 04 的往右出血交替 -->
+    <div class="step bleed-left" id="ch-sync">
+      <span class="ghost-no" aria-hidden="true">03</span>
+      <div class="rail"><span class="step-num is-fork">03</span><span class="node fork"></span></div>
+      <div class="step-body">
+        <p class="step-kicker">被共享 · 本地日历双向同步</p>
+        <h2>我改的一定生效，<br>我没改的一定不变</h2>
+        <p>原来只能把手机日历里的事件导进 App，反方向不通。用户每天看的是手机日历，家庭安排却只在 App 里：</p>
+        <div class="pull"><p>「我已经有一个日历了，不想重新维护两个地方。」</p></div>
+        <p>做双向同步，面临的问题是<strong>两边同时改了怎么办</strong>。妻子在 App 里把时间改成 19:00，丈夫在手机日历里改成 18:00，到底听谁的？<br>用户一旦遇到「我改了却被覆盖」，不会觉得是同步有 bug，而是觉得这个日历不可靠，然后关掉同步。<br>所以统一原则是：我改的一定生效，我没改的一定不变。</p>
+      </div>
+      <!-- 动手试 · 同步冲突沙盒（规则照 PRD v2；脚本 assets/family-lab.js，下面存的是默认状态，脚本加载后重画） -->
+      <section class="lab" data-lab="sync" aria-label="同步冲突沙盒">
+        <div class="lab-head"><p class="lab-k">动手试 · 规则</p><h3 class="lab-t">两边同时改了，听谁的？</h3><p class="lab-d">给 Mom（App 里）和 Dad（手机日历里）各选要改的字段，看冲突按三步怎么判：改错会错过的让人选，其余自动处理。</p></div>
+        <div class="lab-body" data-lab-body><p class="lab-cap">一件事：Family dinner · Sat 6:30 PM · Home · Mom, Dad, Lisa<span>给两边各选要改的字段；颜色是风险等级</span></p><div class="ls-presets"><button type="button" data-preset="0" class="on">两人都改了时间</button><button type="button" data-preset="1">两人都改了地点</button><button type="button" data-preset="2">一边删、一边改</button><button type="button" data-preset="3">只有 Dad 改了时间</button><button type="button" data-preset="4">改动相同 · 都改成 7 点</button></div><div class="ls-sides"><div class="ls-side"><p class="ls-who"><i class="mom"></i>Mom · 在 App 里改</p><div class="ls-chips"><button type="button" class="ls-chip r-high on" data-side="a" data-k="time" aria-pressed="true">开始时间<em>7:00 PM</em></button><button type="button" class="ls-chip r-high" data-side="a" data-k="who" aria-pressed="false">参与人</button><button type="button" class="ls-chip r-high" data-side="a" data-k="rep" aria-pressed="false">重复规则</button><button type="button" class="ls-chip r-mid" data-side="a" data-k="title" aria-pressed="false">标题</button><button type="button" class="ls-chip r-low" data-side="a" data-k="place" aria-pressed="false">地点</button><button type="button" class="ls-chip r-low" data-side="a" data-k="note" aria-pressed="false">备注</button><button type="button" class="ls-chip r-high del" data-side="a" data-k="del" aria-pressed="false">删除这件事</button></div></div><div class="ls-side"><p class="ls-who"><i class="dad"></i>Dad · 在手机日历里改</p><div class="ls-chips"><button type="button" class="ls-chip r-high on" data-side="b" data-k="time" aria-pressed="true">开始时间<em>6:00 PM</em></button><button type="button" class="ls-chip r-high" data-side="b" data-k="who" aria-pressed="false">参与人</button><button type="button" class="ls-chip r-high" data-side="b" data-k="rep" aria-pressed="false">重复规则</button><button type="button" class="ls-chip r-mid" data-side="b" data-k="title" aria-pressed="false">标题</button><button type="button" class="ls-chip r-low" data-side="b" data-k="place" aria-pressed="false">地点</button><button type="button" class="ls-chip r-low" data-side="b" data-k="note" aria-pressed="false">备注</button><button type="button" class="ls-chip r-high del" data-side="b" data-k="del" aria-pressed="false">删除这件事</button></div></div></div><p class="ls-opts"><label><input type="checkbox" data-opt="soon"> 这件事 24 小时内开始</label><label><input type="checkbox" data-opt="same"> 两边改成了同一个值</label></p><div class="ls-run"><ol class="ls-steps"><li><b>第 1 步 · 逐个字段比对</b><ul><li>开始时间：两边都改、值不同 → 字段冲突（高风险）</li></ul></li><li><b>第 2 步 · 冲突字段按风险分级</b><ul><li><span class="rk r-high">高</span>开始时间</li></ul></li><li><b>第 3 步 · 组合判定</b><ul class="ls-rules"><li class="hit">任一高风险字段冲突 → 冲突卡</li><li>标题实质不同（中风险） → 冲突卡</li><li>只有低风险字段冲突 → 自动采用最近修改</li><li>事件 24 小时内开始 → 一律升级为高风险</li></ul></li></ol><div class="ls-out card"><p class="lab-cap">结果</p><b>弹出冲突卡，让人来选</b><p>有高风险字段冲突。两版并排、差异高亮、不预选；未决期间暂停这件事的常规提醒，改在较早那个时间的 24 小时前推送一次「需要你决定」。</p></div></div></div>
+        <div class="lab-goal"><p class="lab-gk">上线后看什么<small>PRD 里定的目标值，不是上线结果</small></p><ul><li><span>北极星 · 同步一致率</span><b>≥ 99%</b><small>挑战 ≥ 99.8%</small></li><li><span>硬约束 · 高风险字段被自动覆盖</span><b>= 0</b></li><li><span>开启后 7 天内关闭同步</span><b>< 15%</b><small>挑战 < 8%</small></li></ul></div>
+      </section>
+      <details class="proto-fold">
+        <summary><span>看完整原型</span><small>6 屏 · 可以点 · 打开后自动演示一遍</small></summary>
+      <!-- 03 同步 · 可交互原型（照原型图用 HTML 重搭；交互写法见 assets/proto.js 顶部） -->
+      <figure class="proto" data-proto="syn" data-demo='[data-go="syn-2"] | [data-set="work=two"] | ~900 | .nav [data-go="syn-1"] | .card.amber[data-go="syn-4"] | [data-set="res=phone"] | ~1300 | .btn[data-go="syn-1"] | @syn-3 | .row.dup | ~700 | .bottom .btn | ~900 | @syn-5 | [data-set="p5=ask"] | ~1100 | [data-set="p5="] | [data-set="p5=hide"] | ~1400 | @syn-6 | [data-set="retry=ing"] | ~1900' data-init="work=busy" style="--cols:3" aria-label="本地日历双向同步 · 可交互低保真原型">
+        <div class="proto-screens">
+          <section class="ps" id="syn-1">
+            <p class="ps-tag"><b>P1</b>设置 → Calendar sync</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Calendar sync</span><span></span></div>
+              <div class="card">
+                <div style="display:flex;gap:.6em;align-items:flex-start"><span><span class="t">Show family events on this phone</span><span class="s">Adds a "Household" calendar to your phone</span></span><span class="tgl on" data-on="sync!=off" data-flip="sync=off"></span></div>
+                <p class="lbl">Which events</p>
+                <p class="t" style="font-size:.92em">Only events I'm in ›</p>
+                <i class="mk">1</i>
+              </div>
+              <div class="cals" data-on="sync=off">
+                <p class="sec">Your calendars</p>
+                <div class="row" data-go="syn-2" data-hint><span class="ico">G</span><span><span class="t">Work</span><span class="s">Google · <span data-when="work=busy">Busy only</span><span class="st-off" data-when="work=none">Don't sync</span><span class="st-off" data-when="work=share">Share</span><span class="st-off" data-when="work=two">Two-way</span></span></span><span class="end">›</span><i class="mk">2</i></div>
+                <div class="row"><span class="ico"></span><span><span class="t">Family</span><span class="s">iCloud · Two-way</span></span><span class="end">›</span></div>
+                <div class="row"><span class="ico"></span><span><span class="t">Personal</span><span class="s">iCloud · Don't sync</span></span><span class="end">›</span><i class="mk btm">3</i></div>
+              </div>
+              <div class="card amber" style="margin-top:.8em;padding:.55em .8em" data-go="syn-4"><span class="t" style="font-size:.85em;font-weight:500"><span class="amb">!</span>&nbsp; <span data-when="res=">2 items need your decision</span><span class="st-off" data-when="res!=">1 item needs your decision</span> ›</span></div>
+              <p class="meta" style="margin-top:.8em"><span data-when="imp=">Last synced 2 min ago</span><span class="st-off" data-when="imp=yes">Last synced just now · 35 events added</span></p>
+            </div></div>
+            <ol class="ps-notes">
+              <li>方向 ①：家庭事件只写进 App 专属的「Household」日历，<strong>不碰个人日历</strong>；默认只写「与我相关」的。</li>
+              <li>方向 ②：每个个人日历单独选模式，默认 Don't sync。</li>
+              <li>待处理项（冲突 / 重复 / 删除确认 / 失败）汇总入口 + 如实的最后同步时间。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="syn-2">
+            <p class="ps-tag"><b>P2</b>为一个日历选模式</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span data-go="syn-1">‹</span><span>Work · Google</span><span></span></div>
+              <div class="opt" data-set="work=none" data-on="work=none"><span class="rd"></span><span><span class="t">Don't sync</span><span class="s">Stays on your phone only.</span></span></div>
+              <div class="opt" data-set="work=share" data-on="work=share"><span class="rd"></span><span><span class="t">Share</span><span class="s">Your family sees these events. Only you can change them.</span></span></div>
+              <div class="opt" data-set="work=two" data-on="work=two" data-hint><span class="rd"></span><span><span class="t">Two-way</span><span class="s">Your family sees and can edit. Their changes come back to this calendar.</span></span></div>
+              <div class="opt on" data-set="work=busy" data-on="work=busy"><span class="rd"></span><span><span class="t">Busy only</span><span class="s">Your family sees when you're busy — not what or where.</span></span><i class="mk mid">1</i></div>
+              <div class="card fill" style="margin-top:1em">
+                <p class="s" style="margin:0 0 .5em">Family sees:</p>
+                <div class="preview">
+                  <span data-when="work=busy"><span class="t">Busy</span><span class="s">Mon 9:00 – 11:00 AM · Dad</span></span>
+                  <span class="st-off" data-when="work=share"><span class="t">Team standup</span><span class="s">Mon 9:00 – 11:00 AM · Dad · View only</span></span>
+                  <span class="st-off" data-when="work=two"><span class="t">Team standup</span><span class="s">Mon 9:00 – 11:00 AM · Dad · Anyone can edit</span></span>
+                  <span class="st-off gray" data-when="work=none"><span class="s">Nothing — this calendar stays on your phone.</span></span>
+                </div>
+                <i class="mk">2</i>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>每个选项一句话说清「家人会看到什么、能不能改」——不让用户去猜模式含义。</li>
+              <li>「Busy only」实时预览家人看到的样子；标题、地点<strong>不离开手机</strong>。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="syn-3">
+            <p class="ps-tag"><b>P3</b>首次导入预览</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Add 36 events</span><span></span></div>
+              <p class="meta" style="margin-top:-.4em">From Family (iCloud) · next 12 months</p>
+              <div class="row on" data-tog><span class="ck"></span><span><span class="t">Piano lesson</span><span class="s">Every Tue · 4:00 PM</span></span></div>
+              <div class="row on" data-tog><span class="ck"></span><span><span class="t">Soccer practice</span><span class="s">Every Thu · 5:30 PM</span></span></div>
+              <div class="row on" data-tog><span class="ck"></span><span><span class="t">Grandma visits</span><span class="s">Sat, Oct 24</span></span></div>
+              <div class="row dup" data-tog><span class="ck"></span><span><span class="t">Dentist – Mike</span><span class="s amb">Looks like it's already in the app</span></span><i class="mk mid">1</i></div>
+              <p class="blue" style="margin-top:.6em;font-size:.85em">+ 32 more</p>
+              <div class="bottom"><span class="btn pri" data-set="imp=yes" data-go="syn-1" data-hint>Add <span data-sum="32">35</span> events</span><i class="mk l mid">2</i></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>疑似重复在导入前就标出且默认不勾选。夫妻同步同一个 iCloud 日历时，靠外部 ID 直接去重，根本不出现在这里。</li>
+              <li>逐条可取消，承接原有「批量导入」能力。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="syn-4">
+            <p class="ps-tag"><b>P4</b>冲突卡（高风险）</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span data-go="syn-1">‹</span><span>Needs your decision</span><span></span></div>
+              <p class="h2">Family dinner</p>
+              <p class="meta">These two versions are different. Choose one.</p>
+              <div class="grid2 vs" style="margin-top:.7em">
+                <div class="card soft" data-on="res=app"><p class="t" style="font-size:.82em">In the app</p><p class="s">Mom · 10:02</p><div class="diff"><span class="lbl">Time</span><b>7:00 PM</b></div><p class="lbl">Place</p><p class="t" style="font-size:.9em">Home</p></div>
+                <div class="card" data-on="res=phone"><p class="t" style="font-size:.82em">On your phone</p><span class="ai gry">Most recent</span><p class="s">Dad · 10:15</p><div class="diff"><span class="lbl">Time</span><b>6:00 PM</b></div><p class="lbl">Place</p><p class="t" style="font-size:.9em">Home</p><i class="mk">1</i></div>
+              </div>
+              <div class="stack" style="margin-top:.8em" data-when="res=">
+                <span class="btn" data-set="res=app" data-hint>Keep app version</span>
+                <span class="btn" data-set="res=phone">Keep phone version<i class="mk l mid">2</i></span>
+                <p class="gray" style="text-align:center;font-size:.85em;padding:.3em 0">Pick for each field</p>
+              </div>
+              <div class="card fill st-off" style="margin-top:.8em" data-when="res!=">
+                <p class="t ok">✓ <span data-when="res=app">Kept 7:00 PM from the app</span><span data-when="res=phone">Kept 6:00 PM from Dad's phone</span></p>
+                <p class="s">Both sides now match. Reminders are back on.</p>
+                <span class="btn" style="margin-top:.6em" data-go="syn-1">Done</span>
+              </div>
+              <p class="meta" style="margin-top:.6em" data-when="res=">Reminders for this event are paused until you choose.<i class="mk">3</i></p>
+            </div></div>
+            <ol class="ps-notes">
+              <li>两版并排，只高亮不同的字段；注明谁、何时改的。「Most recent」只是标签。</li>
+              <li><strong>不预选、没有主按钮</strong>——选哪个是用户的决定。</li>
+              <li>未决期间暂停常规提醒，改为在较早时间 24 小时前推送一次「需要你决定」。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="syn-5">
+            <p class="ps-tag"><b>P5</b>手机上删除了家庭事件</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="h1" style="margin-top:.4em">Hi, Dad</p>
+              <div class="card soft" style="margin-top:.6em"><span class="bar" style="width:90%"></span><span class="bar" style="width:55%"></span></div>
+              <div class="dim bleed" data-when="p5=|ask"></div>
+              <div class="sheet bleed" data-when="p5=">
+                <p class="h2" style="font-size:1.12em">You removed "Piano lesson" on your phone</p>
+                <p class="s" style="margin:.4em 0 1em">It's still on the family calendar. What would you like to do?</p>
+                <span class="btn pri" data-set="p5=hide" data-hint>Just remove from this phone</span>
+                <span class="btn" style="margin-top:.55em" data-set="p5=ask">Delete for everyone<i class="mk l mid">2</i></span>
+                <span class="btn txt" style="margin-top:.3em" data-set="p5=back">Put it back on my phone</span>
+                <i class="mk">1</i>
+              </div>
+              <div class="sheet bleed st-off" data-when="p5=ask">
+                <p class="h2">Delete "Piano lesson" for everyone?</p>
+                <p class="s" style="margin:.4em 0 1em">Mom and Mike will lose it too.</p>
+                <span class="btn" data-set="p5=del">Delete for everyone</span>
+                <span class="btn txt" style="margin-top:.3em" data-set="p5=">Cancel</span>
+              </div>
+              <div class="toast st-off" data-when="p5=hide"><span>Hidden on this phone. Your family still sees it.</span></div>
+              <div class="toast st-off" data-when="p5=back"><span>"Piano lesson" is back on your phone.</span></div>
+              <div class="toast st-off" data-when="p5=del"><span>Deleted for everyone.</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>手机上的删除<strong>只隐藏</strong>，家人那边不受影响，直到在 App 里确认。</li>
+              <li>更保守的选项排第一。反过来，家人在 App 里删了我的事件，也<strong>永远不会</strong>删到我个人日历。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="syn-6">
+            <p class="ps-tag"><b>P6</b>事件详情中的同步状态</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Event</span><span></span></div>
+              <p class="h1">Emma's birthday</p>
+              <p class="meta">Sun, Nov 1 · All day · <span class="ai gry">View only</span></p>
+              <div class="card fill" style="margin-top:.7em;display:flex;gap:.5em"><span>✓</span><span><span class="t" style="font-size:.85em;font-weight:500">Synced · iPhone Calendar · Household</span><span class="s">2 min ago</span></span><i class="mk">1</i></div>
+              <div class="card amber"><p class="t" style="font-size:.85em">Your change on this phone was undone</p><p class="s amb">This event is view-only. Ask Mom to change it, or edit in the app if you have access.</p><i class="mk mid">2</i></div>
+              <p class="lbl" style="text-transform:none;letter-spacing:0;font-size:.78em">Other states</p>
+              <div class="card fill" style="padding:.5em .8em"><span class="s" style="color:#555">↻ Syncing…</span></div>
+              <div class="card amber" style="padding:.5em .8em" data-go="syn-4"><span class="s" style="color:#555">! Needs your decision ›</span></div>
+              <div class="card fill" style="padding:.5em .8em">
+                <span class="s" style="color:#555;display:flex;justify-content:space-between" data-when="retry="><span>! Couldn't sync · No connection</span><b class="blue" data-set="retry=ing" data-then="1500: retry=ok" data-then-if="retry=ing" data-hint>Retry</b></span>
+                <span class="s st-off" style="color:#555" data-when="retry=ing">↻ Trying again…</span>
+                <span class="s ok st-off" data-when="retry=ok">✓ Synced just now</span>
+                <i class="mk mid">3</i>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>每个事件一行状态：来源 + 状态 + 时间；图标、颜色、文字三重表达。</li>
+              <li>「仅查看」事件在手机上被改：撤回并说明原因，<strong>不静默</strong>。</li>
+              <li>失败时绝不显示「Synced」；给原因与重试。</li>
+            </ol>
+          </section>
+        </div>
+        <p class="proto-tip">滚到这里会自动演示一遍，点一下就停；也可以自己点手机里的按钮往下走，点空白处会标出能点的地方。</p>
+      </figure>
+      </details>
+      <div class="step-body step-after">
+        <div class="decisions">
+          <div class="decision">
+            <span class="label">冲突分级</span>
+            <h4>改错会错过的字段让人选，其余自动处理</h4>
+            <p>时间、参与人、重复规则，以及「一边删除一边修改」属于高风险，两个版本并排给人选，<strong>不预选</strong>；地点、备注这类低风险的差异，自动采用最近一次修改并留下记录。全部自动会覆盖重要修改，全部让人选又会被打扰到关掉同步。</p>
+          </div>
+          <div class="decision kill">
+            <span class="label">永不做</span>
+            <h4>把家庭日程写进用户的个人日历</h4>
+            <p>家庭日程只写进一个 App 专属的日历。混进个人日历，会被它自己的云同步带到别的设备和 App，出了问题收拾不了；专属日历关掉同步时删掉一个就干净了。同样，手机上删一个家庭日程只是从这台手机隐藏，全家删除要再确认一次。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 被理解 · Future Tab -->
+    <div class="step" id="ch-future">
+      <span class="ghost-no" aria-hidden="true">04</span>
+      <div class="rail"><span class="step-num">04</span><span class="node"></span></div>
+      <div class="step-body">
+        <p class="step-kicker">被理解 · Future Tab</p>
+        <h2>最多高亮 3 个，<br>不加任何推送</h2>
+        <p>用的时间越久，未来 30 天的事项从几个涨到几十个。按时间排的列表能回答「未来有什么」，回答不了「哪些最要紧」：</p>
+        <div class="pull"><p>「以前觉得方便，后来事情多了反而不知道看什么。」</p></div>
+        <p>Future Tab 帮人看出接下来哪件最要紧：分成今天、本周、更晚三层，今天按时间排，其余按重要程度排；每层只显示几条，全页最多高亮 3 个；每个重点都能点「Why this?」看到一句理由，比如「孩子的事 · 3 天后」。</p>
+      </div>
+      <!-- 动手试 · Future Tab 排序实验台（规则照 PRD v2；脚本 assets/family-lab.js，下面存的是默认状态，脚本加载后重画） -->
+      <section class="lab" data-lab="fut" aria-label="Future Tab 排序实验台">
+        <div class="lab-head"><p class="lab-k">动手试 · 排序</p><h3 class="lab-t">哪件事最要紧，按什么排？</h3><p class="lab-d">八件真实场景里的事，按 PRD 的评分表打分。拖动日期、给任意一件标星，看分层、星级、高亮（全页最多 3 个）怎么变。比如给 Dentist 标星，看谁被挤出高亮。</p></div>
+        <div class="lab-body" data-lab-body><div class="lf-ctrl"><p class="lab-cap">今天是 <b>Wed, Oct 14</b><span>拖动看排序怎么随时间变；给任意一件标星（+40，只影响自己）</span></p><input type="range" min="14" max="24" step="1" value="14" aria-label="今天是哪一天" data-today=""><p class="lf-count">高亮 <b>3</b> / 3</p></div><ul class="lf-list"><li class="lf-tier"><span>Today</span><em>按时间</em></li><li class="lf-row"><span class="lf-main"><b>Return library books</b><small>Wed, Oct 14 · Mom</small></span><span class="lf-side"><span class="lf-stars">★★★<i>★★</i></span><span class="lf-score" title="时间 30 + 任务 10 = 40">时间 30 + 任务 10 = 40</span><button type="button" class="lf-star" data-t="Return library books" aria-pressed="false">☆ 标星</button></span></li><li class="lf-tier"><span>This week</span><em>按评分</em></li><li class="lf-row hl"><span class="lf-main"><b>Piano recital</b><small>Sat, Oct 17 · Mike, Mom</small><small class="lf-why">Why this? in 3 days · Kid's event</small></span><span class="lf-side"><span class="lf-badge">3 days to go</span><span class="lf-stars">★★★★★<i></i></span><span class="lf-score" title="时间 25 + 日历事件 20 + 含儿童 15 + 多人 10 = 70">时间 25 + 日历事件 20 + 含儿童 15 + 多人 10 = 70</span><button type="button" class="lf-star" data-t="Piano recital" aria-pressed="false">☆ 标星</button></span></li><li class="lf-row hl"><span class="lf-main"><b>Family dinner</b><small>Sun, Oct 18 · Mom, Dad</small><small class="lf-why">Why this? in 4 days · With 2 people</small></span><span class="lf-side"><span class="lf-badge">4 days to go</span><span class="lf-stars">★★★★<i>★</i></span><span class="lf-score" title="时间 20 + 日历事件 20 + 多人 10 = 50">时间 20 + 日历事件 20 + 多人 10 = 50</span><button type="button" class="lf-star" data-t="Family dinner" aria-pressed="false">☆ 标星</button></span></li><li class="lf-row"><span class="lf-main"><b>Dentist</b><small>Thu, Oct 15 · Dad</small></span><span class="lf-side"><span class="lf-stars">★★★<i>★★</i></span><span class="lf-score" title="时间 25 + 日历事件 20 = 45">时间 25 + 日历事件 20 = 45</span><button type="button" class="lf-star" data-t="Dentist" aria-pressed="false">☆ 标星</button></span></li><li class="lf-row"><span class="lf-main"><b>Groceries</b><small>Fri, Oct 16 · Mom</small></span><span class="lf-side"><span class="lf-stars">★★<i>★★★</i></span><span class="lf-score" title="时间 25 + 购物清单 0 = 25">时间 25 + 购物清单 0 = 25</span><button type="button" class="lf-star" data-t="Groceries" aria-pressed="false">☆ 标星</button></span></li><li class="lf-tier"><span>Coming up</span><em>第 8–30 天里 ★4 以上，最多 2 个</em></li><li class="lf-row hl"><span class="lf-main"><b>Trip to Orlando</b><small>Sat, Oct 24 · Everyone</small><small class="lf-why">Why this? Trip · Kid's event</small></span><span class="lf-side"><span class="lf-badge">10 days to go</span><span class="lf-stars">★★★★<i>★</i></span><span class="lf-score" title="时间 10 + 旅行 30 + 含儿童 15 + 多人 10 = 65">时间 10 + 旅行 30 + 含儿童 15 + 多人 10 = 65</span><button type="button" class="lf-star" data-t="Trip to Orlando" aria-pressed="false">☆ 标星</button></span></li><li class="lf-row"><span class="lf-main"><b>Lisa's birthday party</b><small>Sat, Oct 31 · Lisa, Mom, Dad</small><small class="lf-why">Why this? Birthday · Kid's event</small></span><span class="lf-side"><span class="lf-stars">★★★★<i>★</i></span><span class="lf-score" title="时间 5 + 生日 25 + 含儿童 15 + 多人 10 = 55">时间 5 + 生日 25 + 含儿童 15 + 多人 10 = 55</span><button type="button" class="lf-star" data-t="Lisa's birthday party" aria-pressed="false">☆ 标星</button></span></li><li class="lf-tier"><span>Later</span><em>按评分</em></li><li class="lf-row"><span class="lf-main"><b>Parent–teacher conference</b><small>Thu, Nov 5 · Mom, Dad</small></span><span class="lf-side"><span class="lf-stars">★★★<i>★★</i></span><span class="lf-score" title="时间 5 + 日历事件 20 + 多人 10 = 35">时间 5 + 日历事件 20 + 多人 10 = 35</span><button type="button" class="lf-star" data-t="Parent–teacher conference" aria-pressed="false">☆ 标星</button></span></li></ul><p class="lf-note">产品里不显示分数和公式，只给一句「Why this?」；这里把分数摊开，是为了看清规则。</p></div>
+        <div class="lab-goal"><p class="lab-gk">上线后看什么<small>定的目标值，<br>不是上线结果</small></p><ul><li><span>北极星 · 重要事项提前触达率</span><b>≥ 60%</b><small>★4 以上的事，开始前 3 天以上被看到；挑战 ≥ 75%</small></li><li><span>★4 以上首屏曝光率</span><b>≥ 90%</b></li><li><span>硬约束 · Future Tab 新增推送</span><b>= 0</b></li><li><span>「Why this?」点击率</span><b>2–10%</b><small>过高说明排序反直觉</small></li></ul></div>
+      </section>
+      <details class="proto-fold">
+        <summary><span>看完整原型</span><small>4 屏 · 可以点 · 打开后自动演示一遍</small></summary>
+      <!-- 04 Future Tab · 可交互原型（照原型图用 HTML 重搭；交互写法见 assets/proto.js 顶部） -->
+      <figure class="proto" data-proto="fut" data-demo='.why[data-go="fut-2"] | [data-flip="star=on"] | ~1300 | .dim | [data-set="day=17"] | ~700 | [data-go="fut-3"] | [data-flip="more=1"] | ~1500 | @fut-4 | [data-set="open=cal; ban=x"] | ~1500' data-init="day=14; open=home" style="--cols:4" aria-label="Future Tab · 可交互低保真原型">
+        <div class="proto-screens">
+          <section class="ps" id="fut-1">
+            <p class="ps-tag"><b>P1</b>Future Tab 主视图</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="home-h"><span class="av mom">M</span>Home</p>
+              <div class="seg"><span data-set="seg=today" data-on="seg=today">Today</span><span class="on" data-set="seg=" data-on="seg=">Future</span></div>
+              <div data-when="seg=">
+                <div class="days">
+                  <span class="day on" data-set="day=14" data-on="day=14"><small>W</small><b>14</b><i class="d"></i></span>
+                  <span class="day" data-set="day=15" data-on="day=15"><small>T</small><b>15</b><i class="d"></i></span>
+                  <span class="day" data-set="day=16" data-on="day=16"><small>F</small><b>16</b><i class="d"></i></span>
+                  <span class="day" data-set="day=17" data-on="day=17"><small>S</small><b>17</b><i class="d f"></i></span>
+                  <span class="day" data-set="day=18" data-on="day=18"><small>S</small><b>18</b><i class="d f"></i></span>
+                  <span class="day" data-set="day=19" data-on="day=19"><small>M</small><b>19</b><i class="d"></i></span>
+                  <span class="day" data-set="day=20" data-on="day=20"><small>T</small><b>20</b></span>
+                  <i class="mk">1</i>
+                </div>
+                <p class="sec" style="font-size:1.25em;margin-top:.5em">Today</p>
+                <div class="row"><span class="vbar mom"></span><span><span class="t">Return library books</span><span class="s">Task · 5:00 PM</span></span><span class="end stars">★★★<i>★★</i></span></div>
+                <p class="sec">This week<i class="mk l mid">2</i></p>
+                <div class="hl green"><span><span class="t">Piano recital</span><span class="s">Sat 10:00 AM · Mike, Mom</span></span><span class="r"><span class="stars">★★★★★</span><b class="blue why" data-go="fut-2" data-hint>Why this?</b></span></div>
+                <div class="hl orange"><span><span class="t">Family dinner</span><span class="s">Sun 6:00 PM · Everyone</span></span><span class="r"><span class="stars">★★★★<i>★</i></span><b class="blue why" data-go="fut-2">Why this?</b></span></div>
+                <div class="row"><span class="vbar dad"></span><span><span class="t">Dentist</span><span class="s">Thu 9:00 AM</span></span><span class="end stars">★★★<i>★★</i></span></div>
+                <div class="row"><span class="vbar"></span><span><span class="t">Groceries</span><span class="s">Fri</span></span><span class="end stars">★★<i>★★★</i></span><i class="mk btm">3</i></div>
+                <p class="blue" style="margin-top:.55em;font-size:.85em;font-weight:600" data-go="fut-3">+6 more this week</p>
+                <p class="lbl" style="font-size:.85em;text-transform:none;letter-spacing:0">Later</p>
+                <div class="row"><span class="vbar mom"></span><span class="t" style="font-weight:500;font-size:.88em">Parent-teacher conference · Nov 5</span><span class="end stars">★★★<i>★★</i></span></div>
+                <p class="blue more">See all in Calendar ›</p>
+              </div>
+              <div class="st-off" data-when="seg=today"><p class="gray" style="margin-top:3em;text-align:center;font-size:.85em">Today 视图保持原样</p></div>
+              <div class="tabbar"><span class="on">Home</span><span>Calendar</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>日期条：有事项的日子有圆点，含 ★4+ 的为实心。点日期滚动到对应事项。</li>
+              <li>Today 按时间排；This week 与 Later 按评分排。高亮 = 成员浅色底，<strong>全页最多 3 个</strong>。</li>
+              <li>每层默认 4 / 4 / 2 条，其余折叠成「+N more」；想看全部去日历。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="fut-2">
+            <p class="ps-tag"><b>P2</b>「Why this?」与标星</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="home-h">Home</p>
+              <div class="card soft" style="margin-top:.6em"><span class="bar" style="width:90%"></span><span class="bar" style="width:60%"></span><span class="bar" style="width:45%"></span></div>
+              <div class="dim bleed" data-go="fut-1"></div>
+              <div class="sheet bleed">
+                <p class="h2" style="font-size:1.2em">Piano recital</p>
+                <p class="stars" style="font-size:1em;margin:.2em 0 .8em">★★★★★</p>
+                <div class="card fill"><p class="s">Why it's near the top</p><p class="t">Kid's event · in 3 days</p><i class="mk">1</i></div>
+                <div class="row" style="border:0;margin-top:.5em"><span class="ico" data-on="star=on"><span data-when="star=">☆</span><span class="st-off" data-when="star=on">★</span></span><span><span class="t">Star this</span><span class="s">Moves it up for you only</span></span><span class="tgl end" data-on="star=on" data-flip="star=on" data-hint></span><i class="mk l mid">2</i></div>
+                <p class="s ok st-off" data-when="star=on" style="margin:-.2em 0 .4em">Starred · only your list changes</p>
+                <p class="t" style="text-align:center;margin-top:.6em;font-weight:500" data-go="fut-1">Open event</p>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>只给一句话理由（贡献最大的两个信号），<strong>不展示分数公式</strong>。</li>
+              <li>标星 = +40 分，<strong>只影响自己的排序</strong>。系统没把爸爸的牙医预约当重点时，爸爸标一下就行。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="fut-3">
+            <p class="ps-tag"><b>P3</b>Coming up + 天数提示（批次二）</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="home-h">Home</p>
+              <div class="seg"><span>Today</span><span class="on">Future</span></div>
+              <p class="sec" style="margin-top:.8em">This week</p>
+              <div class="hl green"><span><span class="t">Piano recital</span><span class="s">Sat 10:00 AM</span></span><span class="r"><span class="badge">3 days to go</span><span class="stars">★★★★★</span></span><i class="mk">1</i></div>
+              <div class="row"><span class="vbar dad"></span><span><span class="t">Dentist</span><span class="s">Thu 9:00 AM</span></span><span class="end stars">★★★<i>★★</i></span></div>
+              <div class="st-off" data-when="more=1">
+                <div class="row"><span class="vbar mike"></span><span><span class="t">Swim practice</span><span class="s">Fri 4:00 PM</span></span><span class="end stars">★★★<i>★★</i></span></div>
+                <div class="row"><span class="vbar"></span><span><span class="t">Groceries</span><span class="s">Fri</span></span><span class="end stars">★★<i>★★★</i></span></div>
+              </div>
+              <p class="blue more" data-flip="more=1" data-hint><span data-when="more=">+6 more this week</span><span class="st-off" data-when="more=1">Show less</span></p>
+              <p class="sec">Coming up<i class="mk l mid">2</i></p>
+              <div class="hl pink"><span><span class="t">Lisa's birthday party</span><span class="s">Sat, Oct 31 · Lisa, Mom, Dad</span></span><span class="r"><span class="stars">★★★★<i>★</i></span></span></div>
+              <p class="lbl" style="font-size:.85em;text-transform:none;letter-spacing:0">Later</p>
+              <div class="row"><span class="vbar mom"></span><span class="t" style="font-weight:500;font-size:.88em">Parent-teacher conference · Nov 5</span><span class="end stars">★★★<i>★★</i></span></div>
+              <p class="blue more">+9 more later</p>
+              <div class="tabbar"><span class="on">Home</span><span>Calendar</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>「N days to go」只给 ★4+、2–14 天内的事项，只在页面内显示，<strong>不推送</strong>。</li>
+              <li>「Coming up」把第 8–30 天里的 ★4+ 提前拉出来，最多 2 个——回应「直到前几天才想起来」。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="fut-4">
+            <p class="ps-tag"><b>P4</b>默认启动页 + 一次性提示</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>General</span><span></span></div>
+              <p class="sec" style="font-size:1.1em">Open app to<i class="mk">1</i></p>
+              <div class="opt on" data-set="open=home" data-on="open=home"><span class="rd"></span><span><span class="t">Home</span><span class="s">See what's coming up first</span></span></div>
+              <div class="opt" data-set="open=cal" data-on="open=cal"><span class="rd"></span><span><span class="t">Calendar</span><span class="s">Go straight to your calendar</span></span></div>
+              <div class="dash-line bleed"></div>
+              <p class="anno">升级后首次进入 Home 时 ↓</p>
+              <div class="card" style="margin-top:.5em;display:flex;align-items:center;gap:.5em" data-when="ban=">
+                <span style="flex:1"><span class="t" style="font-size:.88em">Prefer to start on Calendar?</span><span class="s">You can change it in Settings.</span></span>
+                <b class="blue" style="font-size:.88em" data-set="open=cal; ban=x" data-hint>Change</b><span class="gray" data-set="ban=x">✕</span>
+                <i class="mk l mid">2</i>
+              </div>
+              <p class="s st-off" style="margin-top:.6em" data-when="ban=x">提示已关闭，不再出现。</p>
+              <p class="anno">空状态 ↓</p>
+              <div class="empty">
+                <span class="cal-ico">1</span>
+                <p class="t">Nothing planned yet</p>
+                <p class="s">Events you add will show up here.</p>
+                <span class="btn pri" style="display:inline-flex;margin-top:.8em">Add event</span>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>老用户可以选择直接打开日历——Future Tab 的价值以「用户愿意来」为前提。</li>
+              <li>升级后只出现一次的提示，回应「被强制落在 Home 页」的评论；可关闭，不再出现。</li>
+            </ol>
+          </section>
+        </div>
+        <p class="proto-tip">滚到这里会自动演示一遍，点一下就停；也可以自己点手机里的按钮往下走，点空白处会标出能点的地方。</p>
+      </figure>
+      </details>
+      <div class="step-body step-after">
+        <div class="decisions">
+          <div class="decision kill">
+            <span class="label">永不做</span>
+            <h4>新增推送</h4>
+            <p>它是「打开就能看见」，不是「弹出来打扰」。加推送短期能拉高打开率，长期用户会关掉通知，连原有的提醒一起失效。</p>
+          </div>
+          <div class="decision">
+            <span class="label">取舍</span>
+            <h4>规则排不准的，交给用户一键标星</h4>
+            <p>事项没有类别字段，看病这类事只靠规则排不上来。与其按标题关键词去猜，不如让用户标一下星，而且只影响他自己看到的排序。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 间奏：已上线的三项和方案之间，留一屏只有一句话的空白 -->
+    <div class="interlude">
+      <span class="mono">然后</span>
+      <p>它要回答，AI 能替一个家庭做到哪一步</p>
+    </div>
+
+    <!-- 05 延伸方案 · AI 家庭管家（⚠️ 不写上线状态，会暴露产品） -->
+    <!-- 延伸方案：整章换牛皮纸色底（.is-plan），和三项已上线的功能区分开 -->
+    <div class="step is-plan" id="ch-ai">
+      <span class="ghost-no" aria-hidden="true">05</span>
+      <div class="rail"><span class="step-num is-fork">05</span><span class="node fork"></span></div>
+      <div class="step-body">
+        <p class="step-kicker">延伸方案 · AI 家庭管家 <em class="ship-tag plan">方案</em></p>
+        <h2>AI 只出草稿，<br>确认权留给人</h2>
+        <p>前三项解决的是「信息进来以后」。还剩最前面一环：学校邮件、群聊截图、纸质通知，根本进不了 App，进日历全靠一个人手动搬，最后常常是谁都以为对方录了。所以 AI 家庭管家把这些信息拆成草稿，人只需要看一眼、点一下。</p>
+        <div class="table-wrap roomy">
+          <table>
+            <thead><tr><th>维度</th><th>竞品 A</th><th>竞品 B</th><th>竞品 C</th><th>本方案</th></tr></thead>
+            <tbody>
+              <tr><td>AI 输入</td><td>邮件导入</td><td>语音 / 拍照 / 邮件 / PDF</td><td>邮件 / PDF / 照片</td><td>截图 / 拍照 / 邮件 / 语音</td></tr>
+              <tr><td>产出</td><td>日程</td><td>结构化数据 + 建议</td><td>日程</td><td>草稿 → 确认 → 日程</td></tr>
+              <tr class="hi"><td>确认机制</td><td>未公开</td><td>建议后确认</td><td>未公开</td><td>强制确认，无自动入历</td></tr>
+              <tr><td>涉及他人须本人确认</td><td>未见</td><td>未见</td><td>—</td><td>是</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「截图变日程」好几家已经做了，这一层只是追平。我查到的几家，都没有公开说明<strong>「谁来确认、提醒发给谁」</strong>怎么处理，所以我把重点放在这一层。个人 AI 排错只打扰自己，家庭 AI 排错被打扰的是另一个人，所以 AI 只出草稿，确认权留给人，并划了三条红线：</p>
+        <ul>
+          <li><strong>涉及其他大人，必须本人确认。</strong>妈妈确认了爸爸也要去的活动，爸爸那边只显示虚线的「Dad?」，直到他自己点「I'm in」。</li>
+          <li><strong>不代付，不代承诺。</strong>识别到缴费、报名，只生成「日程 + 提醒」，界面上不存在支付或报名按钮。</li>
+          <li><strong>敏感的事先问一句。</strong>看起来像就医、私人约会时，默认推荐「只提醒我」，不写进全家可见的日历。</li>
+        </ul>
+      </div>
+      <aside class="facts">
+        <h4>文案里只说「建议」，不说「已安排」</h4>
+        <p>界面里只用 Draft、Suggested、Review，不用 Added、Scheduled、Assigned。</p>
+      </aside>
+      <!-- 动手试 · 全流程路由图：照原来的全流程概念图用 HTML 重搭（节点文字不改），选一种情况，看它走哪条路、在哪被拦下。脚本 assets/family-lab.js 画连线。 -->
+      <section class="lab lab-ai" data-lab="ai" aria-label="AI 家庭管家全流程路由图">
+        <div class="lab-head"><p class="lab-k">动手试 · 全流程</p><h3 class="lab-t">从一张截图到对的人收到提醒</h3><p class="lab-d">三条泳道分别是发起的大人、AI 与系统、被安排的另一个大人。实线是主路径，虚线框是异常和退出。选一种情况，看它怎么走、在哪停下。</p></div>
+        <div class="lr-scs" role="group" aria-label="选一种情况"><button type="button" data-sc="kid" aria-pressed="false">孩子的比赛截图</button><button type="button" data-sc="fee" aria-pressed="false">缴费通知</button><button type="button" data-sc="priv" aria-pressed="false">看心理医生的预约</button><button type="button" data-sc="dup" aria-pressed="false">日历里已经有的牙医</button><button type="button" data-sc="fail" aria-pressed="false">一张看不出时间的图</button><button type="button" data-sc="stale" aria-pressed="false">没人处理的草稿</button><button type="button" data-sc="no" aria-pressed="false">Dad 去不了</button></div>
+        <div class="lr-out" aria-live="polite"><p class="mute">选一种情况，看它在三条泳道里怎么走。</p></div>
+        <div class="lr-wrap"><div class="lr-map">
+          <p class="lr-stage" style="grid-column:2"><b>1</b>收集</p><p class="lr-stage" style="grid-column:3"><b>2</b>识别</p><p class="lr-stage" style="grid-column:4"><b>3</b>复核</p><p class="lr-stage" style="grid-column:5"><b>4</b>进日历与分流</p><p class="lr-stage" style="grid-column:6"><b>5</b>提醒送达</p>
+          <p class="lr-lane" style="grid-row:2 / span 2"><i class="mom"></i>Mom<small>发起的大人</small></p>
+          <p class="lr-lane" style="grid-row:4 / span 2"><i class="ai"></i>AI 与系统<small>只出草稿</small></p>
+          <p class="lr-lane" style="grid-row:6"><i class="dad"></i>Dad<small>被安排的大人</small></p>
+          <div class="lr-node user" data-n="m1" style="grid-column:2;grid-row:2"><p class="lr-nt">看到一条活动通知<em>P1 · P2</em></p><p class="lr-nd">学校 App、群聊、纸质通知、学校邮件。截图、拍照、转发邮件或按住说一句，交给 App。</p></div>
+          <div class="lr-node user" data-n="m3" style="grid-column:4;grid-row:2"><p class="lr-nt">打开草稿，看一眼<em>P4 · P5</em></p><p class="lr-nd">旁边附着来源原文。AI 没把握的字段标成琥珀色，必须先点开确认，「Add」才能点。</p></div>
+          <div class="lr-node exc" data-n="m3x" style="grid-column:5;grid-row:2"><p class="lr-nt">Discard：草稿直接删掉</p><p class="lr-nd">不留痕，不追问原因，可选填一个（不相关 / 识别错了 / 已经加过）。</p></div>
+          <div class="lr-node stop" data-n="m3p" style="grid-column:4;grid-row:3"><p class="lr-nt">看起来是私事？<em>P6</em></p><p class="lr-nd">像就医、私人约会时先问一句。默认选「Only remind me」：只提醒自己，不进全家可见的日历。</p></div>
+          <div class="lr-node exc" data-n="m5x" style="grid-column:6;grid-row:3"><p class="lr-nt">Dad 拒绝时，只告诉 Mom</p><p class="lr-nd">不通知全家，也不留拒绝记录。</p></div>
+          <div class="lr-node sys" data-n="a2" style="grid-column:3;grid-row:4"><p class="lr-nt">识别成草稿<em>P3 · P7</em></p><p class="lr-nd">拆出时间、地点、谁参加；一封邮件可以拆成多条。草稿不进日历，先放进全家可见的待确认队列。</p></div>
+          <div class="lr-node exc" data-n="a3d" style="grid-column:4;grid-row:4"><p class="lr-nt">像是已经有的日程</p><p class="lr-nd">确认前提示，不自动合并。</p></div>
+          <div class="lr-node sys" data-n="a4" style="grid-column:5;grid-row:4"><p class="lr-nt">写进家庭日历</p><p class="lr-nd">只有人点了确认才写。AI 本身没有写日历的权限，也没有「自动确认」开关。<span class="lr-tags"><i>孩子</i>Mom 确认即生效<br><i>其他大人</i>显示虚线「Dad?」，等他本人</span></p></div>
+          <div class="lr-node sys" data-n="a5" style="grid-column:6;grid-row:4"><p class="lr-nt">提醒只发给已生效的人</p><p class="lr-nd">Mom 和孩子按时收到；Dad 点了「I'm in」才进他的提醒。时间改了，提醒自动跟着改。</p></div>
+          <div class="lr-node exc" data-n="a2x" style="grid-column:3;grid-row:5"><p class="lr-nt">没找到事件 / 识别失败</p><p class="lr-nd">说清原因，可换一张或手动添加，已识别的字段带过去。</p></div>
+          <div class="lr-node exc" data-n="a3s" style="grid-column:4;grid-row:5"><p class="lr-nt">7 天没人处理</p><p class="lr-nd">草稿自动删除，不会自动加进日历。</p></div>
+          <div class="lr-node user" data-n="d4" style="grid-column:5;grid-row:6"><p class="lr-nt">收到 Mom 的建议<em>P9 · P10</em></p><p class="lr-nd">写的是「Mom suggested you join」，不是「你已被安排」；附着「由 AI 从截图生成」。</p></div>
+          <div class="lr-node user" data-n="d5" style="grid-column:6;grid-row:6"><p class="lr-nt">点一下，不用写理由</p><p class="lr-nd"><span class="lr-tags"><i class="pri">I'm in</i>算进他的日程和提醒<br><i>Can't make it / Not me</i>移出参与人<br><i>不回应</i>一直是「Dad?」，不催、不过期</span></p></div>
+          <svg class="lr-lines" aria-hidden="true" viewBox="0 0 1020 999"><defs><marker id="lr-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="ah"></path></marker><marker id="lr-arrow-on" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="ah on"></path></marker></defs><path class="" d="M271.125 128.953125 L288.125 128.953125 L288.125 454.8203125 L305.125 454.8203125" marker-end="url(#lr-arrow)"></path><text class="" x="281.125" y="291.88671875" text-anchor="end">截图 / 拍照 / 转发 / 说话</text><path class="" d="M458.25 454.8203125 L475.25 454.8203125 L475.25 119.359375 L492.25 119.359375" marker-end="url(#lr-arrow)"></path><text class="" x="468.25" y="287.08984375" text-anchor="end">推送「Draft ready」</text><path class="dash" d="M381.6875 524.6875 L381.6875 620.875" marker-end="url(#lr-arrow)"></path><path class="dash" d="M645.375 119.359375 L679.375 119.359375" marker-end="url(#lr-arrow)"></path><path class="" d="M568.8125 190.03125 L568.8125 227.21875" marker-end="url(#lr-arrow)"></path><path class="" d="M645.375 297.0859375 L662.375 297.0859375 L662.375 493.9140625 L679.375 493.9140625" marker-end="url(#lr-arrow)"></path><text class="" x="653.375" y="290.0859375" text-anchor="start">Add to calendar</text><path class="dash" d="M568.8125 190.03125 L568.8125 384.953125" marker-end="url(#lr-arrow)"></path><path class="dash" d="M645.375 426.0390625 L662.375 426.0390625 L662.375 119.359375 L679.375 119.359375" marker-end="url(#lr-arrow)"></path><path class="dash" d="M458.25 454.8203125 L475.25 454.8203125 L475.25 661.9609375 L492.25 661.9609375" marker-end="url(#lr-arrow)"></path><path class="" d="M832.5 493.9140625 L849.5 493.9140625 L849.5 465.21875 L866.5 465.21875" marker-end="url(#lr-arrow)"></path><path class="" d="M755.9375 602.875 L755.9375 761.03125" marker-end="url(#lr-arrow)"></path><text class="" x="762.9375" y="681.953125" text-anchor="start">涉及其他大人</text><path class="" d="M832.5 841.296875 L849.5 841.296875 L849.5 874.8046875 L866.5 874.8046875" marker-end="url(#lr-arrow)"></path><path class="" d="M943.0625 761.03125 L943.0625 545.484375" marker-end="url(#lr-arrow)"></path><text class="" x="950.0625" y="653.2578125" text-anchor="start">I'm in</text><path class="dash" d="M1019.625 874.8046875 L1033.625 874.8046875 L1033.625 278.703125 L1019.625 278.703125" marker-end="url(#lr-arrow)"></path><text class="" x="1039.625" y="576.75390625" text-anchor="start">拒绝</text></svg>
+        </div></div>
+        <ol class="lr-rules">
+          <li><b>进日历必须有人点过确认</b>AI 只能写草稿。AI 很有把握的草稿也要多点一下，但日历上不会出现谁都没看过的事。</li>
+          <li><b>只在两处让人停下来</b>AI 没把握的字段、看起来私密的事。其他情况看一眼就能加，不给每条草稿都加关卡。</li>
+          <li><b>涉及另一个大人，由他自己决定</b>Mom 能替孩子确认，不能替 Dad 确认。Dad 没点头之前，这件事不算他的，也不给他发提醒。</li>
+          <li><b>拒绝和不回应都不追究</b>拒绝只告诉发起人；不回应就一直等着，不催、不过期，也不让全家看见谁没回。</li>
+        </ol>
+        <p class="lr-legend"><span class="user">用户操作</span><span class="sys">系统做的事</span><span class="stop">必须停一下的地方</span><span class="exc">异常与退出</span><b>不写的能力：</b>代付、代报名、替别的大人确认、自动确认</p>
+      </section>
+      <details class="proto-fold">
+        <summary><span>看完整原型</span><small>14 屏 · 可以点 · 打开后自动演示一遍</small></summary>
+      <!-- 05 AI 家庭管家 · 可交互原型（四组共 14 屏，连成一条路；交互写法见 assets/proto.js 顶部） -->
+      <figure class="proto" data-proto="ai" data-demo='.fab | .sheet [data-hint] | ~3900 | .field | .field .btn.pri | ~600 | .bottom [data-go="ai-13"] | ~900 | p[data-go="ai-9"] | .btn.pri[data-set="dad=in"] | ~1300 | .ev | ~1100 | .row[data-go="ai-14"] | ~2200' data-init="me=mom" style="--cols:4" aria-label="AI 家庭管家 · 可交互低保真原型">
+        <div class="proto-screens">
+          <p class="proto-gh">① 入口与输入</p>
+          <section class="ps" id="ai-1" data-group="① 入口与输入">
+            <p class="ps-tag"><b>P1</b>Home：新增 AI 入口与待确认提示</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="home-h"><span class="av ring">M</span>Hi, Mom<span class="gray" style="margin-left:auto;font-size:.8em">⌕</span></p>
+              <div class="card bluec" style="margin-top:.7em;display:flex;align-items:center;gap:.6em" data-go="ai-7"><span class="ico" style="background:#fff">✦</span><span style="flex:1"><span class="t">2 AI drafts to review</span><span class="s">Not on the calendar yet</span></span><span class="gray">›</span><i class="mk l">1</i></div>
+              <div class="card soft" style="margin-top:.7em">
+                <p class="lbl" style="margin:0 0 .3em">Today · Fri</p>
+                <div class="row"><span class="vbar mike"></span><span style="flex:1"><span class="t">Swim practice</span><span class="s">4:00 PM</span></span><span class="av ring">Mi</span></div>
+                <div class="row"><span class="vbar mom"></span><span style="flex:1"><span class="t">Grocery shopping</span><span class="s">6:00 PM</span></span><span class="av ring">M</span></div>
+                <div class="row" style="border:0"><span class="vbar dad"></span><span style="flex:1"><span class="t">Dentist</span><span class="s">Sat 10:00 AM</span></span><span class="av ring">D</span></div>
+              </div>
+              <div class="card soft"><p class="lbl" style="margin:0">Shopping list</p><span class="bar" style="width:60%"></span><span class="bar" style="width:45%"></span></div>
+              <div class="fab" data-go="ai-2" data-hint>+<i class="mk">2</i></div>
+              <div class="tabbar"><span class="on">Home</span><span>Calendar</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>有没确认的草稿时才出现，点进去是 P7 待确认队列；没有草稿时不占位置。</li>
+              <li>沿用现有的「+」按钮，在原来的新建菜单顶部加一行 AI 入口，进入 P2。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-2" data-group="① 入口与输入">
+            <p class="ps-tag"><b>P2</b>四种输入方式</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="home-h"><span class="av ring">M</span>Hi, Mom</p>
+              <div class="card soft" style="margin-top:.7em"><span class="bar" style="width:90%"></span><span class="bar" style="width:55%"></span></div>
+              <div class="dim bleed" data-go="ai-1"></div>
+              <div class="sheet bleed">
+                <p class="h2" style="font-size:1.2em">Add with AI</p>
+                <p class="s" style="margin:.2em 0 .5em">AI makes a draft. Nothing is added until you confirm.</p>
+                <div class="row" data-go="ai-3" data-hint><span class="ico">▣</span><span><span class="t">Screenshot</span><span class="s">School app, group chat, email</span></span><span class="end">›</span></div>
+                <div class="row" data-go="ai-3"><span class="ico">◉</span><span><span class="t">Take a photo</span><span class="s">Paper flyers, permission slips</span></span><span class="end">›</span></div>
+                <div class="row"><span class="ico">✉</span><span><span class="t">Forward an email</span><span class="s">smith-7k2q@in.example.com <b class="blue" data-set="copy=1"><span data-when="copy=">Copy</span><span class="st-off" data-when="copy=1">Copied ✓</span></b></span></span><i class="mk l mid">2</i></div>
+                <div class="row" style="border:0" data-go="ai-3"><span class="ico">🎙︎</span><span><span class="t">Hold to speak</span><span class="s">"Mike has a game Saturday at 10"</span></span></div>
+                <i class="mk">1</i>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>副标题直接写明：AI 只出草稿，确认前不会进日历。文案里不出现 "added / scheduled" 这类已完成的说法。</li>
+              <li>邮件转发到家庭专属地址，只接受家里大人的邮箱发来的邮件；语音是按住说话。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-3" data-group="① 入口与输入" data-auto="3600: go=ai-4">
+            <p class="ps-tag"><b>P3</b>解析中 / 解析失败</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span data-go="ai-1">✕</span><span>Reading…</span><span></span></div>
+              <div class="card fill" style="display:flex;gap:.7em;align-items:center"><span class="ph" style="width:2.6em"></span><span><span class="t">Screenshot</span><span class="s">IMG_2041 · just now</span></span></div>
+              <div class="spin"></div>
+              <p class="t" style="text-align:center">Looking for dates and times…</p>
+              <p class="s" style="text-align:center;margin-top:.2em">Usually under 10 seconds. You can leave — we'll notify you.<i class="mk">1</i></p>
+              <div class="dash-line bleed"></div>
+              <p class="anno">失败态 ↓</p>
+              <div class="card" style="margin-top:.5em">
+                <p class="t">We couldn't find an event here</p>
+                <p class="s">No date or time was found in this image. It hasn't been saved anywhere.</p>
+                <div class="btns"><span class="btn" data-go="ai-2">Try another</span><span class="btn" data-go="ai-4">Add manually</span></div>
+                <i class="mk l">2</i>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>可以离开，解析不中断，好了推送「Draft ready」进入 P4；慢了也会告诉用户。</li>
+              <li>失败时说清原因并给出路，不悄悄丢掉；"Add manually" 会带上已经识别出的字段。</li>
+            </ol>
+          </section>
+
+          <p class="proto-gh">② 草稿确认</p>
+          <section class="ps" id="ai-4" data-group="② 草稿确认">
+            <p class="ps-tag"><b>P4</b>单条草稿卡</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span data-go="ai-7">‹</span><span>Review draft</span><span>Edit</span></div>
+              <p class="meta" style="margin-top:-.3em"><span class="ai">✦ AI DRAFT</span> · Not on the calendar yet<i class="mk">1</i></p>
+              <div class="card fill" style="margin-top:.5em;display:flex;gap:.6em;align-items:flex-start"><span class="ph" style="width:2.6em"></span><span style="flex:1"><span class="t" style="font-size:.85em">From your screenshot</span><span class="s">"…game moved to Sat 10am at Lincoln Park…"</span></span><span class="blue" style="font-size:.8em">View</span></div>
+              <p class="lbl">Title</p><p class="val">U10 Basketball game</p>
+              <div class="card amber field" data-when="t4=|open" style="margin-top:.6em" data-set="t4=open" data-hint>
+                <p class="lbl" style="margin:0">Date &amp; time</p>
+                <p class="t">Sat, Oct 17 · 10:00 – 11:00 AM</p>
+                <p class="s amb">⚠ Please check — end time was guessed</p>
+                <div class="btns st-off" data-when="t4=open"><span class="btn pri" data-set="t4=ok">Looks right</span><span class="btn">Change</span></div>
+                <i class="mk mid">2</i>
+              </div>
+              <div class="st-off" data-when="t4=ok"><p class="lbl">Date &amp; time</p><p class="val">Sat, Oct 17 · 10:00 – 11:00 AM <span class="ok" style="font-size:.8em">✓ checked</span></p></div>
+              <p class="lbl">Location</p><p class="val">Lincoln Park, Court 2</p>
+              <p class="lbl">Who</p>
+              <div class="chips"><span class="chip"><i class="mike"></i>Mike</span><span class="chip dash"><i class="dad"></i>Dad · will be asked</span><i class="mk">3</i></div>
+              <p class="lbl">Remind</p><p class="val" style="border:0">Mike &amp; Mom · 1 hour before</p>
+              <div class="bottom">
+                <span class="btn txt" data-go="ai-7">Discard<i class="mk l mid">4</i></span>
+                <span class="btn off" data-when="t4=|open">Check the time first</span>
+                <span class="btn pri st-off" data-when="t4=ok" data-go="ai-13" data-hint>Add to calendar</span>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>来源可追溯：显示来源类型 + AI 依据的原文片段；"View" 打开原图（原图仅在解析期临时保留）。</li>
+              <li>低置信字段 = 琥珀底 + ⚠ 图标 + 文字说明，<strong>不只靠颜色</strong>。存在低置信<strong>关键字段</strong>（时间 / 参与人）时，主按钮置灰为「Check the time first」；用户点开该字段、修改或点「Looks right」后才变为「Add to calendar」。</li>
+              <li>儿童成员（Mike）由确认人代确认；成人成员（Dad）显示为虚线「will be asked」，确认后向本人发请求（见 P9）。</li>
+              <li>「Discard」= 销毁，不留痕、不追问原因（可选原因见 P5）。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-5" data-group="② 草稿确认">
+            <p class="ps-tag"><b>P5</b>多事件草稿（一封邮件拆多条）</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span data-go="ai-7">‹</span><span>3 events found</span><span></span></div>
+              <div class="card fill" style="display:flex;gap:.6em;align-items:flex-start"><span class="ph" style="width:2.4em"></span><span><span class="t" style="font-size:.82em">Email: "Lincoln Elementary – November Newsletter"</span><span class="s">from mom@… · forwarded 2 min ago</span></span></div>
+              <div class="card soft" style="margin-top:.6em" data-when="c1=|why">
+                <span class="ai">✦ DRAFT 1/3</span>
+                <p class="t" style="margin-top:.3em">Picture Day</p><p class="s">Thu, Nov 5 · All day · Mike</p>
+                <div class="btns" data-when="c1="><span class="btn txt" data-set="c1=why">Discard</span><span class="btn" data-go="ai-4">Review</span><span class="btn pri" data-set="c1=added" data-hint>Add</span></div>
+                <div class="why-row st-off" data-when="c1=why"><span data-set="c1=gone">Not for us</span><span data-set="c1=gone">Wrong info</span><span data-set="c1=gone">Already added</span></div>
+              </div>
+              <div class="card soft st-off" style="margin-top:.6em" data-when="c1=added"><p class="t ok">✓ Picture Day added</p><p class="s">Thu, Nov 5 · reminders go to Mike's iPad</p></div>
+              <div class="card amber" data-when="c2=|why">
+                <span class="ai amb">⚠ CHECK DATE</span>
+                <p class="t" style="margin-top:.3em">Parent–Teacher Conference</p><p class="s">Nov 12 or 13? · Mom, Dad</p>
+                <div class="btns" data-when="c2="><span class="btn txt" data-set="c2=why">Discard</span><span class="btn pri" style="flex:2" data-go="ai-4">Review<i class="mk btm">2</i></span></div>
+                <div class="why-row st-off" data-when="c2=why"><span data-set="c2=gone">Not for us</span><span data-set="c2=gone">Wrong info</span><span data-set="c2=gone">Already added</span></div>
+                <i class="mk">1</i>
+              </div>
+              <div class="card soft gone"><span class="ai gry">DISCARDED</span><p class="t" style="margin-top:.3em">Grade 5 Field Trip</p><p class="s">Not for us ✓</p></div>
+              <div class="card soft gone st-off" data-when="c1=gone"><span class="ai gry">DISCARDED</span><p class="t" style="margin-top:.3em">Picture Day</p></div>
+              <div class="card soft gone st-off" data-when="c2=gone"><span class="ai gry">DISCARDED</span><p class="t" style="margin-top:.3em">Parent–Teacher Conference</p></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>关键字段低置信的条目<strong>不提供</strong>行内「Add」，只能进 P4 逐条复核。</li>
+              <li>丢弃时可选一键原因（Not for us / Wrong info / Already added），用于区分「AI 错了」与「与本家庭无关」——后者不是质量问题（中性指标）。</li>
+              <li class="dot">首版不提供「全部确认」。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-6" data-group="② 草稿确认">
+            <p class="ps-tag"><b>P6</b>敏感事件提示（红线 3）</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Review draft</span><span></span></div>
+              <span class="ai">✦ AI DRAFT</span>
+              <p class="lbl">Title</p><p class="val">Therapy appointment</p>
+              <p class="lbl">Date &amp; time</p><p class="val">Tue, Oct 20 · 3:30 PM</p>
+              <div class="dim bleed" data-when="p6="></div>
+              <div class="sheet bleed" data-when="p6=">
+                <p class="h2" style="font-size:1.2em">This looks private</p>
+                <p class="s" style="margin:.3em 0 1em">It may be a health appointment. Events on the family calendar are visible to everyone in your family.</p>
+                <span class="btn pri" data-set="p6=me" data-hint>Only remind me<i class="mk l btm">2</i></span>
+                <span class="btn" style="margin-top:.55em" data-set="p6=fam">Add to family calendar</span>
+                <span class="btn txt" style="margin-top:.3em" data-set="p6=x">Discard</span>
+                <i class="mk">1</i>
+              </div>
+              <div class="toast st-off" data-when="p6=me"><span>Saved as a reminder on this phone only.</span></div>
+              <div class="toast st-off" data-when="p6=fam"><span>Added to the family calendar.</span></div>
+              <div class="toast st-off" data-when="p6=x"><span>Draft discarded.</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>AI 判定为医疗 / 财务 / 私人约会时，确认前<strong>必经</strong>此提示；措辞是「看起来」，不下结论。</li>
+              <li>默认推荐「Only remind me」= 仅本机个人提醒，不写入家庭日历。私人事件要等独立账号，首版先用这个方式过渡。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-7" data-group="② 草稿确认">
+            <p class="ps-tag"><b>P7</b>待确认队列</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span data-go="ai-1">‹</span><span>AI drafts</span><span></span></div>
+              <p class="meta" style="margin-top:-.3em">Drafts are deleted after 7 days if not reviewed.<i class="mk">1</i></p>
+              <div class="card soft" style="margin-top:.6em" data-go="ai-4" data-hint><p class="meta" style="display:flex;justify-content:space-between"><span class="ai">✦ SCREENSHOT</span>2h ago</p><p class="t" style="margin-top:.3em">U10 Basketball game</p><p class="s">Sat 10:00 AM · Mike, Dad</p></div>
+              <div class="card soft" data-go="ai-5"><p class="meta" style="display:flex;justify-content:space-between"><span class="ai">✦ EMAIL</span>Yesterday</p><p class="t" style="margin-top:.3em">Parent–Teacher Conference</p><p class="s amb">⚠ Date needs checking</p></div>
+              <div class="card fill"><p class="meta" style="display:flex;justify-content:space-between"><span class="ai gry">BY DAD</span>5 days ago</p><p class="t" style="margin-top:.3em">Flu shots</p><p class="s">Expires in 2 days</p><i class="mk btm">2</i></div>
+              <div class="dash-line bleed"></div>
+              <p class="s" style="margin-top:.6em">Waiting on others<i class="mk">3</i></p>
+              <div class="row" data-go="ai-9"><span class="vbar dad"></span><span><span class="t">Swim meet</span><span class="s">Asked Dad · no reply yet</span></span></div>
+              <div class="tabbar"><span>Home</span><span>Calendar</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>队列对全部成人成员可见；任一成人都可确认。7 天未处理<strong>自动删除，绝不自动确认</strong>。</li>
+              <li>他人上传的草稿标注来源成员，避免两人重复处理。</li>
+              <li>「等待他人确认」只读展示，不提供催促按钮（避免把系统变成施压工具）。</li>
+            </ol>
+          </section>
+
+          <p class="proto-gh">③ 成员身份与他人确认</p>
+          <section class="ps" id="ai-8" data-group="③ 成员身份与他人确认">
+            <p class="ps-tag"><b>P8</b>身份认领（升级后首次打开）</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="h1" style="margin-top:1em;font-size:1.6em">Who's using<br>this phone?<i class="mk">1</i></p>
+              <p class="s" style="margin:.4em 0 .8em">So reminders reach the right person. You'll still sign in the same way.</p>
+              <div class="row who on" data-set="me=mom" data-on="me=mom"><span class="av mom">M</span><span class="t" style="flex:1">Mom</span><span class="s">This is me</span></div>
+              <div class="row who off"><span class="av dad">D</span><span class="t" style="flex:1">Dad</span><span class="s">On Dad's iPhone</span></div>
+              <div class="row who" data-set="me=mike" data-on="me=mike" data-hint><span class="av mike">Mi</span><span class="t" style="flex:1">Mike</span><span class="s">Kid · reminders only</span><i class="mk l mid">2</i></div>
+              <div class="row who" data-set="me=lisa" data-on="me=lisa"><span class="av lisa">L</span><span class="t" style="flex:1">Lisa</span><span class="s">Kid · reminders only</span></div>
+              <span class="btn pri" style="margin-top:1.4em" data-go="ai-14">Continue as <span data-when="me=mom">Mom</span><span class="st-off" data-when="me=mike">Mike</span><span class="st-off" data-when="me=lisa">Lisa</span></span>
+              <p class="t" style="text-align:center;margin-top:.8em;font-weight:500">Skip for now<i class="mk l">3</i></p>
+            </div></div>
+            <ol class="ps-notes">
+              <li>不新增注册，登录方式不变，只是把这台设备和一个成员身份绑在一起；同一个人可以在多台设备上认领。</li>
+              <li>孩子的设备也能认领，用来收提醒，但<strong>不能确认草稿</strong>。</li>
+              <li>可以跳过：草稿照常能用，但提醒只能发给全家；新的认领会通知家里所有大人。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-9" data-group="③ 成员身份与他人确认">
+            <p class="ps-tag"><b>P9</b>被安排者收到的确认请求</p>
+            <div class="lp"><div class="lp-scr tint">
+              <div class="sb"><span>9:41</span></div>
+              <div class="card" style="margin-top:.4em"><p class="s">Calendar · now</p><p class="t">Mom suggested an event for you</p><p class="s" style="color:#333">U10 Basketball game · Sat 10:00 AM</p><i class="mk">1</i></div>
+              <div class="card" style="margin-top:.8em">
+                <p class="s">Mom suggested you join</p>
+                <p class="h2" style="font-size:1.25em;margin:.15em 0">U10 Basketball game</p>
+                <p class="s">Sat, Oct 17 · 10:00 – 11:00 AM<br>Lincoln Park, Court 2 · with Mike</p>
+                <div class="card fill" style="margin-top:.6em;display:flex;gap:.5em;align-items:center;padding:.45em .6em"><span class="ph" style="width:1.8em"></span><span class="s">Created from a screenshot by AI</span></div>
+                <div data-when="dad=">
+                  <span class="btn pri" style="margin-top:.7em" data-set="dad=in" data-go="ai-10" data-hint>I'm in</span>
+                  <div class="btns"><span class="btn" data-set="dad=no">Can't make it<i class="mk l mid">2</i></span><span class="btn" data-set="dad=notme">Not me</span></div>
+                </div>
+                <p class="t ok st-off" style="margin-top:.7em" data-when="dad=in">✓ You're in. Reminders start now.</p>
+                <p class="t st-off" style="margin-top:.7em" data-when="dad=no">Mom will see you can't make it.</p>
+                <p class="t st-off" style="margin-top:.7em" data-when="dad=notme">Thanks — Mom will know AI picked the wrong person.</p>
+              </div>
+              <p class="s" style="margin-top:.8em">If you decline, only Mom is told. Nobody else is notified.<i class="mk">3</i></p>
+            </div></div>
+            <ol class="ps-notes">
+              <li>推送和卡片都用 suggested，不用 "added" 或 "You're scheduled"。只推送到 Dad 认领过的设备。</li>
+              <li>三个选项都是点一下就行，不用写理由。「Not me」说明 AI 认错了人，会记为一次识别错误。</li>
+              <li>拒绝只告诉 Mom 一个人，不通知全家，也不留记录。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-10" data-group="③ 成员身份与他人确认">
+            <p class="ps-tag"><b>P10</b>日历中的「待本人确认」</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <p class="home-h">Sat, Oct 17<span class="avs"><span class="av dad">D</span><span class="av mike">Mi</span><span class="av mom">M</span><i class="mk">2</i></span></p>
+              <div class="tl">
+                <p><small>9 AM</small></p><p><small>10 AM</small></p><p><small>11 AM</small></p><p><small>12 PM</small></p><p><small>1 PM</small></p><p><small>2 PM</small></p><p><small>3 PM</small></p>
+                <div class="ev green" data-go="ai-13">
+                  <span class="t" style="font-size:.85em">U10 Basketball game</span>
+                  <span class="chips" style="margin:.3em 0 0"><span class="chip"><i class="mike"></i>Mike</span><span class="chip dash" data-when="dad!=in"><i class="dad"></i>Dad?</span><span class="chip st-off" data-when="dad=in"><i class="dad"></i>Dad</span></span>
+                  <i class="mk mid">1</i>
+                </div>
+                <div class="ev orange e2"><span class="t" style="font-size:.85em">Grocery shopping</span></div>
+              </div>
+              <div class="fab">+</div>
+              <div class="tabbar"><span>Home</span><span class="on">Calendar</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>Mom 确认后，事件进了家庭日历，但 Dad 是虚线「Dad?」：<strong>不算进 Dad 的日程，也不给他发提醒</strong>，直到他点「I'm in」。</li>
+              <li>只看 Dad 的日程时，这件事用浅色显示，和他已确认的日程分开。</li>
+            </ol>
+          </section>
+
+          <p class="proto-gh">④ 入历之后：钱、重复和提醒</p>
+          <section class="ps" id="ai-11" data-group="④ 入历之后">
+            <p class="ps-tag"><b>P11</b>涉及钱：只记日子，不代办（红线 2）</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Review draft</span><span>Edit</span></div>
+              <p class="meta" style="margin-top:-.3em"><span class="ai">✦ AI DRAFT</span> · Not on the calendar yet</p>
+              <div class="card fill" style="margin-top:.5em;display:flex;gap:.6em;align-items:flex-start"><span class="ph" style="width:2.6em"></span><span style="flex:1"><span class="t" style="font-size:.85em">From your screenshot</span><span class="s">"…field trip fee is due this Friday. Please pay through the school app…"</span></span><span class="blue" style="font-size:.8em">View</span></div>
+              <p class="lbl">Title</p><p class="val">Pay field trip fee<i class="mk mid">1</i></p>
+              <p class="lbl">Due</p><p class="val">Fri, Oct 23 · All day</p>
+              <p class="lbl">Who</p><div class="chips"><span class="chip"><i class="mom"></i>Mom</span></div>
+              <p class="lbl">Remind</p><p class="val" style="border:0">Mom · Thu 7:00 PM</p>
+              <div class="card fill" style="margin-top:.4em"><p class="s" style="color:#444"><b>ⓘ This is a reminder only.</b> We don't pay or sign up for you — that still happens in the school's own app.</p><i class="mk mid">2</i></div>
+              <div class="bottom" data-when="p11=">
+                <span class="btn txt" data-set="p11=x">Discard</span>
+                <span class="btn pri" data-set="p11=added" data-hint>Add to calendar</span>
+              </div>
+              <div class="toast st-off" data-when="p11=added"><span>Added. Mom gets a reminder Thu 7:00 PM.</span></div>
+              <div class="toast st-off" data-when="p11=x"><span>Draft discarded.</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>识别到缴费、报名、捐款时，只生成「事件 + 提醒」：标题写成要做的那件事，截止日就是日期。</li>
+              <li>界面里没有「Pay now」「Sign up」按钮，系统里也不存在支付、报名的接口；付钱仍在学校自己的渠道完成。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-12" data-group="④ 入历之后">
+            <p class="ps-tag"><b>P12</b>疑似重复：只提示，不合并</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span>‹</span><span>Review draft</span><span>Edit</span></div>
+              <p class="meta" style="margin-top:-.3em"><span class="ai">✦ AI DRAFT</span> · from an email</p>
+              <p class="lbl">Title</p><p class="val">Dentist – Mike</p>
+              <p class="lbl">Date &amp; time</p><p class="val">Sat, Oct 24 · 10:00 AM</p>
+              <div class="card amber" style="margin-top:.8em">
+                <p class="t amb">⚠ Looks like this is already on your calendar</p>
+                <div class="card" style="margin-top:.5em;display:flex;gap:.6em;border-width:1px"><span class="vbar mike"></span><span style="flex:1"><span class="t">Dentist</span><span class="s">Sat, Oct 24 · 10:00 AM · Mike</span></span><span class="s" style="text-align:right">added by Dad<br>3 days ago</span></div>
+                <i class="mk mid">1</i>
+              </div>
+              <p class="s" style="margin-top:.7em">Nothing is merged automatically. Choose what to do with this draft.</p>
+              <div class="bottom" data-when="p12=">
+                <span class="btn" data-set="p12=x" data-hint>Discard this draft<i class="mk l">2</i></span>
+                <span class="btn" data-set="p12=both">Keep both</span>
+              </div>
+              <div class="toast st-off" data-when="p12=x"><span>Discarded · marked "Already added".</span></div>
+              <div class="toast st-off" data-when="p12=both"><span>Both kept on the calendar.</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>标题和日期都很接近已有日程时，确认前先提醒，并把已有的那条并排给出来：谁加的、什么时候加的。</li>
+              <li>不自动合并，也不预选：两个按钮一样重，留下还是丢掉由人决定。丢掉记为「Already added」，不算 AI 出错。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-13" data-group="④ 入历之后">
+            <p class="ps-tag"><b>P13</b>入历之后：从哪来、提醒发给谁</p>
+            <div class="lp"><div class="lp-scr">
+              <div class="sb"><span>9:41</span></div>
+              <div class="nav"><span data-go="ai-10">‹</span><span>Event</span><span>Edit</span></div>
+              <p class="h1">U10 Basketball game</p>
+              <p class="meta">Sat, Oct 17 · 10:00 – 11:00 AM<br>Lincoln Park, Court 2</p>
+              <div class="card fill" style="margin-top:.6em;display:flex;gap:.5em"><span class="blue">✦</span><span><span class="t" style="font-size:.88em">Created from a screenshot by AI</span><span class="s">Confirmed by Mom · 2 days ago</span></span><i class="mk">1</i></div>
+              <p class="lbl">Who</p>
+              <div class="chips"><span class="chip"><i class="mike"></i>Mike</span><span class="chip dash" data-when="dad!=in"><i class="dad"></i>Dad?</span><span class="chip st-off" data-when="dad=in"><i class="dad"></i>Dad</span></div>
+              <p class="s" data-when="dad!=in" data-go="ai-9" data-hint>Waiting for Dad to confirm</p>
+              <p class="s ok st-off" data-when="dad=in">Dad is in</p>
+              <p class="lbl">Reminders go to</p>
+              <div class="row"><span class="dot mom"></span><span class="t" style="flex:1;font-weight:500">Mom</span><span class="s">1 hour before</span></div>
+              <div class="row" data-go="ai-14"><span class="dot mike"></span><span class="t" style="flex:1;font-weight:500">Mike's iPad</span><span class="s">1 hour before</span></div>
+              <div class="row" data-when="dad!=in"><span class="dot pend"></span><span class="t gray" style="flex:1;font-weight:500">Dad</span><span class="s">after he says I'm in</span><i class="mk l mid">2</i></div>
+              <div class="row st-off" data-when="dad=in"><span class="dot dad"></span><span class="t" style="flex:1;font-weight:500">Dad</span><span class="s">1 hour before</span></div>
+              <div class="card soft dashed" style="margin-top:.7em;display:flex;gap:.6em;align-items:center" data-when="shot=" data-set="shot=1"><span class="gray" style="font-size:1.3em">+</span><span><span class="t" style="font-size:.88em;font-weight:500">Attach the original screenshot</span><span class="s">Optional · not kept by default</span></span><i class="mk mid">3</i></div>
+              <div class="card fill st-off" style="margin-top:.7em;display:flex;gap:.6em;align-items:center" data-when="shot=1"><span class="ph" style="width:2.2em"></span><span class="t" style="font-size:.88em;font-weight:500">Screenshot attached</span></div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>入历后「AI DRAFT」标记消失，换成一行来源说明：从哪来、谁确认的。</li>
+              <li>提醒只发给已经生效的人：Mom 和 Mike 的设备。Dad 点「I'm in」之前不提醒，也没有催他的按钮。</li>
+              <li>原图默认不留；想留可以手动附上，用的就是 02 章的附件能力。</li>
+            </ol>
+          </section>
+
+          <section class="ps" id="ai-14" data-group="④ 入历之后">
+            <p class="ps-tag"><b>P14</b>提醒送达：只到对的人</p>
+            <div class="lp"><div class="lp-scr dark lock">
+              <div class="sb"><span>9:00</span></div>
+              <p class="pill">Mike's iPad · reminders only</p>
+              <p class="clock">9:00<i class="mk">1</i></p>
+              <p class="date">Saturday, October 17</p>
+              <div class="notes-lock">
+                <div class="ntf"><p class="s" style="display:flex;justify-content:space-between"><span>CALENDAR</span><span>now</span></p><p class="t">U10 Basketball game in 1 hour</p><p class="s" style="color:#444">10:00 AM · Lincoln Park, Court 2</p></div>
+                <div class="ntf old"><p class="s" style="display:flex;justify-content:space-between"><span>CALENDAR</span><span>Thu</span></p><p class="t">Time changed: 10:00 AM</p><p class="s">Your reminder moved with it</p><i class="mk l">2</i></div>
+              </div>
+            </div></div>
+            <ol class="ps-notes">
+              <li>孩子没有账号，这台设备被设成「给 Mike 用」：只收 Mike 的提醒，不能确认草稿。</li>
+              <li>时间改了，提醒自动跟着改；推送失败会重试，大人的设备再用邮件兜底。</li>
+              <li class="dot">这是整条路的终点：对的人在对的时间收到提醒，才算真的帮上忙。</li>
+            </ol>
+          </section>
+        </div>
+        <p class="proto-tip">滚到这里会自动从 P1 演示到 P14，点一下就停；也可以从 P1 的「+」开始自己点，点空白处会标出能点的地方。</p>
+        <p class="proto-cap"><b>低保真原型</b> · 蓝 = 主按钮 / 选中态　琥珀 = AI 低置信度字段　虚线成员 = 待本人确认　红色编号 = 标注</p>
+      </figure>
+      </details>
+      <div class="step-body step-after">
+        <div class="decision">
+          <span class="label">不做</span>
+          <h4>自动确认开关</h4>
+          <p>只要存在一条自动写入的路，「AI 不替人做决定」就无法保证。代价是高置信度的草稿也要多点一下。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 收尾揭示：四章各自的「不做」沿阶梯排下来，和第 01 章的三个断点首尾呼应 -->
+    <section class="reveal" aria-labelledby="reveal-title">
+      <span class="mono">回头看 · 四章，四个「不做」</span>
+      <ol class="reveal-stair">
+        <li><b>不做</b>独立的附件中心<span>02 · 被记录</span></li>
+        <li><b>不把</b>家庭日程写进个人日历<span>03 · 被共享</span></li>
+        <li><b>不加</b>任何新的推送<span>04 · 被理解</span></li>
+        <li><b>不做</b>自动确认开关<span>05 · AI 家庭管家</span></li>
+      </ol>
+      <h2 id="reveal-title">能帮人整理，<br><em>不替人做主。</em></h2>
+    </section>
+  </div>
+
+  <div class="grid12">
+    <a class="case-next" href="feynman.html">
+      <span class="mono">下一个案例 · 03</span>
+      <strong>你讲给 AI 听，AI 追问你</strong>
+      <span class="go">读费曼学习助手案例 →</span>
+    </a>
+  </div>
+</section>
+
+<footer class="night colophon">
+  <div class="page">
+    <div class="grid12 colophon-in">
+      <h4 class="name">陈利行<br>CHEN LIXING</h4>
+      <div class="contact">
+        <p>邮箱 · <a href="mailto:lixingchan1123@gmail.com">lixingchan1123@gmail.com</a><button type="button" class="copy-btn" data-copy="lixingchan1123@gmail.com">复制</button></p>
+      </div>
+      <div class="folio-bar">
+        <span class="mono">Chen Lixing · Portfolio</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/zoom.js" defer></script>
+<script src="assets/proto.js" defer></script>
+<script src="assets/family-lab.js" defer></script>
+<script src="assets/motion.js" defer></script>
+</body>
+</html>
